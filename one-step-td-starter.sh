@@ -4,6 +4,15 @@
 #Description: one step build up
 
 
+checkDockerContainer(){
+    container_name=$1
+    if [[ $(docker inspect --format "{{.State.Running}}" $container_name) ]]
+       then echo "container $container_name is running, will stop and destory it!"
+       docker stop $container_name
+       docker rm $container_name
+    fi
+}
+
 fold_path=./var/project
 project_path=td-starter
 
@@ -32,6 +41,9 @@ image_name="tx-nginx"
 
 
 docker build -t $image_name .
-docker run -d -p 3003:3003 $image_name
+
+checkDockerContainer $image_name
+
+docker run --name $image_name -d -p 3003:3003 $image_name
 
 echo "tx-starter started, please checked 3003!"
