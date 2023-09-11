@@ -1,0 +1,1 @@
+import{aV as a,j as o}from"./index.e0b1210f.js";import{D as r}from"./index.efcb47b7.js";const Y=[a().subtract(7,"day").format("YYYY-MM-DD"),a().subtract(1,"day").format("YYYY-MM-DD")],D=t=>o(r,{mode:"date",placeholder:["\u5F00\u59CB\u65F6\u95F4","\u7ED3\u675F\u65F6\u95F4"],value:Y,format:"YYYY-MM-DD",onChange:e=>t(e)});export{D as L};
