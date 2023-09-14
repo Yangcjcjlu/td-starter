@@ -44,25 +44,13 @@ export default memo(() => {
   const pageState = useAppSelector(selectBase);
 
   const { datasourceList } = pageState;
+  // console.log("datasourceList==>");
+  // console.log(JSON.stringify(datasourceList))
+  const DATA = datasourceList;
 
-  // console.log("datasourceList==>"+JSON.stringify(datasourceList));
-  // const { loading, contractList, current, pageSize, total } = pageState;
-
-  // useEffect(() => {
-  //   dispatch(
-  //     getList({
-  //       pageSize: pageState.pageSize,
-  //       current: pageState.current,
-  //     }),
-  //   );
-  //   return () => {
-  //     console.log('clear');
-  //     dispatch(clearPageState());
-  //   };
-  // }, []);
-
+  console.log(JSON.stringify(datasourceList));
   const onSubmit = (e: SubmitContext) => {
-    if (e.validateResult === true) {    
+    if (e.validateResult === true) {
       console.log('form 值', formRef.current?.getFieldsValue?.(true));
       MessagePlugin.info('提交成功');
     }
@@ -101,7 +89,7 @@ export default memo(() => {
               <FormItem
                 label='name'
                 name='name'
-                initialData={INITIAL_DATA.name}
+                initialData={DATA.name}
                 // value={datasourceList[0].name}
                 // rules={[{ required: true, message: '合同名称必填', type: 'error' }]}
               >
