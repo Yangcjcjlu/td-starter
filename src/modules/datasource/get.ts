@@ -9,7 +9,7 @@ interface IDataSourceState {
 //   current: number;
 //   pageSize: number;
 //   total: number;
-  datasourceList: IDatasource[];
+  item: IDatasource;
 }
 
 const initialState: IDataSourceState = {
@@ -17,14 +17,13 @@ const initialState: IDataSourceState = {
 //   current: 1,
 //   pageSize: 10,
 //   total: 0,
-  datasourceList: [],
+   item: null,
 };
 
 export const getItem = createAsyncThunk(
   `${namespace}/get/detail?id=1`,
   async (params: { pageSize: number; current: number }) => {
     const result = await getDataSource(params);
-    console.log("getItem list==>"+JSON.stringify(result));
 
     return {
       list: result?.page,
@@ -48,7 +47,7 @@ const listBaseSlice = createSlice({
       })
       .addCase(getItem.fulfilled, (state, action) => {
         state.loading = false;
-        state.datasourceList = action.payload?.list;
+        state.item = action.payload?.list;
         // state.total = action.payload?.total;
         // state.pageSize = action.payload?.pageSize;
         // state.current = action.payload?.current;

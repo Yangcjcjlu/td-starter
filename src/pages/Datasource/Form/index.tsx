@@ -43,12 +43,10 @@ export default memo(() => {
   const {id} = useParams();
   const pageState = useAppSelector(selectBase);
 
-  const { datasourceList } = pageState;
+  const { item } = pageState;
   // console.log("datasourceList==>");
   // console.log(JSON.stringify(datasourceList))
-  const DATA = datasourceList;
 
-  console.log(JSON.stringify(datasourceList));
   const onSubmit = (e: SubmitContext) => {
     if (e.validateResult === true) {
       console.log('form 值', formRef.current?.getFieldsValue?.(true));
@@ -89,7 +87,7 @@ export default memo(() => {
               <FormItem
                 label='name'
                 name='name'
-                initialData={DATA.name}
+                initialData={INITIAL_DATA.name}
                 // value={datasourceList[0].name}
                 // rules={[{ required: true, message: '合同名称必填', type: 'error' }]}
               >

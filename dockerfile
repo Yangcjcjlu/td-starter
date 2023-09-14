@@ -1,7 +1,7 @@
 # docker build -t tx-nginx .
 # docker run -d -p 3003:3003 tx-nginx
 
-FROM nginx
+FROM nginx:latest
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
