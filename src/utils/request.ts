@@ -10,8 +10,9 @@ const TIMEOUT = 5000;
 export const instance = axios.create({
   baseURL: API_HOST,
   timeout: TIMEOUT,
-  withCredentials: true,
+  withCredentials: false,
 });
+
 
 instance.interceptors.response.use(
   // eslint-disable-next-line consistent-return

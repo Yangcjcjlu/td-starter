@@ -3,6 +3,8 @@ import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
 
 import global from './global';
 import user from './user';
+import listDataSource from './datasource/base';
+import getDataSource from './datasource/get'
 import listBase from './list/base';
 import listSelect from './list/select';
 import listCard from './list/card';
@@ -10,6 +12,8 @@ import listCard from './list/card';
 const reducer = combineReducers({
   global,
   user,
+  getDataSource,
+  listDataSource,
   listBase,
   listSelect,
   listCard,
