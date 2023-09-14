@@ -37,9 +37,13 @@ export const getDataSource = async (params: IParams) => {
     // 模拟接口分页
     const list = result?.page || [];
     const total = list.length;
+    console.log(JSON.stringify(list));
+    const data = list[0];
+    console.log("getDataSource==>");
+    console.log(JSON.stringify(data));
     // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {
-        list,
+        data,
         total,
     };
 };
