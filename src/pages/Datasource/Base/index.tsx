@@ -56,20 +56,13 @@ export const ContractTypeMap: {
   2: '待履行',
 };
 
-
-// const handleClickUpdate = (record:any) =>{
-//   setRedirectTo('/form/base');
-//   return <redirectTo to={redirectTo}></redirectTo>
-// }
-
-
-
 export default memo(() => {
   const dispatch = useAppDispatch();
   const pageState = useAppSelector(selectListBase);
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([1, 2]);
 
   const { loading, datasourceList, current, pageSize, total } = pageState;
+
 
   const nav= useNavigate();
   const handleManage = (record: any) => {

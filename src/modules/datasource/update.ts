@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IDatasource, getDataSource } from 'services/datasource';
+import { IDatasource, updateDataSource } from 'services/datasource';
 import { RootState } from '../store';
 
 const namespace = 'datasource/get';
@@ -20,10 +20,12 @@ const initialState: IDataSourceState = {
    item: null,
 };
 
-export const getItem = createAsyncThunk(
-  `${namespace}/get/detail?id=1`,
-  async (params: { pageSize: number; current: number }) => {
-    const result = await getDataSource(params);
+export const updateItem = createAsyncThunk(
+  `${namespace}/update`,
+  async (data: any) => {
+    console.log("update==>");
+    console.log(JSON.stringify(data));
+    const result = await updateDataSource(null,data);
     console.log("Base get==>");
     console.log(JSON.stringify(result))
     return {
@@ -43,17 +45,17 @@ const listBaseSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getItem.pending, (state) => {
+      .addCase(updateItem.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getItem.fulfilled, (state, action) => {
+      .addCase(updateItem.fulfilled, (state, action) => {
         state.loading = false;
         state.item = action.payload?.list;
         // state.total = action.payload?.total;
         // state.pageSize = action.payload?.pageSize;
         // state.current = action.payload?.current;
       })
-      .addCase(getItem.rejected, (state) => {
+      .addCase(updateItem.rejected, (state) => {
         state.loading = false;
       });
   },
@@ -61,6 +63,6 @@ const listBaseSlice = createSlice({
 
 export const { clearPageState } = listBaseSlice.actions;
 
-export const selectBase = (state: RootState) => state.getDataSource;
+export const selectBase = (state: RootState) => state.updateDataSource;
 
 export default listBaseSlice.reducer;

@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import { getItem, selectBase } from 'modules/datasource/get';
+import { updateItem } from 'modules/datasource/update';
 import { useAppDispatch, useAppSelector } from 'modules/store';
 import { memo, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,8 +13,7 @@ import {
   Input,
   MessagePlugin,
   Row,
-  Select,
-  Textarea
+  Select
 } from 'tdesign-react';
 import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
 import Style from './index.module.less';
@@ -26,15 +26,8 @@ const { Group } = Avatar;
 const INITIAL_DATA = {
   name: '',
   type: '',
-  payment: '',
-  partyA: '',
-  partyB: '',
-  signDate: '',
-  effectiveDate: '',
-  endDate: '',
-  remark: '',
-  notary: '',
-  file: [],
+  host: '',
+  username: '',
 };
 
 export default memo(() => {
@@ -44,15 +37,30 @@ export default memo(() => {
   const pageState = useAppSelector(selectBase);
 
   const { item } = pageState;
+  // console.log(JSON.stringify(item));
+
+  formRef.current?.setFieldsValue(
+    {
+    name: item.name,
+    type: item.type,
+    host: item.host,
+    username: item.username
+    })
   // console.log("datasourceList==>");
   // console.log(JSON.stringify(datasourceList))
-
+  // INITIAL_DATA.name = item.name
+  // formRef.setFieldsValue()
+  
   const onSubmit = (e: SubmitContext) => {
     if (e.validateResult === true) {
-      console.log('form 值', formRef.current?.getFieldsValue?.(true));
+      // console.log('form 值', formRef.current?.getFieldsValue?.(true));
+      let data = formRef.current?.getFieldsValue?.(true)
+      data["id"] = id;
+      dispatch(updateItem(data));
+
       MessagePlugin.info('提交成功');
     }
-  };
+  };  
 
   const handleFail = ({ file }: { file: any }) => {
     console.error(`文件 ${file.name} 上传失败`);
@@ -69,10 +77,6 @@ export default memo(() => {
         current: 0,
       }),
     );
-    return () => {
-      // console.log('clear');
-      // dispatch(clearPageState());
-    };
   }, []);
 
   return (
@@ -88,7 +92,7 @@ export default memo(() => {
                 label='name'
                 name='name'
                 initialData={INITIAL_DATA.name}
-                // value={datasourceList[0].name}
+                // value={item.name}
                 // rules={[{ required: true, message: '合同名称必填', type: 'error' }]}
               >
                 <Input placeholder='Please input item' />
@@ -99,7 +103,18 @@ export default memo(() => {
               <FormItem
                 label='type'
                 name='type'
-                initialData={INITIAL_DATA.name}
+                initialData={INITIAL_DATA.type}
+                // rules={[{ required: true, message: '合同名称必填', type: 'error' }]}
+              >
+                <Input placeholder='Please input item' />
+              </FormItem>
+            </Col>
+
+            <Col span={6}>
+              <FormItem
+                label='host'
+                name='host'
+                initialData={INITIAL_DATA.host}
                 // rules={[{ required: true, message: '合同名称必填', type: 'error' }]}
               >
                 <Input placeholder='Please input item' />
@@ -200,7 +215,7 @@ export default memo(() => {
             <div className={Style.titleText}>other info</div>
           </div>
 
-          <FormItem label='备注' name='remark' initialData={INITIAL_DATA.remark}>
+          {/* <FormItem label='备注' name='remark' initialData={INITIAL_DATA.remark}>
             <Textarea placeholder='请输入备注' />
           </FormItem>
 
@@ -210,7 +225,7 @@ export default memo(() => {
               <Avatar>S</Avatar>
               <Avatar>+</Avatar>
             </Group>
-          </FormItem>
+          </FormItem> */}
 
           <FormItem>
             <Button type='submit' theme='primary'>

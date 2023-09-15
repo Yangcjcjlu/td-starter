@@ -5,6 +5,7 @@ import global from './global';
 import user from './user';
 import listDataSource from './datasource/base';
 import getDataSource from './datasource/get'
+import updateDataSource from './datasource/update'
 import listBase from './list/base';
 import listSelect from './list/select';
 import listCard from './list/card';
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   listBase,
   listSelect,
   listCard,
+  updateDataSource,
 });
 
 export const store = configureStore({

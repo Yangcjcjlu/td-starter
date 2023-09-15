@@ -37,10 +37,7 @@ export const getDataSource = async (params: IParams) => {
     // 模拟接口分页
     const list = result?.page || [];
     const total = list.length;
-    console.log(JSON.stringify(list));
     const data = list[0];
-    console.log("getDataSource==>");
-    console.log(JSON.stringify(data));
     // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {
         data,
@@ -57,5 +54,19 @@ export const getDataSourceList = async (params: IParams) => {
     return {
         list,
         total,
+    };
+};
+
+
+export const updateDataSource = async (params: IParams, data:any) => {
+    console.log("updateDataSource")
+    const result:any = await request.post<any>('/ds/update',data);    
+    // 模拟接口分页
+    const code = result?.code;
+    // let list = result?.page || [];
+    // const total = list.length;
+    // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
+    return {
+        code
     };
 };

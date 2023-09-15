@@ -1,21 +1,21 @@
-import React, { memo, useRef } from 'react';
+import classnames from 'classnames';
+import { memo, useRef } from 'react';
+import CommonStyle from 'styles/common.module.less';
 import {
-  Form,
-  Row,
-  Col,
-  Input,
-  Radio,
+  Avatar,
   Button,
+  Col,
   DatePicker,
+  Form,
+  Input,
+  MessagePlugin,
+  Radio,
+  Row,
   Select,
   Textarea,
-  Avatar,
   Upload,
-  MessagePlugin,
 } from 'tdesign-react';
-import classnames from 'classnames';
-import { SubmitContext, FormInstanceFunctions } from 'tdesign-react/es/form/type';
-import CommonStyle from 'styles/common.module.less';
+import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
 import Style from './index.module.less';
 
 const { FormItem } = Form;
