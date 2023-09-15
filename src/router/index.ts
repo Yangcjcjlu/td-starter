@@ -9,6 +9,7 @@ import login from './modules/login';
 import otherRoutes from './modules/others';
 import result from './modules/result';
 import user from './modules/user';
+import eventhub from './modules/eventhub';
 
 export interface IRouter {
   path: string;
@@ -51,6 +52,6 @@ const routes: IRouter[] = [
   },
 ];
 
-const allRoutes = [...routes, ...dashboard, ...datasource];
+const allRoutes = [...routes, ...dashboard, ...form, ...datasource, ...eventhub];
 
 export default allRoutes;
