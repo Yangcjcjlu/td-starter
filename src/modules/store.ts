@@ -6,6 +6,7 @@ import user from './user';
 import listDataSource from './datasource/base';
 import getDataSource from './datasource/get'
 import updateDataSource from './datasource/update'
+import sendFile from './eventHub/sendFile';
 import listBase from './list/base';
 import listSelect from './list/select';
 import listCard from './list/card';
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   listSelect,
   listCard,
   updateDataSource,
+  sendFile,
 });
 
 export const store = configureStore({
