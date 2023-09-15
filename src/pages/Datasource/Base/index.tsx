@@ -64,12 +64,9 @@ export default memo(() => {
   const { loading, datasourceList, current, pageSize, total } = pageState;
 
 
-  const nav= useNavigate();
-  const handleManage = (record: any) => {
-    const id = record.id ? record.id : 0
-    nav(`/datasource/${id}/form`);
-  }
+  const nav = useNavigate();
   
+
   useEffect(() => {
     dispatch(
       getList({
@@ -82,6 +79,12 @@ export default memo(() => {
       dispatch(clearPageState());
     };
   }, []);
+
+  function handleManage(record: any)  {
+    const { row } = record;
+    const id = row.id ? row.id : 0;
+    nav(`/datasource/${id}/form`);
+  }
 
   function onSelectChange(value: (string | number)[]) {
     setSelectedRowKeys(value);

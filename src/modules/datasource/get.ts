@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IDatasource, getDataSource } from 'services/datasource';
+import { getDataSource } from 'services/datasource';
 import { RootState } from '../store';
 
 const namespace = 'datasource/get';
@@ -9,7 +9,7 @@ interface IDataSourceState {
 //   current: number;
 //   pageSize: number;
 //   total: number;
-  item: IDatasource;
+  item: any;
 }
 
 const initialState: IDataSourceState = {
@@ -21,11 +21,9 @@ const initialState: IDataSourceState = {
 };
 
 export const getItem = createAsyncThunk(
-  `${namespace}/get/detail?id=1`,
-  async (params: { pageSize: number; current: number }) => {
+  `${namespace}/get/detail?id=?`,
+  async (params:any) => {
     const result = await getDataSource(params);
-    console.log("Base get==>");
-    console.log(JSON.stringify(result))
     return {
       list: result?.data,
     //   total: result?.total,
@@ -61,6 +59,6 @@ const listBaseSlice = createSlice({
 
 export const { clearPageState } = listBaseSlice.actions;
 
-export const selectBase = (state: RootState) => state.getDataSource;
+export const getDataItem = (state: RootState) => state.getDataSource;
 
 export default listBaseSlice.reducer;

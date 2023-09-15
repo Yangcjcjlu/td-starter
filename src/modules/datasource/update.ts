@@ -23,11 +23,7 @@ const initialState: IDataSourceState = {
 export const updateItem = createAsyncThunk(
   `${namespace}/update`,
   async (data: any) => {
-    console.log("update==>");
-    console.log(JSON.stringify(data));
     const result = await updateDataSource(null,data);
-    console.log("Base get==>");
-    console.log(JSON.stringify(result))
     return {
       list: result?.data,
     //   total: result?.total,

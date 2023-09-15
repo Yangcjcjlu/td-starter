@@ -26,10 +26,7 @@ export const getAllMappingTopics = async (params: IParams) => {
     // 模拟接口分页
     const list = result?.page || [];
     const total = list.length;
-    console.log(JSON.stringify(list));
     const data = list[0];
-    console.log("getMapping==>");
-    console.log(JSON.stringify(data));
     // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {
         data,
@@ -42,8 +39,6 @@ export const getMappingRulesWithTopic = async (topicName: string) => {
     // 模拟接口分页
     const list = result?.page || [];
     const total = list.length;
-    console.log("getMappingRulesWithTopic==>");
-    console.log(JSON.stringify(list));
     // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {
         list,

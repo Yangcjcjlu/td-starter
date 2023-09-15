@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { getItem, selectBase } from 'modules/datasource/get';
+import { getDataItem, getItem } from 'modules/datasource/get';
 import { updateItem } from 'modules/datasource/update';
 import { useAppDispatch, useAppSelector } from 'modules/store';
 import { memo, useEffect, useRef } from 'react';
@@ -18,7 +18,6 @@ import {
 import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
 import Style from './index.module.less';
 
-
 const { FormItem } = Form;
 const { Option } = Select;
 const { Group } = Avatar;
@@ -32,12 +31,27 @@ const INITIAL_DATA = {
 
 export default memo(() => {
   const formRef = useRef<FormInstanceFunctions>();
+  const pageState = useAppSelector(getDataItem);
+
   const dispatch = useAppDispatch();
-  const {id} = useParams();
-  const pageState = useAppSelector(selectBase);
+  const { id } = useParams();
+
+  // const pageState = useAppSelector(selectBase);
+
 
   const { item } = pageState;
-  // console.log(JSON.stringify(item));
+
+  useEffect(() => {
+    dispatch(
+      getItem({
+        id: id
+      }),
+    );
+    return () => {
+      console.log('clear');
+      // dispatch(clearPageState());
+    };
+  }, []);
 
   formRef.current?.setFieldsValue(
     {
@@ -46,12 +60,8 @@ export default memo(() => {
     host: item.host,
     username: item.username
     })
-  // console.log("datasourceList==>");
-  // console.log(JSON.stringify(datasourceList))
-  // INITIAL_DATA.name = item.name
-  // formRef.setFieldsValue()
   
-  const onSubmit = (e: SubmitContext) => {
+    const onSubmit = (e: SubmitContext) => {
     if (e.validateResult === true) {
       // console.log('form 值', formRef.current?.getFieldsValue?.(true));
       let data = formRef.current?.getFieldsValue?.(true)
@@ -65,19 +75,6 @@ export default memo(() => {
   const handleFail = ({ file }: { file: any }) => {
     console.error(`文件 ${file.name} 上传失败`);
   };
-
-  // const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([1, 2]);
-
-  // const { loading, datasourceList, current, pageSize, total } = pageState;
- 
-  useEffect(() => {
-    dispatch(
-      getItem({
-        pageSize: 0,
-        current: 0,
-      }),
-    );
-  }, []);
 
   return (
     <div className={classnames(CommonStyle.pageWithColor)}>

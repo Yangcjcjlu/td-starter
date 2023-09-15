@@ -31,8 +31,9 @@ interface IParams {
 }
 
 
-export const getDataSource = async (params: IParams) => {
-    const result = await request.get<any>('/ds/get/detail?id=1'); 
+export const getDataSource = async (params: any) => {
+    const id = params?.id || 0;
+    const result = await request.get<any>(`/ds/get/detail?id=${id}`); 
     
     // 模拟接口分页
     const list = result?.page || [];
