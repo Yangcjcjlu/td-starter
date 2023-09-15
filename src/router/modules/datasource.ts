@@ -6,7 +6,7 @@ const result: IRouter[] = [
   {
     path: '/datasource',
     meta: {
-      title: 'data source page',
+      title: 'Data Source',
       Icon: ViewModuleIcon,
     },
     children: [
@@ -14,14 +14,14 @@ const result: IRouter[] = [
         path: 'list',
         Component: lazy(() => import('pages/Datasource/Base')),
         meta: {
-          title: 'data source list',
+          title: 'Data Source List',
         },
       },
       {
         path: 'card',
         Component: lazy(() => import('pages/Datasource/Card')),
         meta: {
-          title: 'data source card',
+          title: 'Data Source Card',
         },
       },
     ],
