@@ -17,13 +17,20 @@ const dashboard: IRouter[] = [
           title: 'DashBoard',
         },
       },
-      // {
-      //   path: 'detail',
-      //   Component: lazy(() => import('pages/Dashboard/Detail')),
-      //   meta: {
-      //     title: 'Detail',
-      //   },
-      // },
+      {
+        path: 'statistic',
+        Component: lazy(() => import('pages/Statistic/Base')),
+        meta:{
+          title: 'Statistic',
+        }
+      },
+      {
+        path: 'detail',
+        Component: lazy(() => import('pages/Dashboard/Detail')),
+        meta: {
+          title: 'Detail',
+        },
+      },
     ],
   },
 ];

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IDatasource, getDataSourceList } from 'services/datasource';
+import { getMappingList } from 'services/mapping';
 import { RootState } from '../store';
 
 const namespace = 'datasource/base';
@@ -9,7 +9,7 @@ interface IInitialState {
   current: number;
   pageSize: number;
   total: number;
-  datasourceList: IDatasource[];
+  datasourceList: [];
 }
 
 const initialState: IInitialState = {
@@ -23,7 +23,7 @@ const initialState: IInitialState = {
 export const getList = createAsyncThunk(
   `${namespace}/getList`,
   async (params: { pageSize: number; current: number, name?: string }) => {
-    const result = await getDataSourceList(params);
+    const result = await getMappingList(params);
     return {
       list: result?.list,
       total: result?.total,
@@ -59,6 +59,6 @@ const listBaseSlice = createSlice({
 
 export const { clearPageState } = listBaseSlice.actions;
 
-export const selectListBase = (state: RootState) => state.listDataSource;
+export const listMapping = (state: RootState) => state.listMappingBase;
 
 export default listBaseSlice.reducer;

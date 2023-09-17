@@ -27,6 +27,22 @@ export function getTimeArray(dateTime: string[] = [], divideNum = 10, format = '
 
 export const getChartDataSet = (dateTime: Array<string> = [], divideNum = 10): ChartValue[][] => {
   const timeArray = getTimeArray(dateTime, divideNum);
+  console.log("getChartDataSet ==>");
+  console.log(JSON.stringify(timeArray));
+  const inArray = [];
+  const outArray = [];
+  for (let index = 0; index < divideNum; index++) {
+    inArray.push(getRandomInt().toString());
+    outArray.push(getRandomInt().toString());
+  }
+
+  return [timeArray, inArray, outArray];
+};
+
+export const getLineChartList = (dateTime: Array<string> = [], divideNum = 10):ChartValue[][] => {
+  const timeArray = getTimeArray(dateTime, divideNum);
+  console.log("getChartDataSet ==>");
+  console.log(JSON.stringify(timeArray));
   const inArray = [];
   const outArray = [];
   for (let index = 0; index < divideNum; index++) {

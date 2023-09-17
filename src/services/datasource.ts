@@ -46,8 +46,9 @@ export const getDataSource = async (params: any) => {
     };
 };
 
-export const getDataSourceList = async (params: IParams) => {
-    const result = await request.get<any>('/ds/list');    
+export const getDataSourceList = async (params: any) =>{
+    const result = await request.post<any>('/ds/list',params);    
+    
     // 模拟接口分页
     let list = result?.page || [];
     const total = list.length;
@@ -60,7 +61,6 @@ export const getDataSourceList = async (params: IParams) => {
 
 
 export const updateDataSource = async (params: IParams, data:any) => {
-    console.log("updateDataSource")
     const result:any = await request.post<any>('/ds/update',data);    
     // 模拟接口分页
     const code = result?.code;

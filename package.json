@@ -58,6 +58,7 @@
     "react-mindmap": "^2.1.6",
     "react-redux": "^7.2.4",
     "react-router-dom": "^6.3.0",
+    "react.joint": "^1.0.2",
     "tdesign-icons-react": "^0.2.0",
     "tdesign-react": "^1.1.10",
     "tvision-color": "^1.5.0"

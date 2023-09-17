@@ -46,15 +46,15 @@ export const getMappingRulesWithTopic = async (topicName: string) => {
     };
 }
 
-// export const getMappingList = async (params: IParams) => {
-//     const result = await request.get<any>('/mapping/list', { params: params });
-//     // 模拟接口分页
-//     let list = result?.page || [];
-//     const total = list.length;
-//     list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
-//     return {
-//         list,
-//         total,
-//     };
-// };
+export const getMappingList = async (params: any) => {
+    const result = await request.get<any>('/mapping/list', params);
+    // 模拟接口分页
+    let list = result?.page || [];
+    const total = list.length;
+    list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
+    return {
+        list,
+        total,
+    };
+};
 

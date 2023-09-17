@@ -1,0 +1,367 @@
+import type { EChartOption } from 'echarts';
+import { getChartDataSet, ONE_WEEK_LIST ,getLineChartList } from 'utils/chart';
+
+
+export const getCustomLineChartOptions =(dateTime: Array<string> = []):EChartOption => {
+  const [timeArray, inArray, outArray] = getChartDataSet(dateTime); 
+  
+  return {
+      title: {
+        text: 'Stacked Line'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: 'Email',
+          type: 'line',
+          stack: 'Total',
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: 'Union Ads',
+          type: 'line',
+          stack: 'Total',
+          data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+          name: 'Video Ads',
+          type: 'line',
+          stack: 'Total',
+          data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+          name: 'Direct',
+          type: 'line',
+          stack: 'Total',
+          data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+          name: 'Search Engine',
+          type: 'line',
+          stack: 'Total',
+          data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+      ]
+    };
+};
+
+export const getLineChartOptions = (dateTime: Array<string> = []): EChartOption => {
+  // const [timeArray, inArray, outArray] = getChartDataSet(dateTime);
+  const [timeArray, inArray, outArray] = getLineChartList(dateTime);
+  return {
+    tooltip: {
+      trigger: 'item',
+    },
+    grid: {
+      left: '0',
+      right: '20px',
+      top: '5px',
+      bottom: '36px',
+      containLabel: true,
+    },
+    legend: {
+      left: 'center',
+      bottom: '0',
+      orient: 'horizontal', // legend 横向布局。
+      data: ['本月', '上月'],
+      textStyle: {
+        fontSize: 12,
+      },
+    },
+    xAxis: {
+      type: 'category',
+      data: timeArray,
+      boundaryGap: false,
+      axisLine: {
+        lineStyle: {
+          color: '#E3E6EB',
+          width: 1,
+        },
+      },
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        name: '本月',
+        data: outArray,
+        type: 'line',
+        smooth: false,
+        showSymbol: true,
+        symbol: 'circle',
+        symbolSize: 8,
+        itemStyle: {
+          borderWidth: 1,
+        },
+        areaStyle: {
+          color: '#0053D92F',
+        },
+      },
+      {
+        name: '上月',
+        data: inArray,
+        type: 'line',
+        smooth: false,
+        showSymbol: true,
+        symbol: 'circle',
+        symbolSize: 8,
+        itemStyle: {
+          borderWidth: 1,
+        },
+      },
+    ],
+  };
+};
+
+export const getPieChartOptions = (radius = 42): EChartOption => ({
+  tooltip: {
+    trigger: 'item',
+  },
+  grid: {
+    top: '0',
+    right: '0',
+  },
+  legend: {
+    itemWidth: 12,
+    itemHeight: 4,
+    textStyle: {
+      fontSize: 12,
+    },
+    left: 'center',
+    bottom: '0',
+    orient: 'horizontal', // legend 横向布局。
+  },
+  series: [
+    {
+      name: '销售渠道',
+      type: 'pie',
+      radius: ['48%', '60%'],
+      avoidLabelOverlap: false,
+      silent: true,
+      itemStyle: {
+        borderWidth: 1,
+      },
+      label: {
+        show: true,
+        position: 'center',
+        formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+        rich: {
+          value: {
+            fontSize: 28,
+            fontWeight: 'normal',
+            lineHeight: 46,
+          },
+          name: {
+            color: '#909399',
+            fontSize: 12,
+            lineHeight: 14,
+          },
+        },
+      },
+      labelLine: {
+        show: false,
+      },
+      data: [
+        { value: 1048, name: '线上' },
+        { value: radius * 7, name: '门店' },
+      ],
+    },
+  ],
+});
+
+export const getBarChartOptions = (dateTime: Array<string> = []): EChartOption => {
+  const [timeArray, inArray, outArray] = getChartDataSet(dateTime);
+  return {
+    tooltip: {
+      trigger: 'item',
+    },
+    xAxis: {
+      type: 'category',
+      data: timeArray,
+      axisLine: {
+        lineStyle: {
+          width: 1,
+        },
+      },
+    },
+    yAxis: {
+      type: 'value',
+    },
+    grid: {
+      top: '5%',
+      left: '25px',
+      right: 0,
+      bottom: '60px',
+    },
+    legend: {
+      icon: 'rect',
+      itemWidth: 12,
+      itemHeight: 4,
+      itemGap: 48,
+      textStyle: {
+        fontSize: 12,
+        color: 'rgba(0, 0, 0, 0.6)',
+      },
+      left: 'center',
+      bottom: '0',
+      orient: 'horizontal',
+      data: ['本月', '上月'],
+    },
+    series: [
+      {
+        name: '本月',
+        data: outArray,
+        type: 'bar',
+      },
+      {
+        name: '上月',
+        data: inArray,
+        type: 'bar',
+      },
+    ],
+  };
+};
+
+export const getTradPieChartOption = (data = 0): EChartOption => ({
+  title: {
+      text: 'Data Source Distribution',
+      subtext: 'Data Source',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'item'
+    },
+    legend: {
+      orient: 'vertical',
+      left: 'left'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: [
+          { value: 1048, name: 'DEH' },
+          { value: 735, name: 'ESM' },
+          { value: 580, name: 'ORS' },
+          { value: 484, name: 'MCH' },
+          { value: 300, name: 'TXR' }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  }
+);
+
+// PieChartIcon Data
+export const MICRO_CHART_OPTIONS_LINE: EChartOption = {
+  xAxis: {
+    type: 'category',
+    show: false,
+    data: ONE_WEEK_LIST,
+  },
+  yAxis: {
+    show: false,
+    type: 'value',
+  },
+  grid: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    tooltip: {
+      show: false,
+    },
+  },
+  color: ['#fff'],
+  series: [
+    {
+      data: [150, 230, 224, 218, 135, 147, 260],
+      type: 'line',
+      showSymbol: false,
+    },
+  ],
+};
+
+// BarChartIcon Data
+export const MICRO_CHART_OPTIONS_BAR: EChartOption = {
+  xAxis: {
+    type: 'category',
+    show: false,
+    data: ONE_WEEK_LIST,
+  },
+  yAxis: {
+    show: false,
+    type: 'value',
+  },
+  grid: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    tooltip: {
+      show: false,
+    },
+  },
+  series: [
+    {
+      data: [
+        100,
+        130,
+        184,
+        218,
+        {
+          value: 135,
+          itemStyle: {
+            opacity: 0.2,
+          },
+        },
+        {
+          value: 118,
+          itemStyle: {
+            opacity: 0.2,
+          },
+        },
+        {
+          value: 60,
+          itemStyle: {
+            opacity: 0.2,
+          },
+        },
+      ],
+      type: 'bar',
+      barWidth: 9,
+    },
+  ],
+};

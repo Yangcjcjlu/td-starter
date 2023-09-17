@@ -1,15 +1,17 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useSelector, useDispatch } from 'react-redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import global from './global';
-import user from './user';
 import listDataSource from './datasource/base';
-import getDataSource from './datasource/get'
-import updateDataSource from './datasource/update'
+import getDataSource from './datasource/get';
+import updateDataSource from './datasource/update';
 import sendFile from './eventHub/sendFile';
+import global from './global';
 import listBase from './list/base';
-import listSelect from './list/select';
 import listCard from './list/card';
+import listSelect from './list/select';
+import listMappingBase from './mapping/base';
+import listStatisticBase from './statistics/base';
+import user from './user';
 
 const reducer = combineReducers({
   global,
@@ -20,6 +22,8 @@ const reducer = combineReducers({
   listSelect,
   listCard,
   updateDataSource,
+  listMappingBase,
+  listStatisticBase,
   sendFile,
 });
 

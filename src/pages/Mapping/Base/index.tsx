@@ -1,17 +1,12 @@
-import classnames from 'classnames';
-import { ETrend, TrendIcon } from 'components/Board';
-import { clearPageState, getList, selectListBase } from 'modules/datasource/base';
-import { useAppDispatch, useAppSelector } from 'modules/store';
-import React, { memo, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import CommonStyle from 'styles/common.module.less';
+import React, { useState, memo, useEffect } from 'react';
+import { Table, Tag, Row, Col, Button, Input } from 'tdesign-react';
 import { SearchIcon } from 'tdesign-icons-react';
-import { Button, Col, Input, Row, Table, Tag } from 'tdesign-react';
-import { getDataSourceList } from "../../../services/datasource";
-import {  debounce } from "../../../services/debounce";
+import classnames from 'classnames';
+import { useAppDispatch, useAppSelector } from 'modules/store';
+import { selectListBase, getList, clearPageState } from 'modules/list/base';
+import CommonStyle from 'styles/common.module.less';
 import style from './index.module.less';
-
-
+import { TrendIcon, ETrend } from 'components/Board';
 
 export const PaymentTypeMap: {
   [key: number]: React.ReactElement;
@@ -63,30 +58,20 @@ export default memo(() => {
   const pageState = useAppSelector(selectListBase);
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([1, 2]);
 
-  const { loading, datasourceList, current, pageSize, total } = pageState;
-
-
-  const nav = useNavigate();
-  
+  const { loading, contractList, current, pageSize, total } = pageState;
 
   useEffect(() => {
     dispatch(
       getList({
         pageSize: pageState.pageSize,
         current: pageState.current,
-    
       }),
     );
     return () => {
+      console.log('clear');
       dispatch(clearPageState());
     };
   }, []);
-
-  function handleManage(record: any)  {
-    const { row } = record;
-    const id = row.id ? row.id : 0;
-    nav(`/datasource/${id}/form`);
-  }
 
   function onSelectChange(value: (string | number)[]) {
     setSelectedRowKeys(value);
@@ -94,7 +79,7 @@ export default memo(() => {
   return (
     <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
       <Row justify='space-between' className={style.toolBar}>
-        {/* <Col>
+        <Col>
           <Row gutter={8} align='middle'>
             <Col>
               <Button>新建合同</Button>
@@ -106,18 +91,9 @@ export default memo(() => {
               <div>已选 {selectedRowKeys?.length || 0} 项</div>
             </Col>
           </Row>
-        </Col> */}
+        </Col>
         <Col>
-          <Input suffixIcon={<SearchIcon />} placeholder='请输入你需要搜索的型号' onChange={(value:any)=>{
-            dispatch(
-              getList({
-                pageSize: pageState.pageSize,
-                current: pageState.current,
-                name:value,
-            })
-            )
-
-          }} />
+          <Input suffixIcon={<SearchIcon />} placeholder='请输入你需要搜索的型号' />
         </Col>
       </Row>
 
@@ -134,61 +110,66 @@ export default memo(() => {
             width: 200,
             ellipsis: true,
             colKey: 'name',
-            title: 'name',
+            title: '合同名称',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'host',
-            title: 'host',
-            // cell({ row }) {
-            //   return StatusMap[row.status || 5];
-            // },
+            colKey: 'status',
+            title: '合同状态',
+            cell({ row }) {
+              return StatusMap[row.status || 5];
+            },
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'port',
-            title: 'port',
+            colKey: 'no',
+            title: '合同编号',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'username',
-            title: 'username',
-            // cell({ row }) {
-            //   return ContractTypeMap[row.contractType];
-            // },
+            colKey: 'contractType',
+            title: '合同类型',
+            cell({ row }) {
+              return ContractTypeMap[row.contractType];
+            },
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'bucketName',
-            title: 'bucketName',
-            // cell({ row }) {
-            //   return PaymentTypeMap[row.paymentType];
-            // },
+            colKey: 'paymentType',
+            title: '合同收付类型',
+            cell({ row }) {
+              return PaymentTypeMap[row.paymentType];
+            },
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'amount',
+            title: '合同金额（元）',
           },
           {
             align: 'left',
             fixed: 'right',
             width: 180,
             colKey: 'op',
-            title: 'operation',
-            cell(record:any) {
+            title: '操作',
+            cell() {
               return (
                 <>
-                  <Button theme='primary' variant='text' onClick={()=>{ return handleManage(record)}}>
-                    manage
+                  <Button theme='primary' variant='text'>
+                    管理
                   </Button>
-                  <Button theme='primary' variant='text' onClick={() => {
-                    // handleClickDelete(record);
-                  }}>
-                    delete
+                  <Button theme='primary' variant='text'>
+                    删除
                   </Button>
                 </>
               );
@@ -196,7 +177,7 @@ export default memo(() => {
           },
         ]}
         loading={loading}
-        data={datasourceList}
+        data={contractList}
         rowKey='index'
         selectedRowKeys={selectedRowKeys}
         verticalAlign='top'

@@ -1,24 +1,19 @@
-import React, { memo, useRef } from 'react';
-import {
-  Form,
-  Row,
-  Col,
-  Input,
-  Radio,
-  Button,
-  DatePicker,
-  Select,
-  Textarea,
-  Avatar,
-  Upload,
-  MessagePlugin,
-} from 'tdesign-react';
 import classnames from 'classnames';
-import { SubmitContext, FormInstanceFunctions } from 'tdesign-react/es/form/type';
-import CommonStyle from 'styles/common.module.less';
-import Style from './index.module.less';
 import { sendFile } from 'modules/eventHub/sendFile';
-import { useAppDispatch, useAppSelector } from 'modules/store';
+import { useAppDispatch } from 'modules/store';
+import { memo, useRef } from 'react';
+import CommonStyle from 'styles/common.module.less';
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  MessagePlugin,
+  Row,
+  Upload
+} from 'tdesign-react';
+import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
+import Style from './index.module.less';
 
 const { FormItem } = Form;
 

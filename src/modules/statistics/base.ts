@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IDatasource, getDataSourceList } from 'services/datasource';
+import { ILineChartResult, getLineChartInfo } from 'services/statistics';
 import { RootState } from '../store';
 
 const namespace = 'datasource/base';
@@ -9,7 +9,7 @@ interface IInitialState {
   current: number;
   pageSize: number;
   total: number;
-  datasourceList: IDatasource[];
+  list: ILineChartResult[];
 }
 
 const initialState: IInitialState = {
@@ -17,13 +17,13 @@ const initialState: IInitialState = {
   current: 1,
   pageSize: 10,
   total: 0,
-  datasourceList: [],
+  list: [],
 };
 
 export const getList = createAsyncThunk(
   `${namespace}/getList`,
   async (params: { pageSize: number; current: number, name?: string }) => {
-    const result = await getDataSourceList(params);
+    const result = await getLineChartInfo(params);
     return {
       list: result?.list,
       total: result?.total,
@@ -46,7 +46,7 @@ const listBaseSlice = createSlice({
       })
       .addCase(getList.fulfilled, (state, action) => {
         state.loading = false;
-        state.datasourceList = action.payload?.list;
+        state.list = action.payload?.list;
         state.total = action.payload?.total;
         state.pageSize = action.payload?.pageSize;
         state.current = action.payload?.current;
@@ -59,6 +59,6 @@ const listBaseSlice = createSlice({
 
 export const { clearPageState } = listBaseSlice.actions;
 
-export const selectListBase = (state: RootState) => state.listDataSource;
+export const listStatistic = (state: RootState) => state.listStatisticBase;
 
 export default listBaseSlice.reducer;
