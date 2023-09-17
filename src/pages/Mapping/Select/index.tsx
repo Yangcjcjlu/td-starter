@@ -1,13 +1,12 @@
-import React, { useState, memo, useEffect } from 'react';
-import { Table, Dialog, Button, Row } from 'tdesign-react';
+import { clearPageState, getList, selectListSelect } from 'modules/list/select';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import { selectListSelect, getList, clearPageState } from 'modules/list/select';
-import SearchForm from './components/SearchForm';
-import { StatusMap, ContractTypeMap, PaymentTypeMap } from '../Base';
+import React, { memo, useEffect, useState } from 'react';
+import { Button, Dialog, Row, Table } from 'tdesign-react';
+import { ContractTypeMap, PaymentTypeMap, StatusMap } from '../Base';
 
-import './index.module.less';
 import classnames from 'classnames';
 import CommonStyle from '../../../styles/common.module.less';
+import './index.module.less';
 
 export const SelectTable = () => {
   const dispatch = useAppDispatch();
@@ -48,12 +47,12 @@ export const SelectTable = () => {
   return (
     <>
       <Row justify='start' style={{ marginBottom: '20px' }}>
-        <SearchForm
+        {/* <SearchForm
           onSubmit={async (value) => {
             console.log(value);
           }}
           onCancel={() => {}}
-        />
+        /> */}
       </Row>
       <Table
         loading={loading}
