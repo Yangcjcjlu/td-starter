@@ -33,7 +33,7 @@ const MiddleChart = () => {
   return (
     <Row gutter={[16, 16]} className={Style.middleChartPanel}>
       <Col xs={12} xl={6}>
-        <Card title='销售渠道' subtitle='2021-12' bordered={false}>
+        <Card title='Data Count' subtitle='2021-12' bordered={false}>
           <ReactEcharts option={dynamicPieChartOption} notMerge={true} lazyUpdate={true} showLoading={false} />
         </Card>
       </Col>
