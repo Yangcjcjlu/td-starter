@@ -31,7 +31,6 @@ export default memo(() => {
       console.log('form: ', formRef.current?.getFieldsValue?.(true));
       const p = e.fields;
       console.log('p: ', p);
-      // debugger;
       dispatch(sendFile(p)).then((resp) => {
         console.log('resp: ', resp);
         if (resp.payload.code === 0) {

@@ -34,20 +34,14 @@ interface IParams {
 export const getDataSource = async (params: any) => {
     const id = params?.id || 0;
     const result = await request.get<any>(`/ds/get/detail?id=${id}`); 
-    
-    // 模拟接口分页
-    const list = result?.page || [];
-    const total = list.length;
-    const data = list[0];
-    // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
+    const data = result?.page || [];
     return {
         data,
-        total,
     };
 };
 
 export const getDataSourceList = async (params: any) =>{
-    const result = await request.post<any>('/ds/list',params);    
+    const result = await request.get<any>('/ds/list',params);    
     
     // 模拟接口分页
     let list = result?.page || [];

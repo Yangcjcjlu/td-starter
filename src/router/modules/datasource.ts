@@ -34,6 +34,10 @@ const result: IRouter[] = [
     path: '/datasource/:id/form',
     Component: lazy(() => import('pages/Datasource/Form')),
   },
+  {
+    path: '/datasource/:id/details',
+    Component: lazy(() => import('pages/Datasource/Details')),
+  },
 ];
 
 export default result;

@@ -87,7 +87,7 @@ export const getLineChartOptions = (dateTime: Array<string> = []): EChartOption 
       left: 'center',
       bottom: '0',
       orient: 'horizontal', // legend 横向布局。
-      data: ['本月', '上月'],
+      data: ['Present', 'Last Month'],
       textStyle: {
         fontSize: 12,
       },
@@ -108,7 +108,7 @@ export const getLineChartOptions = (dateTime: Array<string> = []): EChartOption 
     },
     series: [
       {
-        name: '本月',
+        name: 'Present',
         data: outArray,
         type: 'line',
         smooth: false,
@@ -123,7 +123,7 @@ export const getLineChartOptions = (dateTime: Array<string> = []): EChartOption 
         },
       },
       {
-        name: '上月',
+        name: 'Last Month',
         data: inArray,
         type: 'line',
         smooth: false,
@@ -158,18 +158,18 @@ export const getPieChartOptions = (radius = 42): EChartOption => ({
   },
   series: [
     {
-      name: '销售渠道',
+      name: 'Data Count',
       type: 'pie',
-      radius: ['48%', '60%'],
+      radius: ['40%', '70%'],
       avoidLabelOverlap: false,
-      silent: true,
+      silent: false,
       itemStyle: {
         borderWidth: 1,
       },
       label: {
-        show: true,
+        show: false,
         position: 'center',
-        formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
+        formatter: ['{value|{d}%}', '{name|{b}}'].join('\n'),
         rich: {
           value: {
             fontSize: 28,
@@ -183,12 +183,17 @@ export const getPieChartOptions = (radius = 42): EChartOption => ({
           },
         },
       },
+      emphasis: {
+        label: {
+          show: true,
+        }
+      },
       labelLine: {
         show: false,
       },
       data: [
-        { value: 1048, name: '线上' },
-        { value: radius * 7, name: '门店' },
+        { value: 1048, name: 'Present' },
+        { value: 1048 * 7, name: 'History' },
       ],
     },
   ],
@@ -230,16 +235,16 @@ export const getBarChartOptions = (dateTime: Array<string> = []): EChartOption =
       left: 'center',
       bottom: '0',
       orient: 'horizontal',
-      data: ['本月', '上月'],
+      data: ['Present', 'Last Month'],
     },
     series: [
       {
-        name: '本月',
+        name: 'Present',
         data: outArray,
         type: 'bar',
       },
       {
-        name: '上月',
+        name: 'Last Month',
         data: inArray,
         type: 'bar',
       },

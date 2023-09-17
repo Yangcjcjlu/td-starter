@@ -21,14 +21,11 @@ const initialState: IDataSourceState = {
 };
 
 export const getItem = createAsyncThunk(
-  `${namespace}/get/detail?id=?`,
+  `${namespace}/get/detail`,
   async (params:any) => {
     const result = await getDataSource(params);
     return {
-      list: result?.data,
-    //   total: result?.total,
-    //   pageSize: params.pageSize,
-    //   current: params.current,
+      data: result?.data,
     };
   },
 );
@@ -46,7 +43,7 @@ const listBaseSlice = createSlice({
       })
       .addCase(getItem.fulfilled, (state, action) => {
         state.loading = false;
-        state.item = action.payload?.list;
+        state.item = action.payload?.data;
         // state.total = action.payload?.total;
         // state.pageSize = action.payload?.pageSize;
         // state.current = action.payload?.current;

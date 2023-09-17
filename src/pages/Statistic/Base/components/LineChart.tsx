@@ -26,7 +26,7 @@ const lineChart = () => {
   return (
     <Row gutter={[16, 16]} className={Style.lineChartPanel}>
       <Col xs={12} xl={12}>
-        <Card title='统计数据' subtitle='(万元)' actions={LastWeekDatePicker(onTimeChange)} bordered={false}>
+        <Card title='Data Count' subtitle='(Million rows)' actions={LastWeekDatePicker(onTimeChange)} bordered={false}>
           <ReactEcharts option={dynamicLineChartOption} notMerge={true} lazyUpdate={false} />
         </Card>
       </Col>

@@ -7,56 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import CommonStyle from 'styles/common.module.less';
 import { SearchIcon } from 'tdesign-icons-react';
 import { Button, Col, Input, Row, Table, Tag } from 'tdesign-react';
-import { getDataSourceList } from "../../../services/datasource";
-import {  debounce } from "../../../services/debounce";
+import { getDataSourceList } from '../../../services/datasource';
+import { debounce } from '../../../services/debounce';
 import style from './index.module.less';
-
-
-
-export const PaymentTypeMap: {
-  [key: number]: React.ReactElement;
-} = {
-  0: <TrendIcon trend={ETrend.down} trendNum='付款' />,
-  1: <TrendIcon trend={ETrend.up} trendNum='收款' />,
-};
-
-export const StatusMap: {
-  [key: number]: React.ReactElement;
-} = {
-  1: (
-    <Tag theme='warning' variant='light'>
-      待审核
-    </Tag>
-  ),
-  2: (
-    <Tag theme='warning' variant='light'>
-      待履行
-    </Tag>
-  ),
-  3: (
-    <Tag theme='success' variant='light'>
-      履行中
-    </Tag>
-  ),
-  4: (
-    <Tag theme='success' variant='light'>
-      已完成
-    </Tag>
-  ),
-  5: (
-    <Tag theme='danger' variant='light'>
-      审核失败
-    </Tag>
-  ),
-};
-
-export const ContractTypeMap: {
-  [key: number]: string;
-} = {
-  0: '审核失败',
-  1: '待审核',
-  2: '待履行',
-};
 
 export default memo(() => {
   const dispatch = useAppDispatch();
@@ -65,16 +18,13 @@ export default memo(() => {
 
   const { loading, datasourceList, current, pageSize, total } = pageState;
 
-
   const nav = useNavigate();
-  
 
   useEffect(() => {
     dispatch(
       getList({
         pageSize: pageState.pageSize,
         current: pageState.current,
-    
       }),
     );
     return () => {
@@ -82,10 +32,16 @@ export default memo(() => {
     };
   }, []);
 
-  function handleManage(record: any)  {
+  function handleManage(record: any) {
     const { row } = record;
     const id = row.id ? row.id : 0;
     nav(`/datasource/${id}/form`);
+  }
+
+  function showDetails(record: any) {
+    const { row } = record;
+    const id = row.id ? row.id : 0;
+    nav(`/datasource/${id}/details`);
   }
 
   function onSelectChange(value: (string | number)[]) {
@@ -108,16 +64,20 @@ export default memo(() => {
           </Row>
         </Col> */}
         <Col>
-          <Input suffixIcon={<SearchIcon />} placeholder='请输入你需要搜索的型号' onChange={(value:any)=>{
-            dispatch(
-              getList({
-                pageSize: pageState.pageSize,
-                current: pageState.current,
-                name:value,
-            })
-            )
-
-          }} />
+          <Input
+            suffixIcon={<SearchIcon />}
+            placeholder='Please type datasource name.'
+            onEnter={(value: any) => {
+              dispatch(
+                getList({
+                  pageSize: pageState.pageSize,
+                  current: pageState.current,
+                  name: value,
+                }),
+              );
+            }}
+            autoWidth
+          />
         </Col>
       </Row>
 
@@ -179,15 +139,34 @@ export default memo(() => {
             width: 180,
             colKey: 'op',
             title: 'operation',
-            cell(record:any) {
+            cell(record: any) {
               return (
                 <>
-                  <Button theme='primary' variant='text' onClick={()=>{ return handleManage(record)}}>
+                  <Button
+                    theme='primary'
+                    variant='text'
+                    onClick={() => {
+                      return handleManage(record);
+                    }}
+                  >
                     manage
                   </Button>
-                  <Button theme='primary' variant='text' onClick={() => {
-                    // handleClickDelete(record);
-                  }}>
+                  <Button
+                    theme='primary'
+                    variant='text'
+                    onClick={() => {
+                      return showDetails(record);
+                    }}
+                  >
+                    details
+                  </Button>
+                  <Button
+                    theme='primary'
+                    variant='text'
+                    onClick={() => {
+                      // handleClickDelete(record);
+                    }}
+                  >
                     delete
                   </Button>
                 </>
