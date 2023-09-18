@@ -19,6 +19,10 @@ const mapping: IRouter[] = [
       },
     ],
   },
+  {
+    path:'/custom-tree',
+    Component: lazy(() => import('pages/Mapping/CustomTree'))
+  }
 ];
 
 export default mapping;

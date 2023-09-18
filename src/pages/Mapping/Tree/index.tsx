@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React from 'react';
+import React, { useRef } from 'react';
 import { SearchIcon } from 'tdesign-icons-react';
 import { Input, Tree } from 'tdesign-react';
 import { SelectTable } from '../Select';
@@ -95,11 +95,31 @@ const treeList = [
   },
 ];
 
+
+
+
+const handleClick = (context:any) => {
+  
+  // console.log(treeRef);
+  // console.log('context==>')
+  // console.log(JSON.stringify(context))
+}
+
+const checkWithRef = () =>{
+  const treeRef = useRef(null);
+}
+
+
+
 const TreeTable: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithColor, Style.content)}>
     <div className={Style.treeContent}>
       <Input className={Style.search} suffixIcon={<SearchIcon />} placeholder='please search for source/'  />
-      <Tree data={treeList} activable hover transition />
+      <Tree data={treeList} 
+      onClick={handleClick}
+      activable 
+      hover 
+      transition />
     </div>
     <div className={Style.tableContent}>
       <SelectTable />

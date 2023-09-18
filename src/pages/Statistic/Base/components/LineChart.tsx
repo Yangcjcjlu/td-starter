@@ -12,8 +12,6 @@ const lineChart = () => {
   const [customOptions, setCustomOptions] = useState(lineOptions);
 
   const onTimeChange = (value: Array<string>) => {
-    console.log("value==>");
-    console.log(JSON.stringify(value));
     const options = getLineChartOptions(value);
     setCustomOptions(options);
   };
