@@ -4,6 +4,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import listDataSource from './datasource/base';
 import getDataSource from './datasource/get';
 import updateDataSource from './datasource/update';
+import ListSelectDataSource from './datasource/listSelect';
 import sendFile from './eventHub/sendFile';
 import global from './global';
 import listBase from './list/base';
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   listCard,
   updateDataSource,
   listMappingBase,
+  ListSelectDataSource,
   listStatisticBase,
   sendFile,
 });

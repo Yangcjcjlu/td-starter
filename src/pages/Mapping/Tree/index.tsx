@@ -1,12 +1,11 @@
 import classnames from 'classnames';
-import React, { useRef } from 'react';
+import React from 'react';
 import { SearchIcon } from 'tdesign-icons-react';
 import { Input, Tree } from 'tdesign-react';
 import { SelectTable } from '../Select';
 // import { treeList } from './consts';
 import CommonStyle from 'styles/common.module.less';
 import Style from './index.module.less';
-
 
 const treeList = [
   {
@@ -94,8 +93,32 @@ const treeList = [
     value: 4,
   },
 ];
+// const [options, setOptions] = useState([]);
 
-
+// const treeRef = useRef(null);
+// useEffect(() => {
+//   const newOptions = [];
+//   for (let i = 1; i <= 3000; i++) {
+//     newOptions.push({
+//       label: `第${i}段`,
+//       value: i,
+//       key: i,
+//       children: [
+//         {
+//           label: `第${i}段第1个子节点`,
+//           value: `${i}.1`,
+//           key: `${i}.1`,
+//         },
+//         {
+//           label: `第${i}段第2个子节点`,
+//           value: `${i}.2`,
+//           key: `${i}.2`,
+//         },
+//       ],
+//     });
+//   }
+//   setOptions(newOptions);
+// }, []);
 
 
 const handleClick = (context:any) => {
@@ -106,7 +129,7 @@ const handleClick = (context:any) => {
 }
 
 const checkWithRef = () =>{
-  const treeRef = useRef(null);
+ 
 }
 
 
@@ -115,11 +138,13 @@ const TreeTable: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithColor, Style.content)}>
     <div className={Style.treeContent}>
       <Input className={Style.search} suffixIcon={<SearchIcon />} placeholder='please search for source/'  />
-      <Tree data={treeList} 
+      <Tree
+       data={treeList}
       onClick={handleClick}
       activable 
       hover 
-      transition />
+      transition
+       />
     </div>
     <div className={Style.tableContent}>
       <SelectTable />

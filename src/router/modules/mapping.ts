@@ -12,7 +12,7 @@ const mapping: IRouter[] = [
     children: [
       {
         path: 'tree',
-        Component: lazy(() => import('pages/Mapping/Tree')),
+        Component: lazy(() => import('pages/Mapping/TreeList')),
         meta: {
           title: 'mapping info',
         },
@@ -21,7 +21,7 @@ const mapping: IRouter[] = [
   },
   {
     path:'/custom-tree',
-    Component: lazy(() => import('pages/Mapping/CustomTree'))
+    Component: lazy(() => import('pages/Mapping/customTree'))
   }
 ];
 

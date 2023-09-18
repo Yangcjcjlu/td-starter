@@ -33,6 +33,9 @@ export const getList = createAsyncThunk(
   },
 );
 
+
+
+
 const listBaseSlice = createSlice({
   name: namespace,
   initialState,
@@ -53,7 +56,7 @@ const listBaseSlice = createSlice({
       })
       .addCase(getList.rejected, (state) => {
         state.loading = false;
-      });
+      })
   },
 });
 
