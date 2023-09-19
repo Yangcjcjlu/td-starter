@@ -3,15 +3,7 @@ import { sendFile } from 'modules/eventHub/sendFile';
 import { useAppDispatch } from 'modules/store';
 import { memo, useRef } from 'react';
 import CommonStyle from 'styles/common.module.less';
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  MessagePlugin,
-  Row,
-  Upload
-} from 'tdesign-react';
+import { Button, Col, Form, Input, MessagePlugin, Row, Upload } from 'tdesign-react';
 import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
 import Style from './index.module.less';
 
@@ -42,10 +34,6 @@ export default memo(() => {
     }
   };
 
-  const handleFail = ({ file }: { file: any }) => {
-    MessagePlugin.error(`Failed to send ${file.name}`);
-  };
-
   return (
     <div className={classnames(CommonStyle.pageWithColor)}>
       <div className={Style.formContainer}>
@@ -53,26 +41,27 @@ export default memo(() => {
           <div className={Style.titleBox}>
             <div className={Style.titleText}>Send File to EventHub</div>
           </div>
-          <Row gutter={[32, 24]}>
-            <Col span={6}>
+          <Row className={Style.row}>
+            <Col>
               <FormItem
                 label='EventHub Name'
                 name='eventhubName'
                 initialData={INITIAL_DATA.eventhubName}
                 rules={[{ required: true, message: 'EventHub Name is required', type: 'error' }]}
               >
-                <Input placeholder='please input EventHub Name' />
+                <Input className={Style.inputText} placeholder='please input EventHub Name' />
               </FormItem>
             </Col>
-
-            <Col span={6}>
+          </Row>
+          <Row className={Style.row}>
+            <Col>
               <FormItem
                 label='File'
                 name='file'
                 initialData={INITIAL_DATA.file}
                 rules={[{ required: true, message: 'File is required', type: 'error' }]}
               >
-                <Upload onFail={handleFail} tips='please upload file to EventHub' autoUpload={false} multiple={false} />
+                <Upload tips='please upload file to EventHub' autoUpload={false} multiple={false} />
               </FormItem>
             </Col>
           </Row>
