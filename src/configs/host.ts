@@ -15,7 +15,7 @@ export default {
   release: {
     // 正式环境接口地址
     // API: 'https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com',
-    API: 'http://64.176.211.119:8080',
+    API: 'http://64.176.211.119:8080/',
   },
   site: {
     // TDesign部署特殊需要 与release功能一致
