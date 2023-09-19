@@ -50,6 +50,7 @@ export const getPieChartInfo = async (params: any) => {
     let resp = null;
     try{
         // result = await request.get<any>('api/v1/statistic/dataSource');
+        console.log(proxy[env].API)
         result = await fetch(`${API_HOST}api/v1/statistic/dataSource`);
         resp = await result.json();
     }catch(error){
