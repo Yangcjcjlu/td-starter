@@ -32,6 +32,7 @@ export const getAllGoldTable = async () => {
 }
 
 export const getGoldTablesColumns = async (id: number) => {
+    // const id = params.id ? params.id : 0
     const result = await request.get<any>(`${basePath}/goldTable/${id}/columns`);
     const data = result ? result : null;
     return { data };
