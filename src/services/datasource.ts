@@ -30,8 +30,10 @@ export const getDataSource = async (params: any) => {
     };
 };
 
+
 export const getDataSourceList = async (params: any) => {
     const result = await request.get<any>(`${basePath}`, { params: params });
+
     // 模拟接口分页
     let list = result?.data || [];
     const total = list.length;

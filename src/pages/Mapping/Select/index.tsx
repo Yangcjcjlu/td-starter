@@ -1,32 +1,62 @@
-import React, { useState, memo, useEffect } from 'react';
-import { Table, Dialog, Button, Row } from 'tdesign-react';
+// import { clearPageState, selectListSelect } from 'modules/list/select';
+// import { getList, selectListSelect } from 'modules/datasource/base';
+import { clearPageState, getMockList, selectDataSourceListSelect } from 'modules/dataSource/listSelect';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import { selectListSelect, getList, clearPageState } from 'modules/list/select';
-import SearchForm from './components/SearchForm';
-import { StatusMap, ContractTypeMap, PaymentTypeMap } from '../Base';
+import React, { memo, useEffect, useState } from 'react';
+import { Button, Dialog, Row, Table } from 'tdesign-react';
+import { ContractTypeMap, PaymentTypeMap, StatusMap } from '../Base';
 
-import './index.module.less';
 import classnames from 'classnames';
 import CommonStyle from '../../../styles/common.module.less';
+import './index.module.less';
 
-export const SelectTable = () => {
+export const SelectTable = (props: any) => {
   const dispatch = useAppDispatch();
-  const pageState = useAppSelector(selectListSelect);
+  const pageState = useAppSelector(selectDataSourceListSelect);
+  const [parentData, setParentData] = useState([]);
+  // const [loading,setLoading] = useState(false);
+  // const [datasourceList,setDatasourceList] = useState([]);
+  // const [current,setCurrent] = useState(1);
+  // const [pageSize,setpageSize] = useState(10);
+  // const [total,setTotal] = useState(0);
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
   const [visible, setVisible] = useState(false);
-  const { loading, contractList, current, pageSize, total } = pageState;
+  const { loading, datasourceList, current, pageSize, total } = pageState;
+
+  // useEffect(() => {
+  //   dispatch(
+  //     getList({
+  //       pageSize: pageState.pageSize,
+  //       current: pageState.current,
+  //     }),
+  //   );
+  //   return () => {
+  //     dispatch(clearPageState());
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   // console.log("data.change！");
+  //   // console.log(props.parentData);
+  // })  
 
   useEffect(() => {
+    console.log("data.change！");
+    console.log(props.parentData);
     dispatch(
-      getList({
-        pageSize: pageState.pageSize,
-        current: pageState.current,
-      }),
+      getMockList({
+      list: props.parentData || [],
+      pageSize: pageState.pageSize,
+      current: pageState.current,
+    }),
     );
     return () => {
+      console.log("clear!");
       dispatch(clearPageState());
-    };
-  }, []);
+    }
+  }, [props.parentData]);
+
+  // console.log("dataSource==>");
+  // console.log(JSON.stringify(datasourceList));
 
   function onSelectChange(value: (string | number)[]) {
     setSelectedRowKeys(value);
@@ -48,16 +78,16 @@ export const SelectTable = () => {
   return (
     <>
       <Row justify='start' style={{ marginBottom: '20px' }}>
-        <SearchForm
+        {/* <SearchForm
           onSubmit={async (value) => {
             console.log(value);
           }}
           onCancel={() => {}}
-        />
+        /> */}
       </Row>
       <Table
         loading={loading}
-        data={contractList}
+        data={datasourceList}
         columns={[
           {
             title: '合同名称',
@@ -145,22 +175,22 @@ export const SelectTable = () => {
           total,
           current,
           showJumper: true,
-          onCurrentChange(current, pageInfo) {
-            dispatch(
-              getList({
-                pageSize: pageInfo.pageSize,
-                current: pageInfo.current,
-              }),
-            );
-          },
-          onPageSizeChange(size) {
-            dispatch(
-              getList({
-                pageSize: size,
-                current: 1,
-              }),
-            );
-          },
+          // onCurrentChange(current, pageInfo) {
+          //   dispatch(
+          //     get({
+          //       pageSize: pageInfo.pageSize,
+          //       current: pageInfo.current,
+          //     }),
+          //   );
+          // },
+          // onPageSizeChange(size) {
+          //   dispatch(
+          //     getList({
+          //       pageSize: size,
+          //       current: 1,
+          //     }),
+          //   );
+          // },
         }}
       />
       <Dialog header='确认删除当前所选合同？' visible={visible} onClose={handleClose}>
