@@ -5,6 +5,7 @@ import datasource from './modules/datasource';
 import eventhub from './modules/eventhub';
 import form from './modules/form';
 import mapping from './modules/mapping';
+import distribution from './modules/distribution'
 
 export interface IRouter {
   path: string;
@@ -47,6 +48,6 @@ const routes: IRouter[] = [
   },
 ];
 
-const allRoutes = [...routes, ...dashboard, ...form, ...datasource, ...eventhub, ...mapping];
+const allRoutes = [...routes, ...dashboard, ...form, ...datasource, ...eventhub, ...mapping, ...distribution];
 
 export default allRoutes;

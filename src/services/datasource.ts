@@ -1,24 +1,13 @@
 import request from 'utils/request';
 
 export interface IDatasource {
-
     id: number;
-    name: string;
-    type: string;
-    host: string;
-    port: number;
-    username: string;
-    password: string;
-    accessKey: string;
-    secretKey: string;
-    bucketName: string;
-    region: string;
-    topic: string;
-    consumerGroup: string;
-    createdBy: string;
-    createdAt: Date;
-    updatedBy: string;
-    updatedAt: Date
+    datasourceName: string;
+    datasourceType: string;
+    businessType: string;
+    ingestionType: string;
+    consumeQueue: string;
+    comment: string;
 }
 
 interface IResult {
@@ -30,24 +19,25 @@ interface IParams {
     current: number;
 }
 
+const basePath = '/api/v1/dataSource'
 
 export const getDataSource = async (params: any) => {
     const id = params?.id || 0;
-    const result = await request.get<any>(`/ds/get/detail?id=${id}`); 
-    const data = result?.page || [];
+    const result = await request.get<any>(`${basePath}/${id}`);
+    const data = result ? result : null;
     return {
         data,
     };
 };
 
-export const getDataSourceList = async (params: any) =>{
-    const result = await request.post<any>('/ds/list',params);    
-    console.log('result==>');
-    console.log(result);
+
+export const getDataSourceList = async (params: any) => {
+    const result = await request.get<any>(`${basePath}`, { params: params });
+
     // 模拟接口分页
-    let list = result?.page || [];
+    let list = result?.data || [];
     const total = list.length;
-    list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
+    // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {
         list,
         total,
@@ -55,8 +45,8 @@ export const getDataSourceList = async (params: any) =>{
 };
 
 
-export const updateDataSource = async (params: IParams, data:any) => {
-    const result:any = await request.post<any>('/ds/update',data);    
+export const updateDataSource = async (params: IParams, data: any) => {
+    const result: any = await request.post<any>('/ds/update', data);
     // 模拟接口分页
     const code = result?.code;
     // let list = result?.page || [];

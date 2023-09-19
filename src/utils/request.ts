@@ -4,7 +4,6 @@ import proxy from '../configs/host';
 const env = import.meta.env.MODE || 'development';
 const API_HOST = proxy[env].API;
 
-const SUCCESS_CODE = 0;
 const TIMEOUT = env === 'development' ? 1800000 : 5000;
 
 export const instance = axios.create({
@@ -19,10 +18,7 @@ instance.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
       const { data } = response;
-      if (data.code === SUCCESS_CODE) {
-        return data;
-      }
-      return Promise.reject(data);
+      return data;
     }
     return Promise.reject(response?.data);
   },

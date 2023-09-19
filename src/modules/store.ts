@@ -13,7 +13,11 @@ import listSelect from './list/select';
 import listMappingBase from './mapping/base';
 // import listStatisticBase from './statistics/base';
 import getStatisticPieBase from './statistics/base'
+// import listStatisticBase from './statistics/base';
+import listAllGoldTable from './goldTable/base';
 import user from './user';
+import listAllSubscrs from './subscr/base'
+import listGoldTableColumn from './goldTable/columns'
 
 const reducer = combineReducers({
   global,
@@ -28,6 +32,9 @@ const reducer = combineReducers({
   ListSelectDataSource,
   getStatisticPieBase,
   sendFile,
+  listAllGoldTable,
+  listAllSubscrs,
+  listGoldTableColumn,
 });
 
 export const store = configureStore({
