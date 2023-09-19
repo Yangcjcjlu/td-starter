@@ -1,22 +1,25 @@
 import classnames from 'classnames';
 import dayjs from 'dayjs';
-import React, { memo, useMemo, useRef, useState } from 'react';
+import React, { memo, useMemo, useRef, useState,useEffect } from 'react';
 import { Button, Input, Link, MessagePlugin, Select, Table } from 'tdesign-react';
 import CommonStyle from '../../../styles/common.module.less';
 import './index.module.less';
 
-export const  EditableCellTable = () => {
+export const  EditableCellTable = (props:any) => {
+
+  const {deleteColumn} = props;
+  
   const tableRef = useRef(null);
   const initData = new Array(5).fill(null).map((_, i) => ({
-    key: String(i + 1),
-    firstName: ['贾明', '张三', '王芳'][i % 3],
+    id: String(i + 1),
+    goldTable: ['table1', 'table2', 'table3'][i % 3],
     status: i % 3,
-    email: [
-      'espinke0@apache.org',
-      'gpurves1@issuu.com',
-      'hkment2@nsw.gov.au',
-      'lskures3@apache.org',
-      'zcroson5@virginia.edu',
+    goldColumn: [
+      'column1',
+      'column2',
+      'column3',
+      'column4',
+      'column5',
     ][i % 4],
     letters: [
       ['宣传物料制作费用'],
@@ -34,6 +37,14 @@ export const  EditableCellTable = () => {
 
   const [data, setData] = useState([...initData]);
   const [relationSelect, setRelationSelect] = useState({});
+  const { goldTableColumnList } = props;
+  useEffect(()=>{
+    console.log("goldTableColumnList==>");
+    console.log(goldTableColumnList);
+    setData(goldTableColumnList.data || [...initData] );
+    // console.log([...initData])
+    // setData(goldTableColumnList.data)
+  },[goldTableColumnList])
 
   const editableCellState = (cellParams:any) => {
     return cellParams.index !== 2;
@@ -48,7 +59,10 @@ export const  EditableCellTable = () => {
   };
 
   const onDelete = (e) => {
+    console.log(e)
     const { id } = e.currentTarget.dataset;
+    console.log("id==>"+id)
+    deleteColumn(id)
   }
    
 
@@ -88,7 +102,7 @@ export const  EditableCellTable = () => {
     () => [
       {
         title: 'Table name',
-        colKey: 'firstName',
+        colKey: 'goldTable',
         align: 'left',
         // 编辑状态相关配置，全部集中在 edit
         edit: {
@@ -132,7 +146,7 @@ export const  EditableCellTable = () => {
       },
       {
         title: 'column name',
-        colKey: 'email',
+        colKey: 'goldColumn',
         align: 'left',
         // 编辑状态相关配置，全部集中在 edit
         edit: {
@@ -177,7 +191,7 @@ export const  EditableCellTable = () => {
       {
         title: 'distribution name',
         colKey: 'distributionName',
-        cell: ({ row }) => row?.letters?.join('、'),
+        cell: ({ row }) => row?.distributionName?.join('、'),
         width: 280,
         edit: {
           // 1. 支持任意组件。需保证组件包含 `value` 和 `onChange` 两个属性，且 onChange 的第一个参数值为 new value。
@@ -228,7 +242,7 @@ export const  EditableCellTable = () => {
             <div className='table-operations'>
               {/* {!editable && ( */}
               <div>
-                <Link theme='primary' hover='color' data-id={row.key} onClick={onDelete}>
+                <Link theme='primary' hover='color' data-id={row.id} onClick={onDelete}>
                   delete
                 </Link>
               </div>

@@ -25,15 +25,10 @@ export const getGoldList= async (params: any) =>{
    return resp;
 };
 
-export const getGoldColumnList = async (params: any, data:any) => {
+export const getGoldColumnList = async (params: any) => {
     let url = 'api/v1/goldTable/1/columns'
-    const result:any = await request.get<any>('/ds/update',data);    
+    const result:any = await request.get<any>(url);    
     // 模拟接口分页
-    const code = result?.code;
-    // let list = result?.page || [];
-    // const total = list.length;
-    // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
-    return {
-        code
-    };
+    const data = result ? result : null;
+    return data;
 };

@@ -55,12 +55,8 @@ const TreeList = () => {
   }, []);
 
   const handleClick = (context: any) => {
-    console.log("treeRef")
-    console.log(treeRef.current);
-    console.log(treeRef.current.getItems()[0].data);
-    // console.log(treeRef.current.getParents())
 
-    const goldTableKey = treeRef.current.getItems()[0].data.value;
+    const goldTableKey = context.node.data.value;
     setGoldTableId(goldTableKey);
     // const parentData = [];
     // const data1 = {

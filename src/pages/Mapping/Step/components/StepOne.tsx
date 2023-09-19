@@ -2,6 +2,10 @@ import React, { memo,useEffect } from 'react';
 import { Alert, Button, Form, Select } from 'tdesign-react';
 import Style from '../index.module.less';
 import { EditableCellTable } from '../../EditTable';
+import { useAppSelector,useAppDispatch } from 'modules/store';
+import {  selectListBase,getGoldTableColumnList } from "modules/goldTable/columns";
+// import {  } from "../../../../services/goldtable";
+
 
 
 const { FormItem } = Form;
@@ -43,29 +47,51 @@ const types = [
   },
 ];
 
-export default memo((props: { callback: Function,goldTableId:any }) => {
+export default memo((props: { callback: Function , goldTableId: any }) => {
   const { callback } = props;
   const { goldTableId } = props
+
   const next = () => {
     callback('next');
   };
+ 
+  const deleteColumn = (id:any) => {
+    console.log(id)
+    // goldTableColumnList.filter(e-> )
+  };
+
+  const pageState = useAppSelector(selectListBase);
+  const dispatch = useAppDispatch();
+  const {goldTableColumnList} = pageState;
+
 
   useEffect(()=>{
     console.log("goldTableId==>");
     console.log(goldTableId);
-  })
+    dispatch(
+      getGoldTableColumnList(
+        goldTableId
+      ),
+    );
+    return () => {
+      // dispatch(clearPageState());
+    };
+  },[goldTableId])
 
 
   const style = {
     marginTop : '10px'
   };
 
+
+ 
+
   return (
     <>
       {/* <div className={Style.alertBox}>
         <Alert theme='info' message={message} title='发票开具规则：' maxLine={3} close />
       </div> */}
-      <EditableCellTable/>
+      <EditableCellTable goldTableColumnList={goldTableColumnList} deleteColumn={deleteColumn}/>
       <div style={style}>
           <Button type='submit' onClick={() => next()}>
             Next Step
