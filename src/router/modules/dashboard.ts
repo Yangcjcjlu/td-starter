@@ -10,13 +10,13 @@ const dashboard: IRouter[] = [
       Icon: DashboardIcon,
     },
     children: [
-      {
-        path: 'base',
-        Component: lazy(() => import('pages/Dashboard/Base')),
-        meta: {
-          title: 'DashBoard',
-        },
-      },
+      // {
+      //   path: 'base',
+      //   Component: lazy(() => import('pages/Dashboard/Base')),
+      //   meta: {
+      //     title: 'DashBoard',
+      //   },
+      // },
       {
         path: 'statistic',
         Component: lazy(() => import('pages/Statistic/Base')),
@@ -24,13 +24,13 @@ const dashboard: IRouter[] = [
           title: 'Statistic',
         }
       },
-      {
-        path: 'detail',
-        Component: lazy(() => import('pages/Dashboard/Detail')),
-        meta: {
-          title: 'Detail',
-        },
-      },
+      // {
+      //   path: 'detail',
+      //   Component: lazy(() => import('pages/Dashboard/Detail')),
+      //   meta: {
+      //     title: 'Detail',
+      //   },
+      // },
     ],
   },
 ];

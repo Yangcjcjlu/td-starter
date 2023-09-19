@@ -44,7 +44,7 @@ const routes: IRouter[] = [
   },
   {
     path: '/',
-    redirect: '/dashboard/base',
+    redirect: '/dashboard/statistic',
   },
 ];
 
