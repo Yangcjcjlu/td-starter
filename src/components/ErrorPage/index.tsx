@@ -43,7 +43,7 @@ const ErrorPage: React.FC<IErrorPageProps> = (props) => {
       {info?.icon}
       <div className={style.title}>{info?.title}</div>
       <div className={style.description}>{info?.desc}</div>
-      <Button theme='primary'>返回首页</Button>
+      <Button theme='primary'>Go back to Home</Button>
     </div>
   );
 };

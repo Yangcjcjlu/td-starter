@@ -34,7 +34,7 @@ const listBaseSlice = createSlice({
             })
             .addCase(getGoldTableColumnList.fulfilled, (state, action) => {
                 state.loading = false;
-                state.goldTableColumnList = action.payload;
+                state.goldTableColumnList = action.payload.data;
             })
             .addCase(getGoldTableColumnList.rejected, (state) => {
                 state.loading = false;

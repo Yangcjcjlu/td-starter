@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
-import { Button, Form, Table, Select } from 'tdesign-react';
+import { Button, Form, Table, Select, Input } from 'tdesign-react';
 import { MinusCircleIcon } from 'tdesign-icons-react';
 import { useAppDispatch, useAppSelector } from 'modules/store';
 import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
@@ -7,9 +7,10 @@ import { clearPageState, getGoldTableColumnList, selectListBase } from 'modules/
 
 const { FormItem, FormList } = Form;
 
-export default memo((props: { current: number; callback: Function; steps: any[] }) => {
+export default memo((props: { current: number; callback: Function; steps: any[]; data: any }) => {
   const { data, current, callback, steps = [] } = props;
   const goldTableId = data.goldTableId;
+  const mappingList = data.mappingList;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const next = () => {
@@ -32,26 +33,45 @@ export default memo((props: { current: number; callback: Function; steps: any[] 
 
   const columns = [
     {
-      // title: '单选',
+      // title: 'multiple',
       // align: 'center',
       colKey: 'row-select',
-      type: 'single',
-      // 允许单选(Radio)取消行选中
-      checkProps: { allowUncheck: true },
+      type: 'multiple',
 
-      width: 50,
+      width: 150,
     },
-    { colKey: 'goldColumn', title: 'Gold Column', width: '100'},
-    { colKey: 'channel', title: '签署方式', width: '120'  },
-    { colKey: 'detail.email', title: '邮箱地址', ellipsis: true },
-    { colKey: 'createTime', title: '申请时间' },
+    { colKey: 'goldColumn', title: 'Gold Column' },
+    // { colKey: 'columnType', title: 'Gold Type' },
+    {
+      colKey: 'subscrName',
+      title: 'Subscr Name',
+      edit: {
+        component: Input,
+        // props:{
+        //   value:
+        // }
+        onEdited: (context) => {
+          mappingList.splice(context.rowIndex, 1, context.newRowData);
+          console.log('Edit Subscr Name:', context);
+        },
+        rules: [
+          { required: true, message: '不能为空' },
+          { max: 10, message: '字符数量不能超过 10', type: 'warning' },
+        ],
+      },
+      defaultEditable: true,
+    },
+    // { colKey: 'subscrType', title: 'Subscr Type' },
   ];
 
-  
   function onSelectChange(value, { selectedRowData }) {
     console.log(value, selectedRowData);
     setSelectedRowKeys(value);
   }
+
+  const editableCellState = (cellParams) => {
+    return cellParams.colIndex !== 1;
+  };
 
   return (
     <Form labelWidth={100}>
@@ -62,7 +82,9 @@ export default memo((props: { current: number; callback: Function; steps: any[] 
         selectOnRowClick={true}
         selectedRowKeys={selectedRowKeys}
         onSelectChange={onSelectChange}
+        editableCellState={editableCellState}
       />
+      <div />
 
       <FormItem>
         {current < steps.length - 1 && (

@@ -10,7 +10,7 @@ const RECENT_7_DAYS: DateRangeValue = [
 const LastWeekDatePicker = (onChange: (value: DateRangeValue) => void) => (
   <DateRangePicker
     mode='date'
-    placeholder={['开始时间', '结束时间']}
+    placeholder={['Start Date', 'End Date']}
     value={RECENT_7_DAYS}
     format='YYYY-MM-DD'
     onChange={(value) => onChange(value)}
