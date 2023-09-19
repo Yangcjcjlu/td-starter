@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getDataSource } from 'services/datasource';
+import { IDatasource,getDataSource } from 'services/datasource';
 import { RootState } from '../store';
 
 const namespace = 'datasource/get';
@@ -9,7 +9,7 @@ interface IDataSourceState {
 //   current: number;
 //   pageSize: number;
 //   total: number;
-  item: any;
+  item: IDatasource;
 }
 
 const initialState: IDataSourceState = {
@@ -17,7 +17,15 @@ const initialState: IDataSourceState = {
 //   current: 1,
 //   pageSize: 10,
 //   total: 0,
-   item: null,
+   item: {
+     id: 0,
+     datasourceName: '',
+     datasourceType: '',
+     businessType: '',
+     ingestionType: '',
+     consumeQueue: '',
+     comment: ''
+   },
 };
 
 export const getItem = createAsyncThunk(
@@ -42,6 +50,7 @@ const listBaseSlice = createSlice({
         state.loading = true;
       })
       .addCase(getItem.fulfilled, (state, action) => {
+        debugger
         state.loading = false;
         state.item = action.payload?.data;
         // state.total = action.payload?.total;

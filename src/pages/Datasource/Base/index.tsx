@@ -83,55 +83,52 @@ export default memo(() => {
 
       <Table
         columns={[
+          // {
+          //   colKey: 'row-select',
+          //   fixed: 'left',
+          //   type: 'multiple',
+          // },
           {
-            colKey: 'row-select',
-            fixed: 'left',
-            type: 'multiple',
-            // width: 50,
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'dataSourceName',
+            title: 'Datasource Name',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'name',
-            title: 'name',
+            colKey: 'datasourceType',
+            title: 'Datasource Type',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'host',
-            title: 'host',
-            // cell({ row }) {
-            //   return StatusMap[row.status || 5];
-            // },
+            colKey: 'businessType',
+            title: 'Business Type',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'port',
-            title: 'port',
+            colKey: 'ingestionType',
+            title: 'Ingestion Type',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'username',
-            title: 'username',
-            // cell({ row }) {
-            //   return ContractTypeMap[row.contractType];
-            // },
+            colKey: 'consumeQueue',
+            title: 'Consume Queue',
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'bucketName',
-            title: 'bucketName',
-            // cell({ row }) {
-            //   return PaymentTypeMap[row.paymentType];
-            // },
+            colKey: 'comment',
+            title: 'comment',
           },
           {
             align: 'left',
@@ -151,13 +148,7 @@ export default memo(() => {
                   >
                     manage
                   </Button>
-                  <Button
-                    theme='primary'
-                    variant='text'
-                    onClick={() => {
-                      return showDetails(record);
-                    }}
-                  >
+                  <Button theme='primary' variant='text' onClick={() => showDetails(record)}>
                     details
                   </Button>
                   <Button
