@@ -1,13 +1,17 @@
 import classnames from 'classnames';
 import dayjs from 'dayjs';
 import React, { memo, useMemo, useRef, useState,useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from 'modules/store';
+
 import { Button, Input, Link, MessagePlugin, Select, Table } from 'tdesign-react';
 import CommonStyle from '../../../styles/common.module.less';
+import {  selectListBase,getGoldTableColumnList,setColumnData } from "modules/goldTable/columns";
 import './index.module.less';
 
 export const  EditableCellTable = (props:any) => {
 
   const {deleteColumn} = props;
+  const dispatch = useAppDispatch();
   
   const tableRef = useRef(null);
   const initData = new Array(5).fill(null).map((_, i) => ({
@@ -39,8 +43,6 @@ export const  EditableCellTable = (props:any) => {
   const [relationSelect, setRelationSelect] = useState({});
   const { goldTableColumnList } = props;
   useEffect(()=>{
-    console.log("goldTableColumnList==>");
-    console.log(goldTableColumnList);
     setData(goldTableColumnList.data || [...initData] );
     // console.log([...initData])
     // setData(goldTableColumnList.data)
@@ -61,7 +63,6 @@ export const  EditableCellTable = (props:any) => {
   const onDelete = (e) => {
     console.log(e)
     const { id } = e.currentTarget.dataset;
-    console.log("id==>"+id)
     deleteColumn(id)
   }
    
@@ -191,7 +192,7 @@ export const  EditableCellTable = (props:any) => {
       {
         title: 'distribution name',
         colKey: 'distributionName',
-        cell: ({ row }) => row?.distributionName?.join('、'),
+        // cell: ({ row }) => row?.distributionName?.join('、'),
         width: 280,
         edit: {
           // 1. 支持任意组件。需保证组件包含 `value` 和 `onChange` 两个属性，且 onChange 的第一个参数值为 new value。
@@ -218,7 +219,10 @@ export const  EditableCellTable = (props:any) => {
           abortEditOnEvent: ['onEnter'],
           // 编辑完成，退出编辑态后触发
           onEdited: (context) => {
-            data.splice(context.rowIndex, 1, context.newRowData);
+            console.log("context==>"+context);
+            console.log("data=>"+JSON.stringify(data))
+            dispatch(setColumnData(data))
+            // data.splice(context.rowIndex, 1, context.newRowData);
             setData([...data]);
             console.log('Edit firstName:', context);
             MessagePlugin.success('Success');

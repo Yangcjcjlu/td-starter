@@ -55,15 +55,36 @@ export default memo((props: { callback: Function , goldTableId: any }) => {
     callback('next');
   };
  
-  const deleteColumn = (id:any) => {
-    console.log(id)
-    // goldTableColumnList.filter(e-> )
-  };
+  
 
   const pageState = useAppSelector(selectListBase);
   const dispatch = useAppDispatch();
   const {goldTableColumnList} = pageState;
 
+
+  const deleteColumn = (id:any) => {
+    // console.log(id)
+    
+    // let index = -1;
+    // const array:Array<any> = goldTableColumnList.data;
+    // let newArray =[];
+
+    // for(let i =0;i < array.length; i++){
+    //   const arrayId = array[i].id +'';
+    //   if( arrayId === id){
+    //     index = i;
+    //     continue;
+    //   }
+    //   newArray.push(array[i]);
+    // }
+
+    // if(index >=0){
+    //   pageState.set
+    //   goldTableColumnList.data = newArray;
+    // }
+    // console.log(goldTableColumnList)
+    // goldTableColumnList.filter(e-> )
+  };
 
   useEffect(()=>{
     console.log("goldTableId==>");

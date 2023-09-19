@@ -26,6 +26,11 @@ const listBaseSlice = createSlice({
     initialState,
     reducers: {
         clearPageState: () => initialState,
+        setColumnData: (state,action)=>{
+            console.log("state!"+state);
+            console.log("action!"+action);
+            
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -42,7 +47,10 @@ const listBaseSlice = createSlice({
     },
 });
 
-export const { clearPageState } = listBaseSlice.actions;
+
+
+
+export const { clearPageState,setColumnData } = listBaseSlice.actions;
 
 export const selectListBase = (state: RootState) => state.listGoldTableColumn;
 
