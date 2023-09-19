@@ -1,5 +1,5 @@
 import request from 'utils/request';
-
+import proxy from '../configs/host';
 
 
 
@@ -44,8 +44,19 @@ export interface ILineChartResult {
 
 
 export const getPieChartInfo = async (params: any) => {
-    const result = await request.post<IPieResult>('api/get-card-list');
-    const list = result?.data || [];
+    const env = import.meta.env.MODE || 'development';
+    const API_HOST = proxy[env].API;
+    let result = null;
+    let resp = null;
+    try{
+        // result = await request.get<any>('api/v1/statistic/dataSource');
+        result = await fetch(`${API_HOST}api/v1/statistic/dataSource`);
+        resp = await result.json();
+    }catch(error){
+        console.log("getPieChartInfo error!",error);
+        throw error;
+    }
+    const list = resp;
     return {
         list,
     };

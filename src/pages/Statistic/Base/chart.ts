@@ -266,25 +266,7 @@ export const getTradPieChartOption = (data = 0): EChartOption => ({
       left: 'left'
     },
     series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: [
-          { value: 1048, name: 'DEH' },
-          { value: 735, name: 'ESM' },
-          { value: 580, name: 'ORS' },
-          { value: 484, name: 'MCH' },
-          { value: 300, name: 'TXR' }
-        ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
+     
     ]
   }
 );

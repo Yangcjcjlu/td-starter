@@ -10,6 +10,8 @@ const lineOptions = getCustomLineChartOptions();
 
 const customlineChart = () => {
   const [customOptions, setCustomOptions] = useState(lineOptions);
+  
+
 
   const onTimeChange = (value: Array<string>) => {
     const options = getCustomLineChartOptions(value);

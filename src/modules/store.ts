@@ -11,7 +11,8 @@ import listBase from './list/base';
 import listCard from './list/card';
 import listSelect from './list/select';
 import listMappingBase from './mapping/base';
-import listStatisticBase from './statistics/base';
+// import listStatisticBase from './statistics/base';
+import getStatisticPieBase from './statistics/base'
 import user from './user';
 
 const reducer = combineReducers({
@@ -25,7 +26,7 @@ const reducer = combineReducers({
   updateDataSource,
   listMappingBase,
   ListSelectDataSource,
-  listStatisticBase,
+  getStatisticPieBase,
   sendFile,
 });
 

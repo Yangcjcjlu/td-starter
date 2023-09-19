@@ -1,16 +1,34 @@
 import ReactEcharts from 'echarts-for-react';
 import useDynamicChart from 'hooks/useDynamicChart';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Col, Row } from 'tdesign-react';
 import { getLineChartOptions, getPieChartOptions, getTradPieChartOption } from '../chart';
 import Style from './MiddleChart.module.less';
+import { useAppDispatch, useAppSelector } from 'modules/store';
+import { getTradStatisticPieBase, getPieData } from '../../../../modules/statistics/base';
+
 
 const lineOptions = getLineChartOptions();
 const pieOptions = getPieChartOptions();
-const tradPieOptions = getTradPieChartOption();
+// const tradPieOptions = getTradPieChartOption();
 
 const MiddleChart = () => {
   const [customOptions, setCustomOptions] = useState(lineOptions);
+  const pageState = useAppSelector(getTradStatisticPieBase);
+  const { loading,tradPieOptions } = pageState;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(
+      getPieData({
+        // pageSize: pageState.pageSize,
+        // current: pageState.current,
+      }),
+    );
+    // return () => {
+    //   dispatch(clearPageState());
+    // };
+  }, []);
 
   const onTimeChange = (value: Array<string>) => {
     const options = getLineChartOptions(value);
@@ -39,7 +57,7 @@ const MiddleChart = () => {
       </Col>
       <Col xs={12} xl={6}>
         <Card title='Data Source' subtitle='2023-09' bordered={false}>
-          <ReactEcharts option={tradPieChartOption} notMerge={true} lazyUpdate={true} />
+          <ReactEcharts option={tradPieChartOption} notMerge={true} lazyUpdate={true} showLoading={loading} />
         </Card>
       </Col>
     </Row>
