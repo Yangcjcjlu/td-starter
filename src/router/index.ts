@@ -6,6 +6,7 @@ import eventhub from './modules/eventhub';
 import form from './modules/form';
 import mapping from './modules/mapping';
 import distribution from './modules/distribution'
+import result from './modules/result'
 
 export interface IRouter {
   path: string;
