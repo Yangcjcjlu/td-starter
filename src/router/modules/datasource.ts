@@ -17,13 +17,6 @@ const result: IRouter[] = [
           title: 'Data Source List',
         },
       },
-      {
-        path: 'card',
-        Component: lazy(() => import('pages/Datasource/Card')),
-        meta: {
-          title: 'Data Source Card',
-        },
-      },
     ],
   },
   {
