@@ -35,7 +35,7 @@ export default memo(() => {
   };
 
   return (
-    <div className={classnames(CommonStyle.pageWithColor)}>
+    <div className={classnames(CommonStyle.pageWithColor, CommonStyle.pageWithPadding, CommonStyle.pageWithSize)}>
       <div className={Style.formContainer}>
         <Form ref={formRef} onSubmit={onSubmit} labelWidth={100} labelAlign='top'>
           <div className={Style.titleBox}>
