@@ -18,6 +18,7 @@ export const getGoldTableColumnList = createAsyncThunk(
     `${namespace}/getList`,
     async (id: number) => {
         const data = await getGoldTablesColumns(id);
+        console.log("goldTable==>"+JSON.stringify(data))
         return data;
     },
 );
@@ -26,10 +27,17 @@ const listBaseSlice = createSlice({
     initialState,
     reducers: {
         clearPageState: () => initialState,
-        setColumnData: (state,action)=>{
-            console.log("state!"+state);
-            console.log("action!"+action);
+        setColumnData: (data:any,rowIndex:any,newRowData:any)=>{
+            data.splice(rowIndex, 1, newRowData);
+            console.log("setColumnData data==>"+JSON.stringify(data))
+
+        },
+        remove: (state,action)=>{
+            console.log("state.goldTableColumnList");
             
+            console.log(state);
+            console.log(action);
+
         }
     },
     extraReducers: (builder) => {
@@ -50,7 +58,7 @@ const listBaseSlice = createSlice({
 
 
 
-export const { clearPageState,setColumnData } = listBaseSlice.actions;
+export const { clearPageState,setColumnData,remove } = listBaseSlice.actions;
 
 export const selectListBase = (state: RootState) => state.listGoldTableColumn;
 

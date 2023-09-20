@@ -25,8 +25,12 @@ interface IParams {
 
 const basePath = '/api/v1'
 
-export const getAllGoldTable = async () => {
-    const result = await request.get<any>(`${basePath}/goldTable`);
+export const getAllGoldTable = async (params?:any) => {
+    let url = `${basePath}/goldTable`;
+    if(params && params.name){
+        url += `?name=${params.name}`
+    }
+    const result = await request.get<any>(url);
     const data = result ? result : null;
     return data;
 }

@@ -1,8 +1,11 @@
 import classnames from 'classnames';
-import React, { memo } from 'react';
+import React, { memo,useEffect } from 'react';
 import CommonStyle from 'styles/common.module.less';
 import { Steps } from 'tdesign-react';
 import { StepOne, StepTwo, StepThree } from './components';
+import { useAppDispatch, useAppSelector } from 'modules/store';
+import {  selectListBase,getGoldTableColumnList,remove } from "modules/goldTable/columns";
+import { getAllGoldTableList } from "modules/goldTable/base";
 
 const { StepItem: Step } = Steps;
 interface IStep {
@@ -37,7 +40,33 @@ const steps: IStep[] = [
 export const GoldStep = (props: any) =>  {
   const [current, setCurrent] = React.useState(0);
   const Comp = steps[current].component;
-  const {goldTableId} = props;
+  const {goldTableId, goldTableName} = props;
+  const pageState = useAppSelector(selectListBase);
+  const dispatch = useAppDispatch();
+  const {goldTableColumnList} = pageState;
+
+  useEffect(() => {
+    dispatch(
+      getGoldTableColumnList(goldTableId),
+    );
+    // const resp = getGoldList({name: null})
+    // resp.then((value:Array<any>)=>{
+    //     for (let i = 0; i< value.length; i++){
+    //       newOptions.push({
+    //         label: value[i].goldTable,
+    //         value: value[i].id,
+    //         key: value[i].id
+    //       });
+    //     }
+    
+    // setOptions(newOptions);
+    // })
+    
+  }, [goldTableId]);
+
+  const removeinfo = () =>{
+    dispatch(remove(null));
+  }
 
   const next = () => {
     setCurrent(current + 1);
@@ -72,7 +101,7 @@ export const GoldStep = (props: any) =>  {
           ))}
         </Steps>
         <div style={{ marginTop: '52px' }}>
-          <Comp steps={steps} current={current} callback={handleSteps} goldTableId={goldTableId} />
+          <Comp steps={steps} current={current} callback={handleSteps} goldTableId={goldTableId} goldTableName={goldTableName} goldTableColumnList={goldTableColumnList} removeinfo={removeinfo} />
         </div>
       </>
     </div>

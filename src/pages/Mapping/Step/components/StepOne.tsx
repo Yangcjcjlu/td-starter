@@ -47,9 +47,9 @@ const types = [
   },
 ];
 
-export default memo((props: { callback: Function , goldTableId: any }) => {
-  const { callback } = props;
-  const { goldTableId } = props
+export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[],removeinfo:Function}) => {
+  const { callback,removeinfo } = props;
+  const { goldTableId, goldTableName,goldTableColumnList } = props
 
   const next = () => {
     callback('next');
@@ -57,12 +57,19 @@ export default memo((props: { callback: Function , goldTableId: any }) => {
  
   
 
-  const pageState = useAppSelector(selectListBase);
-  const dispatch = useAppDispatch();
-  const {goldTableColumnList} = pageState;
+  // const pageState = useAppSelector(selectListBase);
+  // const dispatch = useAppDispatch();
+  // const {goldTableColumnList} = pageState;
 
+
+  const getCurrentColumnList = (array:any) =>{
+    console.log("getCurrentColumnList==>");
+    console.log(JSON.stringify)
+}
 
   const deleteColumn = (id:any) => {
+    removeinfo();
+    
     // console.log(id)
     
     // let index = -1;
@@ -86,18 +93,18 @@ export default memo((props: { callback: Function , goldTableId: any }) => {
     // goldTableColumnList.filter(e-> )
   };
 
-  useEffect(()=>{
-    console.log("goldTableId==>");
-    console.log(goldTableId);
-    dispatch(
-      getGoldTableColumnList(
-        goldTableId
-      ),
-    );
-    return () => {
-      // dispatch(clearPageState());
-    };
-  },[goldTableId])
+  // useEffect(()=>{
+  //   // console.log("goldTableId==>");
+  //   // console.log(goldTableId);
+  //   dispatch(
+  //     getGoldTableColumnList(
+  //       goldTableId
+  //     ),
+  //   );
+  //   return () => {
+  //     // dispatch(clearPageState());
+  //   };
+  // },[goldTableId])
 
 
   const style = {
@@ -112,40 +119,12 @@ export default memo((props: { callback: Function , goldTableId: any }) => {
       {/* <div className={Style.alertBox}>
         <Alert theme='info' message={message} title='发票开具规则：' maxLine={3} close />
       </div> */}
-      <EditableCellTable goldTableColumnList={goldTableColumnList} deleteColumn={deleteColumn}/>
+      <EditableCellTable goldTableColumnList={goldTableColumnList} deleteColumn={deleteColumn} getCurrentColumnList={getCurrentColumnList} />
       <div style={style}>
           <Button type='submit' onClick={() => next()}>
             Next Step
           </Button>
       </div>
-      {/* <Form labelWidth={100}>
-        <FormItem label='合同名称' name='name' rules={[{ required: true, message: '请选择合同名称', type: 'error' }]}>
-          <Select value='A' placeholder='请选择合同'>
-            {names.map((item) => {
-              const { label, value } = item;
-              return <Option label={label} value={value} key={value} />;
-            })}
-          </Select>
-        </FormItem>
-
-        <FormItem label='发票类型' name='type' rules={[{ required: true, message: '请选择发票类型', type: 'error' }]}>
-          <Select value='A' placeholder='请选择发票类型'>
-            {types.map((item) => {
-              const { label, value } = item;
-              return <Option label={label} value={value} key={value} />;
-            })}
-          </Select>
-        </FormItem>
-
-        <FormItem label='开票金额' name='name'>
-          <div>--</div>
-        </FormItem>
-        <FormItem>
-          <Button type='submit' onClick={() => next()}>
-            提交申请
-          </Button>
-        </FormItem>
-      </Form> */}
     </>
   );
 });

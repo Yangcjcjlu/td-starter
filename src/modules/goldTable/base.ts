@@ -22,8 +22,8 @@ const initialState: IInitialState = {
 
 export const getAllGoldTableList = createAsyncThunk(
     `${namespace}/getList`,
-    async () => {
-        const data = await getAllGoldTable();
+    async (param?:any) => {
+        const data = await getAllGoldTable(param);
         return data;
     },
 );
