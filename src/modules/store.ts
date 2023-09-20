@@ -18,6 +18,7 @@ import listAllGoldTable from './goldTable/base';
 import user from './user';
 import listAllSubscrs from './subscr/base'
 import listGoldTableColumn from './goldTable/columns'
+import updateMapping from './mapping/update'
 
 const reducer = combineReducers({
   global,
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   sendFile,
   listAllGoldTable,
   listAllSubscrs,
+  updateMapping,
   listGoldTableColumn,
 });
 

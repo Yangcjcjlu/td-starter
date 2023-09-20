@@ -10,8 +10,9 @@ import './index.module.less';
 
 export const  EditableCellTable = (props:any) => {
 
-  const {deleteColumn} = props;
+  const {deleteColumn, getCurrentColumnList} = props;
   const dispatch = useAppDispatch();
+  
   
   const tableRef = useRef(null);
   const initData = new Array(5).fill(null).map((_, i) => ({
@@ -43,9 +44,15 @@ export const  EditableCellTable = (props:any) => {
   const [relationSelect, setRelationSelect] = useState({});
   const { goldTableColumnList } = props;
   useEffect(()=>{
-    setData(goldTableColumnList.data || [...initData] );
+
+    setData(goldTableColumnList || [...initData] );
     // console.log([...initData])
     // setData(goldTableColumnList.data)
+  },[goldTableColumnList])
+
+
+  useEffect(()=>{
+    getCurrentColumnList(goldTableColumnList)
   },[goldTableColumnList])
 
   const editableCellState = (cellParams:any) => {
@@ -219,9 +226,9 @@ export const  EditableCellTable = (props:any) => {
           abortEditOnEvent: ['onEnter'],
           // 编辑完成，退出编辑态后触发
           onEdited: (context) => {
-            console.log("context==>"+context);
+            console.log("context==>"+JSON.stringify(context));
             console.log("data=>"+JSON.stringify(data))
-            dispatch(setColumnData(data))
+            dispatch(setColumnData(data,context.rowIndex ,context.newRowData))
             // data.splice(context.rowIndex, 1, context.newRowData);
             setData([...data]);
             console.log('Edit firstName:', context);

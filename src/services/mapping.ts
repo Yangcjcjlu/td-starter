@@ -58,3 +58,14 @@ export const getMappingList = async (params: any) => {
     };
 };
 
+export const updateMapping = async (data: any) => {
+    const result: any = await request.post<any>('/api/v1/subscr/saveSubGoldMapping', data);
+    // 模拟接口分页
+    const code = result?.code;
+    // let list = result?.page || [];
+    // const total = list.length;
+    // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
+    return {
+        code
+    };
+};
