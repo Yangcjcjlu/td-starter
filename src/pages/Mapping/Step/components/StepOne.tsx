@@ -47,8 +47,8 @@ const types = [
   },
 ];
 
-export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[]}) => {
-  const { callback } = props;
+export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[],removeinfo:Function}) => {
+  const { callback,removeinfo } = props;
   const { goldTableId, goldTableName,goldTableColumnList } = props
 
   const next = () => {
@@ -68,6 +68,8 @@ export default memo((props: { callback: Function , goldTableId: any, goldTableNa
 }
 
   const deleteColumn = (id:any) => {
+    removeinfo();
+    
     // console.log(id)
     
     // let index = -1;

@@ -4,7 +4,7 @@ import CommonStyle from 'styles/common.module.less';
 import { Steps } from 'tdesign-react';
 import { StepOne, StepTwo, StepThree } from './components';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import {  selectListBase,getGoldTableColumnList } from "modules/goldTable/columns";
+import {  selectListBase,getGoldTableColumnList,remove } from "modules/goldTable/columns";
 import { getAllGoldTableList } from "modules/goldTable/base";
 
 const { StepItem: Step } = Steps;
@@ -64,6 +64,10 @@ export const GoldStep = (props: any) =>  {
     
   }, [goldTableId]);
 
+  const removeinfo = () =>{
+    dispatch(remove(null));
+  }
+
   const next = () => {
     setCurrent(current + 1);
   };
@@ -97,7 +101,7 @@ export const GoldStep = (props: any) =>  {
           ))}
         </Steps>
         <div style={{ marginTop: '52px' }}>
-          <Comp steps={steps} current={current} callback={handleSteps} goldTableId={goldTableId} goldTableName={goldTableName} goldTableColumnList={goldTableColumnList} />
+          <Comp steps={steps} current={current} callback={handleSteps} goldTableId={goldTableId} goldTableName={goldTableName} goldTableColumnList={goldTableColumnList} removeinfo={removeinfo} />
         </div>
       </>
     </div>

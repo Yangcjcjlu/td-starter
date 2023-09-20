@@ -31,6 +31,13 @@ const listBaseSlice = createSlice({
             data.splice(rowIndex, 1, newRowData);
             console.log("setColumnData data==>"+JSON.stringify(data))
 
+        },
+        remove: (state,action)=>{
+            console.log("state.goldTableColumnList");
+            
+            console.log(state);
+            console.log(action);
+
         }
     },
     extraReducers: (builder) => {
@@ -51,7 +58,7 @@ const listBaseSlice = createSlice({
 
 
 
-export const { clearPageState,setColumnData } = listBaseSlice.actions;
+export const { clearPageState,setColumnData,remove } = listBaseSlice.actions;
 
 export const selectListBase = (state: RootState) => state.listGoldTableColumn;
 
