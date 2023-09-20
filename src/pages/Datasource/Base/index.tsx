@@ -48,7 +48,7 @@ export default memo(() => {
     setSelectedRowKeys(value);
   }
   return (
-    <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor)}>
+    <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor, CommonStyle.pageWithSize)}>
       <Row justify='space-between' className={style.toolBar}>
         {/* <Col>
           <Row gutter={8} align='middle'>
@@ -90,7 +90,7 @@ export default memo(() => {
           // },
           {
             align: 'left',
-            width: 200,
+            width: 150,
             ellipsis: true,
             colKey: 'dataSourceName',
             title: 'Datasource Name',
@@ -99,19 +99,26 @@ export default memo(() => {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'datasourceType',
+            colKey: 'dataSourceStream',
+            title: 'Datasource Stream',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'dataSourceType',
             title: 'Datasource Type',
           },
           {
             align: 'left',
-            width: 200,
+            width: 150,
             ellipsis: true,
             colKey: 'businessType',
             title: 'Business Type',
           },
           {
             align: 'left',
-            width: 200,
+            width: 150,
             ellipsis: true,
             colKey: 'ingestionType',
             title: 'Ingestion Type',
@@ -127,43 +134,50 @@ export default memo(() => {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'comment',
-            title: 'comment',
+            colKey: 'ingestionBy',
+            title: 'Ingestion By',
           },
           {
             align: 'left',
-            fixed: 'right',
-            width: 180,
-            colKey: 'op',
-            title: 'operation',
-            cell(record: any) {
-              return (
-                <>
-                  <Button
-                    theme='primary'
-                    variant='text'
-                    onClick={() => {
-                      return handleManage(record);
-                    }}
-                  >
-                    manage
-                  </Button>
-                  <Button theme='primary' variant='text' onClick={() => showDetails(record)}>
-                    details
-                  </Button>
-                  <Button
-                    theme='primary'
-                    variant='text'
-                    onClick={() => {
-                      // handleClickDelete(record);
-                    }}
-                  >
-                    delete
-                  </Button>
-                </>
-              );
-            },
+            width: 200,
+            ellipsis: true,
+            colKey: 'comment',
+            title: 'comment',
           },
+          // {
+          //   align: 'left',
+          //   fixed: 'right',
+          //   width: 180,
+          //   colKey: 'op',
+          //   title: 'operation',
+          //   cell(record: any) {
+          //     return (
+          //       <>
+          //         <Button
+          //           theme='primary'
+          //           variant='text'
+          //           onClick={() => {
+          //             return handleManage(record);
+          //           }}
+          //         >
+          //           manage
+          //         </Button>
+          //         <Button theme='primary' variant='text' onClick={() => showDetails(record)}>
+          //           details
+          //         </Button>
+          //         <Button
+          //           theme='primary'
+          //           variant='text'
+          //           onClick={() => {
+          //             // handleClickDelete(record);
+          //           }}
+          //         >
+          //           delete
+          //         </Button>
+          //       </>
+          //     );
+          //   },
+          // },
         ]}
         loading={loading}
         data={datasourceList}
