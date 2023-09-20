@@ -177,18 +177,18 @@ const listBaseSlice = createSlice({
         let sortedxDataList = xDataList.map((data:string)=> new Date(data)).sort((a:Date,b:Date)=> a - b)
         .map((date:Date)=> formatDate(date));
 
-        let dataMap:map =action.payload?.list?.dataMap;
+        // let dataMap:map =action.payload?.list?.dataMap;
 
-        let sourceList = action.payload?.list?.sourceList || [];
-
-
-        let sourceMap = new Map();
-        for (let k of sourceList){
-            sourceMap.set(k,[]);
-        }
+        // let sourceList = action.payload?.list?.sourceList || [];
 
 
-        let keys = Object.keys(dataMap);
+        // let sourceMap = new Map();
+        // for (let k of sourceList){
+        //     sourceMap.set(k,[]);
+        // }
+
+
+        // let keys = Object.keys(dataMap);
         
 
         // for(let a=0; a<sortedxDataList.length; a++ ){
