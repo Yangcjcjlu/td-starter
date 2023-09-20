@@ -56,7 +56,7 @@ const TreeList = () => {
   }
 
   return (
-    <div className={classnames(CommonStyle.pageWithColor, Style.content)}>
+    <div className={classnames(CommonStyle.pageWithPadding, CommonStyle.pageWithColor, CommonStyle.pageWithSize, Style.content)}>
       <div className={Style.treeContent}>
         <Input className={Style.search} suffixIcon={<SearchIcon />}
          onEnter={(value: any) => {
