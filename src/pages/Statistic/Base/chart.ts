@@ -151,6 +151,7 @@ export const getPieChartOptions = (radius = 42): EChartOption => ({
     itemHeight: 4,
     textStyle: {
       fontSize: 12,
+      color: 'rgba(0, 0, 0, 0.35)'
     },
     left: 'center',
     bottom: '0',
@@ -165,6 +166,7 @@ export const getPieChartOptions = (radius = 42): EChartOption => ({
       silent: false,
       itemStyle: {
         borderWidth: 1,
+        borderColor: '#fff'
       },
       label: {
         show: false,

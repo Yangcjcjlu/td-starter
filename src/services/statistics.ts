@@ -63,9 +63,26 @@ export const getPieChartInfo = async (params: any) => {
     };
 };
 
+export const getPip = async () => {
+    let url =`api/v1/statistic/getPip`;
+    
+    const result = await request.get<any>(url);
+    const list = result|| [];
+    return {
+        list,
+    };
+};
+
+
+
 export const getLineChartInfo = async (params: any) => {
-    const result = await request.post<ILineChartResult>('api/get-line-list',params);
-    const list = result?.data || [];
+    let url =`api/v1/statistic/getDurationVolume`;
+    if(params.startDate && params.endDate){
+        url +=`?startDate=${params.startDate}&endDate=${params.endDate}`
+    }
+    const result = await request.get<any>(url);
+    console.log("getLineChartInfo==>"+JSON.stringify(result));
+    const list = result|| [];
     return {
         list,
     };

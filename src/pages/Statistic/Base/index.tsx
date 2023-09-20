@@ -10,7 +10,7 @@ const DashBoard = () => (
   <div style={{ overflowX: 'hidden' }}>
     {/* <TopPanel /> */}
     <MiddleChart />
-    <LineChart/>
+    {/* <LineChart/> */}
     <CustomLineChart/>
     {/* <RankList /> */}
     {/* <Overview /> */}

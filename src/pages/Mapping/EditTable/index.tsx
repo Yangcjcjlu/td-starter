@@ -124,7 +124,7 @@ export const  EditableCellTable = (props:any) => {
       },
       {
         title: 'distribution name',
-        colKey: 'distributionName',
+        colKey: 'subscrColumn',
         // cell: ({ row }) => row?.distributionName?.join('、'),
         width: 280,
         edit: {

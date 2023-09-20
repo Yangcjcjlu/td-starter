@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ILineChartResult, getPieChartInfo } from 'services/statistics';
-import { getTradPieChartOption } from '../../pages/Statistic/Base/chart';
+import { ILineChartResult, getPieChartInfo ,getPip  } from 'services/statistics';
+import { getTradPieChartOption,getPieChartOptions } from '../../pages/Statistic/Base/chart';
 import { RootState } from '../store';
 
 
@@ -8,20 +8,24 @@ const namespace = 'statistic/base';
 
 interface IInitialState {
   loading: boolean;
+  piploading: boolean;
   // current: number;
   // pageSize: number;
   // total: number;
   list: ILineChartResult[];
   tradPieOptions: any;
+  pieOptions:any
 }
 
 const initialState: IInitialState = {
   loading: true,
+  piploading: true,
   // current: 1,
   // pageSize: 10,
   // total: 0,
   list: [],
-  tradPieOptions:[]
+  tradPieOptions:[],
+  pieOptions:[]
 };
 
 const getPieInfo = ():any=> ({
@@ -60,6 +64,27 @@ export const getPieData = createAsyncThunk(
   },
 );
 
+export const getVolumePie = createAsyncThunk(
+  `${namespace}/getPip`,
+  async () => {
+    console.log("result1");
+    let result = null;
+    try{
+     result =  await getPip();
+    } catch(error){
+      console.log(error);
+    };
+   return {
+      list: result?.list,
+      // total: result?.total,
+      // pageSize: params.pageSize,
+      // current: params.current,
+    };
+  },
+);
+
+
+
 const listBaseSlice = createSlice({
   name: namespace,
   initialState,
@@ -78,15 +103,31 @@ const listBaseSlice = createSlice({
         pieInfo.data= action.payload?.list || [];
         tradPieOptions.series.push(pieInfo);
         state.tradPieOptions = tradPieOptions;
-        // state.tradPieOptions
-        // state.list = action.payload?.list;
-        // state.total = action.payload?.total;
-        // state.pageSize = action.payload?.pageSize;
-        // state.current = action.payload?.current;
       })
       .addCase(getPieData.rejected, (state) => {
-        state.tradPieOptions = getTradPieChartOption()
+        state.tradPieOptions = getPieChartOptions()
         state.loading = false;
+      }).addCase(getVolumePie.pending, (state) => {
+        state.piploading = true;
+      })
+      .addCase(getVolumePie.fulfilled, (state, action) => {
+        state.piploading = false;
+        let pieOptions = getPieChartOptions();
+        let data = action.payload?.list.map((data)=>{
+          let obj = {};
+          obj.value = data.volume
+          obj.name = data.sourceName
+          return obj;
+        })
+        // console.log("statis.data==>"+JSON.stringify(data));
+        pieOptions.series[0].data = data;
+        state.pieOptions = pieOptions;
+        console.log("statePipOption==>"+JSON.stringify(state.pieOptions));
+        
+      })
+      .addCase(getVolumePie.rejected, (state) => {
+        state.pieOptions = getPieChartOptions()
+        state.piploading = false;
       });
   },
 });

@@ -20,6 +20,7 @@ import listAllSubscrs from './subscr/base'
 import listGoldTableColumn from './goldTable/columns'
 import updateMapping from './mapping/update'
 import listIndexTable from './indexTable/base'
+import getLineBase from './statistics/line'
 
 const reducer = combineReducers({
   global,
@@ -39,6 +40,7 @@ const reducer = combineReducers({
   updateMapping,
   listGoldTableColumn,
   listIndexTable,
+  getLineBase,
 });
 
 export const store = configureStore({

@@ -86,10 +86,12 @@ export const GoldStep = (props: any) =>  {
       subscr: data.subscr,
       distributionType:data.distributionType,
       goldTableColumnList:goldTableColumnList,
-      goldTableId:goldTableId
+      goldTableId:goldTableId,
+      goldTableName:goldTableName
     }
+
     //mock
-    // dispatch(updateMappingItem(obj));
+    dispatch(updateMappingItem(obj));
 
     next();
   }

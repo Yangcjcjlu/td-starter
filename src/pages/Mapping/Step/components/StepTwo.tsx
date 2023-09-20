@@ -20,15 +20,6 @@ export default memo((props: { current: number; callback: Function; steps: any[],
 
 
   const next = () => {
-    // callback('next');
-    // const data = formRef.current?.getFieldsValue?.(true)
-    //   // data["id"] = id;
-      
-    //   data.goldTableId = goldTableId;
-    //   data.goldTableName = goldTableName;
-    // dispatch(updateItem(data));
-    // MessagePlugin.success('Success');
-
     const data = formRef.current?.getFieldsValue?.(true)
     submitInfo(data)
   };

@@ -5,30 +5,33 @@ import { Card, Col, Row } from 'tdesign-react';
 import { getLineChartOptions, getPieChartOptions, getTradPieChartOption } from '../chart';
 import Style from './MiddleChart.module.less';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import { getTradStatisticPieBase, getPieData } from '../../../../modules/statistics/base';
+import { getTradStatisticPieBase, getPieData,getVolumePie } from '../../../../modules/statistics/base';
 
 
 const lineOptions = getLineChartOptions();
-const pieOptions = getPieChartOptions();
+// const pieOptions = getPieChartOptions();
 // const tradPieOptions = getTradPieChartOption();
 
 const MiddleChart = () => {
   const [customOptions, setCustomOptions] = useState(lineOptions);
   const pageState = useAppSelector(getTradStatisticPieBase);
   const { loading,tradPieOptions } = pageState;
+  const { piploading,pieOptions } = pageState
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(
       getPieData({
-        // pageSize: pageState.pageSize,
-        // current: pageState.current,
       }),
+     
     );
-    // return () => {
-    //   dispatch(clearPageState());
-    // };
   }, []);
+
+  useEffect(()=>{
+    dispatch(
+      getVolumePie()
+    )
+  },[])
 
   const onTimeChange = (value: Array<string>) => {
     const options = getLineChartOptions(value);
@@ -39,6 +42,8 @@ const MiddleChart = () => {
     placeholderColor: ['legend.textStyle.color', 'xAxis.axisLabel.color', 'yAxis.axisLabel.color'],
     borderColor: ['series.0.itemStyle.borderColor', 'series.1.itemStyle.borderColor'],
   });
+
+  // console.log("real pieOption==>"+JSON.stringify(pieOptions))
 
   const dynamicPieChartOption = useDynamicChart(pieOptions, {
     placeholderColor: ['legend.textStyle.color'],
@@ -52,7 +57,7 @@ const MiddleChart = () => {
     <Row gutter={[16, 16]} className={Style.middleChartPanel}>
       <Col xs={12} xl={6}>
         <Card title='Data Count' subtitle='2021-12' bordered={false}>
-          <ReactEcharts option={dynamicPieChartOption} notMerge={true} lazyUpdate={true} showLoading={false} />
+          <ReactEcharts option={dynamicPieChartOption} notMerge={true} lazyUpdate={true} showLoading={piploading} />
         </Card>
       </Col>
       <Col xs={12} xl={6}>

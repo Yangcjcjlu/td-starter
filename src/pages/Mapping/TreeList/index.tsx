@@ -44,7 +44,6 @@ const TreeList = () => {
     
     setOptions(newOptions);
     })
-    
   }, []);
 
   const handleClick = (context: any) => {
@@ -53,6 +52,7 @@ const TreeList = () => {
     const goldTableKey = context.node.data.value;
     setGoldTableId(goldTableKey);
     setGoldTableName(goldTableName)
+    
   }
 
   return (
@@ -77,14 +77,6 @@ const TreeList = () => {
         />
       </div>
       <div className={Style.tableContent}>
-      {/* <MyContext.Provider value={current}> */}
-        {/* <HorizontalStepsWithNumbers/> */}
-      {/* </MyContext.Provider> */}
-
-        
-        {/* {current === 0 ? <EditableCellTable/>: ''} */}
-      
-        {/* <SelectTable parentData = {parentData}/> */}
          { goldTableId && goldTableId!= 0 ? <GoldStep goldTableId={goldTableId} goldTableName={goldTableName}/>  : null }
       </div>
     </div>

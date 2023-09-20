@@ -20,16 +20,21 @@ interface IParams {
     current: number;
 }
 
-const basePath = '/api/v1/dataSource'
 
 
 
 
 export const getIndexTableList = async (params: any) => {
-    const result = await request.get<any>(`${basePath}`, { params: params });
+
+    const basePath = '/api/v1/mergedIndex'
+
+    basePath += '?pageNumber=10&pageSize=1'
+
+    const result = await request.get<any>(`${basePath}`);
 
     // 模拟接口分页
     let list = result?.data || [];
+    console.log("result==>"+JSON.stringify(list));
     const total = list.length;
     // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {
