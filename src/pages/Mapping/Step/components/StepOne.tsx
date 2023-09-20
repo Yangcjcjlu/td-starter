@@ -47,8 +47,8 @@ const types = [
   },
 ];
 
-export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[],removeinfo:Function}) => {
-  const { callback,removeinfo } = props;
+export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[],removeinfo:Function,editInfo:Function}) => {
+  const { callback,removeinfo,editInfo } = props;
   const { goldTableId, goldTableName,goldTableColumnList } = props
 
   const next = () => {
@@ -68,43 +68,12 @@ export default memo((props: { callback: Function , goldTableId: any, goldTableNa
 }
 
   const deleteColumn = (id:any) => {
-    removeinfo();
-    
-    // console.log(id)
-    
-    // let index = -1;
-    // const array:Array<any> = goldTableColumnList.data;
-    // let newArray =[];
-
-    // for(let i =0;i < array.length; i++){
-    //   const arrayId = array[i].id +'';
-    //   if( arrayId === id){
-    //     index = i;
-    //     continue;
-    //   }
-    //   newArray.push(array[i]);
-    // }
-
-    // if(index >=0){
-    //   pageState.set
-    //   goldTableColumnList.data = newArray;
-    // }
-    // console.log(goldTableColumnList)
-    // goldTableColumnList.filter(e-> )
+    removeinfo(id);
   };
 
-  // useEffect(()=>{
-  //   // console.log("goldTableId==>");
-  //   // console.log(goldTableId);
-  //   dispatch(
-  //     getGoldTableColumnList(
-  //       goldTableId
-  //     ),
-  //   );
-  //   return () => {
-  //     // dispatch(clearPageState());
-  //   };
-  // },[goldTableId])
+  const editColumn = (data:any) =>{
+    editInfo(data)
+  }
 
 
   const style = {
@@ -119,7 +88,7 @@ export default memo((props: { callback: Function , goldTableId: any, goldTableNa
       {/* <div className={Style.alertBox}>
         <Alert theme='info' message={message} title='发票开具规则：' maxLine={3} close />
       </div> */}
-      <EditableCellTable goldTableColumnList={goldTableColumnList} deleteColumn={deleteColumn} getCurrentColumnList={getCurrentColumnList} />
+      <EditableCellTable goldTableColumnList={goldTableColumnList} deleteColumn={deleteColumn} getCurrentColumnList={getCurrentColumnList} editColumn={editColumn}/>
       <div style={style}>
           <Button type='submit' onClick={() => next()}>
             Next Step

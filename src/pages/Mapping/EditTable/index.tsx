@@ -10,7 +10,7 @@ import './index.module.less';
 
 export const  EditableCellTable = (props:any) => {
 
-  const {deleteColumn, getCurrentColumnList} = props;
+  const {deleteColumn, getCurrentColumnList,editColumn} = props;
   const dispatch = useAppDispatch();
   
   
@@ -113,88 +113,14 @@ export const  EditableCellTable = (props:any) => {
         colKey: 'goldTable',
         align: 'left',
         // 编辑状态相关配置，全部集中在 edit
-        edit: {
-          // 1. 支持任意组件。需保证组件包含 `value` 和 `onChange` 两个属性，且 onChange 的第一个参数值为 new value。
-          // 2. 如果希望支持校验，组件还需包含 `status` 和 `tips` 属性。具体 API 含义参考 Input 组件
-          component: Input,
-          // props, 透传全部属性到 Input 组件
-          props: {
-            clearable: true,
-            autofocus: true,
-          },
-          // 触发校验的时机（when to validate)
-          validateTrigger: 'change',
-          // 透传给 component: Input 的事件（也可以在 edit.props 中添加）
-          on: (editContext) => ({
-            onBlur: () => {
-              console.log('失去焦点', editContext);
-            },
-            onEnter: (ctx) => {
-              ctx?.e?.preventDefault();
-              console.log('onEnter', ctx);
-            },
-          }),
-          // 除了点击非自身元素退出编辑态之外，还有哪些事件退出编辑态
-          abortEditOnEvent: ['onEnter'],
-          // 编辑完成，退出编辑态后触发
-          onEdited: (context) => {
-            data.splice(context.rowIndex, 1, context.newRowData);
-            setData([...data]);
-            console.log('Edit firstName:', context);
-            MessagePlugin.success('Success');
-          },
-          // 校验规则，此处同 Form 表单
-          rules: [
-            { required: true, message: '不能为空' },
-            { max: 10, message: '字符数量不能超过 10', type: 'warning' },
-          ],
-        },
-        // 默认是否为编辑状态
-        defaultEditable: true,
+        
       },
       {
         title: 'column name',
         colKey: 'goldColumn',
         align: 'left',
         // 编辑状态相关配置，全部集中在 edit
-        edit: {
-          // 1. 支持任意组件。需保证组件包含 `value` 和 `onChange` 两个属性，且 onChange 的第一个参数值为 new value。
-          // 2. 如果希望支持校验，组件还需包含 `status` 和 `tips` 属性。具体 API 含义参考 Input 组件
-          component: Input,
-          // props, 透传全部属性到 Input 组件
-          props: {
-            clearable: true,
-            autofocus: true,
-          },
-          // 触发校验的时机（when to validate)
-          validateTrigger: 'change',
-          // 透传给 component: Input 的事件（也可以在 edit.props 中添加）
-          on: (editContext) => ({
-            onBlur: () => {
-              console.log('失去焦点', editContext);
-            },
-            onEnter: (ctx) => {
-              ctx?.e?.preventDefault();
-              console.log('onEnter', ctx);
-            },
-          }),
-          // 除了点击非自身元素退出编辑态之外，还有哪些事件退出编辑态
-          abortEditOnEvent: ['onEnter'],
-          // 编辑完成，退出编辑态后触发
-          onEdited: (context) => {
-            data.splice(context.rowIndex, 1, context.newRowData);
-            setData([...data]);
-            console.log('Edit firstName:', context);
-            MessagePlugin.success('Success');
-          },
-          // 校验规则，此处同 Form 表单
-          rules: [
-            { required: true, message: '不能为空' },
-            { max: 10, message: '字符数量不能超过 10', type: 'warning' },
-          ],
-        },
-        // 默认是否为编辑状态
-        defaultEditable: false,
+       
       },
       {
         title: 'distribution name',
@@ -226,13 +152,15 @@ export const  EditableCellTable = (props:any) => {
           abortEditOnEvent: ['onEnter'],
           // 编辑完成，退出编辑态后触发
           onEdited: (context) => {
-            console.log("context==>"+JSON.stringify(context));
-            console.log("data=>"+JSON.stringify(data))
-            dispatch(setColumnData(data,context.rowIndex ,context.newRowData))
-            // data.splice(context.rowIndex, 1, context.newRowData);
-            setData([...data]);
-            console.log('Edit firstName:', context);
-            MessagePlugin.success('Success');
+           
+            // console.log("context==>"+JSON.stringify(context));
+            // console.log("data=>"+JSON.stringify(data))
+            editColumn(context.newRowData);
+            // dispatch(setColumnData(data,context.rowIndex ,context.newRowData))
+            // // data.splice(context.rowIndex, 1, context.newRowData);
+            // setData([...data]);
+            // console.log('Edit firstName:', context);
+            // MessagePlugin.success('Success');
           },
           // 校验规则，此处同 Form 表单
           rules: [
