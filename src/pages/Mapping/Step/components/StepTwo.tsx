@@ -9,8 +9,8 @@ import { updateMappingInfo,updateItem } from 'modules/mapping/update';
 
 const { FormItem } = Form;
 
-export default memo((props: { current: number; callback: Function; steps: any[], goldTableName:string,goldTableId:any }) => {
-  const { current, callback, steps = [],goldTableName,goldTableId } = props;
+export default memo((props: { current: number; callback: Function; steps: any[], goldTableName:string,goldTableId:any,submitInfo:Function }) => {
+  const { current, callback, steps = [],goldTableName,goldTableId ,submitInfo} = props;
   const dispatch = useAppDispatch();
   const pageState = useAppSelector(updateMappingInfo);
 
@@ -21,13 +21,16 @@ export default memo((props: { current: number; callback: Function; steps: any[],
 
   const next = () => {
     // callback('next');
-    const data = formRef.current?.getFieldsValue?.(true)
-      // data["id"] = id;
+    // const data = formRef.current?.getFieldsValue?.(true)
+    //   // data["id"] = id;
       
-      data.goldTableId = goldTableId;
-      data.goldTableName = goldTableName;
-    dispatch(updateItem(data));
-    MessagePlugin.success('Success');
+    //   data.goldTableId = goldTableId;
+    //   data.goldTableName = goldTableName;
+    // dispatch(updateItem(data));
+    // MessagePlugin.success('Success');
+
+    const data = formRef.current?.getFieldsValue?.(true)
+    submitInfo(data)
   };
 
   const prev = () => {
@@ -59,18 +62,6 @@ export default memo((props: { current: number; callback: Function; steps: any[],
             <Option key='C' label='PDF' value='C' />
         </Select>
       </FormItem>
-{/* 
-      <FormItem label='银行账号' name='bankCount'>
-        <Input placeholder='请输入银行账号' />
-      </FormItem>
-
-      <FormItem label='通知邮箱' name='email'>
-        <Input placeholder='请输入通知邮箱' />
-      </FormItem>
-
-      <FormItem label='通知手机' name='phone'>
-        <Input placeholder='请输入通知手机' />
-      </FormItem> */}
 
       <FormItem>
         {/* {current < steps.length - 1 && ( */}

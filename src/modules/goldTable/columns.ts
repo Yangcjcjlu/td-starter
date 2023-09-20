@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { IGoldTableColumn, getGoldTablesColumns } from 'services/goldtable'
+import { updateMapping } from 'services/mapping';
+
 
 const namespace = 'goldTable/columns';
 
@@ -22,6 +24,23 @@ export const getGoldTableColumnList = createAsyncThunk(
         return data;
     },
 );
+
+export const updateMappingItem = createAsyncThunk(
+    `${namespace}/updateItem`,
+    async (data: any) => {
+        console.log("updateMapping.data==>");
+        console.log(JSON.stringify(data));
+      const result = await updateMapping(data);
+      return {
+        // list: result?.data,
+      //   total: result?.total,
+      //   pageSize: params.pageSize,
+      //   current: params.current,
+      };
+    },
+  );
+
+
 const listBaseSlice = createSlice({
     name: namespace,
     initialState,
@@ -33,11 +52,10 @@ const listBaseSlice = createSlice({
 
         },
         remove: (state,action)=>{
-            console.log("state.goldTableColumnList");
-            
-            console.log(state);
-            console.log(action);
-
+           state.goldTableColumnList = action.payload;
+        },
+        edit:(state, action) =>{
+            state.goldTableColumnList = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -51,14 +69,14 @@ const listBaseSlice = createSlice({
             })
             .addCase(getGoldTableColumnList.rejected, (state) => {
                 state.loading = false;
-            });
+            })
     },
 });
 
 
 
 
-export const { clearPageState,setColumnData,remove } = listBaseSlice.actions;
+export const { clearPageState,setColumnData,remove,edit } = listBaseSlice.actions;
 
 export const selectListBase = (state: RootState) => state.listGoldTableColumn;
 

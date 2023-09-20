@@ -4,8 +4,11 @@ import CommonStyle from 'styles/common.module.less';
 import { Steps } from 'tdesign-react';
 import { StepOne, StepTwo, StepThree } from './components';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import {  selectListBase,getGoldTableColumnList,remove } from "modules/goldTable/columns";
+import {  selectListBase,getGoldTableColumnList,remove,edit,updateMappingItem } from "modules/goldTable/columns";
 import { getAllGoldTableList } from "modules/goldTable/base";
+import { updateMapping } from 'services/mapping';
+
+
 
 const { StepItem: Step } = Steps;
 interface IStep {
@@ -49,29 +52,49 @@ export const GoldStep = (props: any) =>  {
     dispatch(
       getGoldTableColumnList(goldTableId),
     );
-    // const resp = getGoldList({name: null})
-    // resp.then((value:Array<any>)=>{
-    //     for (let i = 0; i< value.length; i++){
-    //       newOptions.push({
-    //         label: value[i].goldTable,
-    //         value: value[i].id,
-    //         key: value[i].id
-    //       });
-    //     }
-    
-    // setOptions(newOptions);
-    // })
     
   }, [goldTableId]);
 
-  const removeinfo = () =>{
-    dispatch(remove(null));
+  const removeinfo = (id:any) =>{
+    const array = [];
+    for(let i = 0;i< goldTableColumnList.length; i++){
+      if(goldTableColumnList[i].id != id){
+        array.push(goldTableColumnList[i])
+      }
+    }
+    dispatch(remove(array));
+  }
+
+  const editInfo = (data:any) =>{
+    const array = [];
+    for(let i = 0;i< goldTableColumnList.length; i++){
+       if(data.id == goldTableColumnList[i].id){
+        array.push(data)
+       }else{
+        array.push(goldTableColumnList[i]);
+       }
+    }
+    dispatch(edit(array));
   }
 
   const next = () => {
     setCurrent(current + 1);
   };
 
+  const submitInfo = (data:any) =>{
+    let obj ={
+      subscr: data.subscr,
+      distributionType:data.distributionType,
+      goldTableColumnList:goldTableColumnList,
+      goldTableId:goldTableId
+    }
+    //mock
+    // dispatch(updateMappingItem(obj));
+
+    next();
+  }
+
+  
   const prev = () => {
     setCurrent(current - 1);
   };
@@ -101,7 +124,9 @@ export const GoldStep = (props: any) =>  {
           ))}
         </Steps>
         <div style={{ marginTop: '52px' }}>
-          <Comp steps={steps} current={current} callback={handleSteps} goldTableId={goldTableId} goldTableName={goldTableName} goldTableColumnList={goldTableColumnList} removeinfo={removeinfo} />
+          <Comp steps={steps} current={current} callback={handleSteps} goldTableId={goldTableId} goldTableName={goldTableName} 
+          editInfo = {editInfo} submitInfo={submitInfo}
+          goldTableColumnList={goldTableColumnList} removeinfo={removeinfo} />
         </div>
       </>
     </div>
