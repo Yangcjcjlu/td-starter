@@ -14,74 +14,74 @@ interface IInitialState {
   // total: number;
   list: ILineChartResult[];
   tradPieOptions: any;
-  customOptions:[]
+  customOptions: []
 }
 
-const getLineInfo = ():any =>({
-    
-    title: {
-      text: ''
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data: ['Transaction', 'IndexData', 'IndexInfo'],
-      textStyle: {
-        color: 'rgba(0, 0, 0, 0.35)'
-      }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    toolbox: {
-      feature: {
-        saveAsImage: {}
-      }
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      axisLabel: {
-        color: 'rgba(0, 0, 0, 0.35)'
+const getLineInfo = (): any => ({
+
+  title: {
+    text: ''
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['Transaction', 'IndexData', 'IndexInfo'],
+    textStyle: {
+      color: 'rgba(0, 0, 0, 0.35)'
     }
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: {
-        color : 'rgba(0, 0, 0, 0.35)'
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
     }
-    },
-    series: [
-      {
-        name: 'Transaction',
-        type: 'line',
-        stack: 'Total',
-        data: [120, 132, 101],
-        itemStyle: {
-			borderColor: '#dcdcdc'
-		}
-      },
-      {
-        name: 'IndexData',
-        type: 'line',
-        stack: 'Total',
-        data: [220, 182, 191],
-        itemStyle: {
-			borderColor: '#dcdcdc'
-		}
-      },
-      {
-        name: 'IndexInfo',
-        type: 'line',
-        stack: 'Total',
-        data: [150, 232, 201]
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    axisLabel: {
+      color: 'rgba(0, 0, 0, 0.35)'
+    }
+  },
+  yAxis: {
+    type: 'value',
+    axisLabel: {
+      color: 'rgba(0, 0, 0, 0.35)'
+    }
+  },
+  series: [
+    {
+      name: 'Transaction',
+      type: 'line',
+      stack: 'Total',
+      data: [120, 132, 101],
+      itemStyle: {
+        borderColor: '#dcdcdc'
       }
-    ]
+    },
+    {
+      name: 'IndexData',
+      type: 'line',
+      stack: 'Total',
+      data: [220, 182, 191],
+      itemStyle: {
+        borderColor: '#dcdcdc'
+      }
+    },
+    {
+      name: 'IndexInfo',
+      type: 'line',
+      stack: 'Total',
+      data: [150, 232, 201]
+    }
+  ]
 
 })
 
@@ -91,7 +91,7 @@ const initialState: IInitialState = {
   // pageSize: 10,
   // total: 0,
   list: [],
-  tradPieOptions:[],
+  tradPieOptions: [],
   customOptions: getLineInfo()
 };
 
@@ -100,7 +100,7 @@ const initialState: IInitialState = {
 //   type: 'pie',
 //   radius: '50%',
 //   data: [
-   
+
 //   ],
 //   emphasis: {
 //     itemStyle: {
@@ -118,28 +118,23 @@ export const getLineData = createAsyncThunk(
   `${namespace}/getLineData`,
   async (params: any) => {
     let result = null;
-    try{
-        console.log("getLineData==>");
-        console.log(JSON.stringify(params));
-     result =  await getLineChartInfo(params);
-    } catch(error){
+    try {
+      console.log("getLineData==>");
+      console.log(JSON.stringify(params));
+      result = await getLineChartInfo(params);
+    } catch (error) {
       console.log(error);
     }
-   return {
-      list: result?.list,
-      // total: result?.total,
-      // pageSize: params.pageSize,
-      // current: params.current,
-    };
+    return result;
   },
 );
 
-    
-function formatDate(dateObj:Date){
-    let year = dateObj.getFullYear();
-    let month = (dateObj.getMonth()+1).toString().padStart(2,'0');
-    let day = dateObj.getDate().toString().padStart(2,'0');
-    return year +'-'+month+'-'+day;
+
+function formatDate(dateObj: Date) {
+  let year = dateObj.getFullYear();
+  let month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+  let day = dateObj.getDate().toString().padStart(2, '0');
+  return year + '-' + month + '-' + day;
 }
 
 
@@ -148,12 +143,12 @@ const listBaseSlice = createSlice({
   initialState,
   reducers: {
     clearPageState: () => initialState,
-    retrigger:(state,action) =>{
-        console.log("retrigger state==>"+JSON.stringify(state));
-        console.log("retrigger action==>"+JSON.stringify(action.payload));
+    retrigger: (state, action) => {
+      console.log("retrigger state==>" + JSON.stringify(state));
+      console.log("retrigger action==>" + JSON.stringify(action.payload));
 
-        // getLineData()
-        // getLineData(params);
+      // getLineData()
+      // getLineData(params);
     }
   },
   extraReducers: (builder) => {
@@ -162,20 +157,63 @@ const listBaseSlice = createSlice({
         state.loading = true;
       })
       .addCase(getLineData.fulfilled, (state, action) => {
-        state.loading = false;
-        const customeLineChartInfo = getCustomLineChartOptions();
-        const lineInfo = getLineInfo();
-        // console.log('action.payload==>'+JSON.stringify(action.payload));
-        lineInfo.legend.data= action.payload?.list?.sourceList || [];
-        // customeLineChartInfo.series.push(pieInfo);
-        lineInfo.xAxis.data =  action.payload?.list?.xDataList || [];
 
+        state.loading = false;
+        // const customeLineChartInfo = getCustomLineChartOptions();
+        const lineInfo = getLineInfo();
+        let xDataList = action.payload?.xDataList || [];
+        let sourceList = action.payload?.sourceList || [];
+        let dataMap = action.payload?.dataMap;
+        // dataMap = xDataList.map((data: string) => new Date(data))
+        //   .sort((a: Date, b: Date) => a - b)
+        //   .map((date: Date) => formatDate(date));
+
+        // console.log('action.payload==>'+JSON.stringify(action.payload));
+        lineInfo.legend.data = sourceList;
+        // customeLineChartInfo.series.push(pieInfo);
+        lineInfo.xAxis.data = xDataList;
 
         let serires = [];
-        let xDataList = action.payload?.list?.xDataList || [];
+        let seriresMap = new Map();
+        for (let i in sourceList) {
+          seriresMap.set(sourceList[i], {
+            name: sourceList[i],
+            type: 'line',
+            stack: 'Total',
+            data: [],
+            itemStyle: {
+              borderColor: '#dcdcdc'
+            }
+          })
+        }
 
-        let sortedxDataList = xDataList.map((data:string)=> new Date(data)).sort((a:Date,b:Date)=> a - b)
-        .map((date:Date)=> formatDate(date));
+        for (let i in xDataList) {
+          let data
+          if (data = dataMap[`${xDataList[i]}`]) {
+            let map = new Map();
+            for (let item of data) {
+              map.set(item.sourceName, item)
+            }
+            for (let name of sourceList) {
+              if (map.get(name)) {
+                seriresMap.get(name).data.push(map.get(name).volume)
+              } else {
+                seriresMap.get(name).data.push(0)
+              }
+            }
+          } else {
+            // if there has no data this date
+            for (let value of seriresMap.values()) {
+              value.data.push(0)
+            }
+          }
+        }
+        for (let e of seriresMap.values()) {
+          serires.push(e)
+        }
+        lineInfo.series = serires
+
+
 
         // let dataMap:map =action.payload?.list?.dataMap;
 
@@ -189,7 +227,7 @@ const listBaseSlice = createSlice({
 
 
         // let keys = Object.keys(dataMap);
-        
+
 
         // for(let a=0; a<sortedxDataList.length; a++ ){
         //     let array = dataMap[sortedxDataList[a]];
@@ -224,17 +262,17 @@ const listBaseSlice = createSlice({
 
         // }
 
-        console.log('lineInfo==>'+JSON.stringify(lineInfo));
+        console.log('lineInfo==>' + JSON.stringify(lineInfo));
         state.customOptions = lineInfo;
 
-        console.log("state.customOptions ==>"+JSON.stringify(state.customOptions ))
+        console.log("state.customOptions ==>" + JSON.stringify(state.customOptions))
         // state.tradPieOptions
         // state.list = action.payload?.list;
         // state.total = action.payload?.total;
         // state.pageSize = action.payload?.pageSize;
         // state.current = action.payload?.current;
 
-        
+
 
       })
       .addCase(getLineData.rejected, (state) => {

@@ -2,7 +2,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 
 const RECENT_7_DAYS: [Dayjs, Dayjs] = [dayjs().subtract(7, 'day'), dayjs().subtract(1, 'day')];
-export const ONE_WEEK_LIST = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+export const ONE_WEEK_LIST = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export const getRandomInt = (num = 100): number => {
   const resultNum = Number((Math.random() * num).toFixed(0));
