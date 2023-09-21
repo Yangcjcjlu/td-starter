@@ -21,6 +21,7 @@ import listGoldTableColumn from './goldTable/columns'
 import updateMapping from './mapping/update'
 import listIndexTable from './indexTable/base'
 import getLineBase from './statistics/line'
+import listTradeInfo from './trade/base'
 
 const reducer = combineReducers({
   global,
@@ -41,6 +42,7 @@ const reducer = combineReducers({
   listGoldTableColumn,
   listIndexTable,
   getLineBase,
+  listTradeInfo,
 });
 
 export const store = configureStore({
