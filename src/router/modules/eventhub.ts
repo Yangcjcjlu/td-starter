@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { QueueIcon } from 'tdesign-icons-react';
+import { AppIcon } from 'tdesign-icons-react';
 import { IRouter } from '../index';
 
 const result: IRouter[] = [
@@ -7,7 +7,7 @@ const result: IRouter[] = [
     path: '/eventhub',
     meta: {
       title: 'Supported Tool ',
-      Icon: QueueIcon,
+      Icon: AppIcon  ,
     },
     children: [
       {

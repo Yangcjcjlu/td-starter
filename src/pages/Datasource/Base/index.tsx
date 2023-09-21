@@ -186,28 +186,28 @@ export default memo(() => {
         verticalAlign='top'
         hover
         onSelectChange={onSelectChange}
-        pagination={{
-          pageSize,
-          total,
-          current,
-          showJumper: true,
-          onCurrentChange(current, pageInfo) {
-            dispatch(
-              getList({
-                pageSize: pageInfo.pageSize,
-                current: pageInfo.current,
-              }),
-            );
-          },
-          onPageSizeChange(size) {
-            dispatch(
-              getList({
-                pageSize: size,
-                current: 1,
-              }),
-            );
-          },
-        }}
+        // pagination={{
+        //   pageSize,
+        //   total,
+        //   current,
+        //   showJumper: true,
+        //   onCurrentChange(current, pageInfo) {
+        //     dispatch(
+        //       getList({
+        //         pageSize: pageInfo.pageSize,
+        //         current: pageInfo.current,
+        //       }),
+        //     );
+        //   },
+        //   onPageSizeChange(size) {
+        //     dispatch(
+        //       getList({
+        //         pageSize: size,
+        //         current: 1,
+        //       }),
+        //     );
+        //   },
+        // }}
       />
     </div>
   );

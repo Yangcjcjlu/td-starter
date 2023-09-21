@@ -13,7 +13,7 @@ const Footer = () => {
 
   return (
     <TFooter>
-      <Row justify='center'>Copyright © 2023-{new Date().getFullYear()} StateStreet. All Rights Reserved</Row>
+      <Row justify='center'>Copyright © 2023-{new Date().getFullYear()} Undertone. All Rights Reserved</Row>
     </TFooter>
   );
 };

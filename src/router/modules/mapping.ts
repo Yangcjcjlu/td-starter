@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { DashboardIcon } from 'tdesign-icons-react';
+import { ShareIcon } from 'tdesign-icons-react';
 import { IRouter } from '../index';
 
 const mapping: IRouter[] = [
@@ -7,7 +7,7 @@ const mapping: IRouter[] = [
     path: '/mapping',
     meta: {
       title: 'Distribution',
-      Icon: DashboardIcon,
+      Icon: ShareIcon,
     },
     children: [
       {
