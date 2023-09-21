@@ -6,7 +6,7 @@ const result: IRouter[] = [
   {
     path: '/datasource',
     meta: {
-      title: 'Data Source',
+      title: 'Ingested Data',
       Icon: ViewModuleIcon,
     },
     children: [

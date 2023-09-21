@@ -55,16 +55,17 @@ const MiddleChart = () => {
 
   return (
     <Row gutter={[16, 16]} className={Style.middleChartPanel}>
-      <Col xs={12} xl={6}>
-        <Card title='Data Count' subtitle='2021-12' bordered={false}>
-          <ReactEcharts option={dynamicPieChartOption} notMerge={true} lazyUpdate={true} showLoading={piploading} />
-        </Card>
-      </Col>
-      <Col xs={12} xl={6}>
-        <Card title='Data Source' subtitle='2023-09' bordered={false}>
+       <Col xs={12} xl={6}>
+        <Card title='Monthly Volume Top 5' subtitle='2023-09' bordered={false}>
           <ReactEcharts option={tradPieChartOption} notMerge={true} lazyUpdate={true} showLoading={loading} />
         </Card>
       </Col>
+      <Col xs={12} xl={6}>
+        <Card title='Monthly Success Rate' subtitle='2021-12' bordered={false}>
+          <ReactEcharts option={dynamicPieChartOption} notMerge={true} lazyUpdate={true} showLoading={piploading} />
+        </Card>
+      </Col>
+     
     </Row>
   );
 };

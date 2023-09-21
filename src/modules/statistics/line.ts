@@ -20,7 +20,7 @@ interface IInitialState {
 const getLineInfo = ():any =>({
     
     title: {
-      text: 'Stacked Line'
+      text: ''
     },
     tooltip: {
       trigger: 'axis'

@@ -24,17 +24,18 @@ interface IParams {
 
 
 
-export const getIndexTableList = async (params: any) => {
+export const getIndexTableList = async (params: { pageSize: number; current: number, name?: string }) => {
 
-    const basePath = '/api/v1/mergedIndex'
+    let basePath = '/api/v1/mergedIndex';
 
-    basePath += '?pageNumber=10&pageSize=1'
+    if(params.pageSize && params.current){
+        basePath += `?pageNumber=${params.current}&pageSize=${params.pageSize}`
+    }
 
     const result = await request.get<any>(`${basePath}`);
 
     // 模拟接口分页
     let list = result?.data || [];
-    console.log("result==>"+JSON.stringify(list));
     const total = list.length;
     // list = list.splice(params.pageSize * (params.current - 1), params.pageSize);
     return {

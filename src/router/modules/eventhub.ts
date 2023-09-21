@@ -6,7 +6,7 @@ const result: IRouter[] = [
   {
     path: '/eventhub',
     meta: {
-      title: 'Eventhub',
+      title: 'Supported Tool ',
       Icon: QueueIcon,
     },
     children: [
@@ -15,6 +15,11 @@ const result: IRouter[] = [
         Component: lazy(() => import('pages/Eventhub/SendFile')),
         meta: { title: 'SendFile' },
       },
+      {
+        path:'index',
+        Component: lazy(() => import('pages/Index/Base')),
+        meta: { title : 'merge index' }
+      }
     ],
   },
 ];

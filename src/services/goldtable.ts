@@ -27,8 +27,8 @@ const basePath = '/api/v1'
 
 export const getAllGoldTable = async (params?:any) => {
     let url = `${basePath}/goldTable`;
-    if(params && params.name){
-        url += `?name=${params.name}`
+    if(params && params.tableName){
+        url += `?tableName=${params.tableName}`
     }
     const result = await request.get<any>(url);
     const data = result ? result : null;

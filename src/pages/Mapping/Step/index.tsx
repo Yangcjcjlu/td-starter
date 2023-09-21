@@ -19,18 +19,18 @@ interface IStep {
 
 const steps: IStep[] = [
   {
-    title: 'Edit mapping ',
-    content: '申请提交已于12月21日提交',
+    title: 'Edit Distribution Info  ',
+    content: 'please input expected distribution name',
     component: StepOne,
   },
   {
-    title: 'Edit Distribution Info ',
-    content: '预计1～3个工作日',
+    title: 'Edit Current Name ',
+    content: 'please input current name',
     component: StepTwo,
   },
   {
     title: 'Submit',
-    content: '电子发票开出后7个工作日内联系',
+    content: 'Submit and back to homepage',
     component: StepThree,
   },
   // {
@@ -122,7 +122,7 @@ export const GoldStep = (props: any) =>  {
       <>
         <Steps current={current}>
           {steps.map((item) => (
-            <Step key={item.title} title={item.title} />
+            <Step key={item.title} title={item.title} content={item.content}/>
           ))}
         </Steps>
         <div style={{ marginTop: '52px' }}>

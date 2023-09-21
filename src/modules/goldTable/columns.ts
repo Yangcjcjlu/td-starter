@@ -8,7 +8,7 @@ const namespace = 'goldTable/columns';
 
 interface IInitialState {
     loading: boolean;
-    goldTableColumnList: IGoldTableColumn[];
+    goldTableColumnList: any[];
 }
 
 const initialState: IInitialState = {
@@ -28,8 +28,6 @@ export const getGoldTableColumnList = createAsyncThunk(
 export const updateMappingItem = createAsyncThunk(
     `${namespace}/updateItem`,
     async (data: any) => {
-        console.log("updateMapping.data==>");
-        console.log(JSON.stringify(data));
       const result = await updateMapping(data);
       return {
         // list: result?.data,
@@ -65,7 +63,20 @@ const listBaseSlice = createSlice({
             })
             .addCase(getGoldTableColumnList.fulfilled, (state, action) => {
                 state.loading = false;
-                state.goldTableColumnList = action.payload.data;
+                let goldTableColumnList = action.payload.data;
+                console.log("getGoldTableColumnList.fulfilled");
+                console.log("goldTableColumnList==>"+JSON.stringify(goldTableColumnList));
+                
+                const array = [];
+                for(let column of goldTableColumnList){
+                    if(column['subscrColumn'] == null){
+                        column.subscrColumn = column.goldColumn;
+                    }
+                    array.push(column);
+                }
+
+                // subscrColumn
+                state.goldTableColumnList = array;
             })
             .addCase(getGoldTableColumnList.rejected, (state) => {
                 state.loading = false;

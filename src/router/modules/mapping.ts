@@ -6,7 +6,7 @@ const mapping: IRouter[] = [
   {
     path: '/mapping',
     meta: {
-      title: 'mapping',
+      title: 'Distribution',
       Icon: DashboardIcon,
     },
     children: [
@@ -14,7 +14,7 @@ const mapping: IRouter[] = [
         path: 'tree',
         Component: lazy(() => import('pages/Mapping/TreeList')),
         meta: {
-          title: 'mapping info',
+          title: 'Distribution Info',
         },
       },
     ],

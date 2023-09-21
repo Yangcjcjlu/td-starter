@@ -77,7 +77,7 @@ export default memo((props: { callback: Function , goldTableId: any, goldTableNa
 
 
   const style = {
-    marginTop : '10px'
+    marginTop : '30px'
   };
 
 

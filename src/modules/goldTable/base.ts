@@ -10,6 +10,7 @@ interface IInitialState {
     pageSize: number;
     total: number;
     goldTableList: IGoldTable[];
+    options:any[]
 }
 
 const initialState: IInitialState = {
@@ -18,6 +19,7 @@ const initialState: IInitialState = {
     pageSize: 10,
     total: 0,
     goldTableList: [],
+    options:[]
 };
 
 export const getAllGoldTableList = createAsyncThunk(
@@ -27,6 +29,16 @@ export const getAllGoldTableList = createAsyncThunk(
         return data;
     },
 );
+
+
+export const getAllGoldTableListForDistribution = createAsyncThunk(
+    `${namespace}/getAllGoldTableListForDistribution`,
+    async (param?:any) => {
+        const data = await getAllGoldTable(param);
+        return data;
+    },
+);
+
 const listBaseSlice = createSlice({
     name: namespace,
     initialState,
@@ -44,12 +56,32 @@ const listBaseSlice = createSlice({
             })
             .addCase(getAllGoldTableList.rejected, (state) => {
                 state.loading = false;
-            });
+            }).addCase(getAllGoldTableListForDistribution.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getAllGoldTableListForDistribution.fulfilled, (state, action) => {
+                state.loading = false;
+                state.goldTableList = action.payload;
+                let value = action.payload;
+                const newOptions = [];
+                for (let i = 0; i< value.length; i++){
+                    newOptions.push({
+                      label: value[i].goldTable,
+                      value: value[i].id,
+                      key: value[i].id
+                    });
+                  }
+                  state.options = newOptions;
+              
+            })
+            .addCase(getAllGoldTableListForDistribution.rejected, (state) => {
+                state.loading = false;
+            })
     },
 });
 
 export const { clearPageState } = listBaseSlice.actions;
 
-export const selectListBase = (state: RootState) => state.listAllGoldTable;
+export const listGoldTable = (state: RootState) => state.listAllGoldTable;
 
 export default listBaseSlice.reducer;

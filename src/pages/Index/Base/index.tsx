@@ -1,22 +1,23 @@
 import classnames from 'classnames';
 import { ETrend, TrendIcon } from 'components/Board';
-import { getIndexTableBaseList,selectListBase ,clearPageState} from 'modules/indexTable/base';
+import { getIndexTableBaseList,listIndex ,clearPageState} from 'modules/indexTable/base';
 import { useAppDispatch, useAppSelector } from 'modules/store';
 import React, { memo, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommonStyle from 'styles/common.module.less';
 import { SearchIcon } from 'tdesign-icons-react';
 import { Button, Col, Input, Row, Table, Tag } from 'tdesign-react';
-import { getDataSourceList } from '../../../services/datasource';
 import { debounce } from '../../../services/debounce';
 import style from './index.module.less';
 
 export default memo(() => {
   const dispatch = useAppDispatch();
-  const pageState = useAppSelector(selectListBase);
+  const pageState = useAppSelector(listIndex);
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([1, 2]);
 
-  const { loading, datasourceList, current, pageSize, total } = pageState;
+  const { loading, list, current, pageSize, total } = pageState;
+
+
 
   const nav = useNavigate();
 
@@ -66,7 +67,7 @@ export default memo(() => {
         <Col>
           <Input
             suffixIcon={<SearchIcon />}
-            placeholder='Please type datasource name.'
+            placeholder='Please type Index name.'
             onEnter={(value: any) => {
               dispatch(
                 getIndexTableBaseList({
@@ -99,7 +100,7 @@ export default memo(() => {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'Date',
+            colKey: 'date',
             title: 'Date',
           },
           {
@@ -113,37 +114,31 @@ export default memo(() => {
             align: 'left',
             width: 150,
             ellipsis: true,
-            colKey: 'producerDateTime',
-            title: 'ProducerDateTime',
+            colKey: 'high',
+            title: 'high',
           },
           {
             align: 'left',
             width: 150,
             ellipsis: true,
+            colKey: 'index',
+            title: 'index',
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'low',
+            title: 'low',
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
             colKey: 'volume',
             title: 'volume',
           },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'open',
-            title: 'open',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'ingestionBy',
-            title: 'Ingestion By',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'comment',
-            title: 'comment',
-          },
+         
           // {
           //   align: 'left',
           //   fixed: 'right',
@@ -180,7 +175,7 @@ export default memo(() => {
           // },
         ]}
         loading={loading}
-        data={datasourceList}
+        data={list}
         rowKey='index'
         selectedRowKeys={selectedRowKeys}
         verticalAlign='top'
@@ -193,7 +188,7 @@ export default memo(() => {
           showJumper: true,
           onCurrentChange(current, pageInfo) {
             dispatch(
-              getList({
+              getIndexTableBaseList({
                 pageSize: pageInfo.pageSize,
                 current: pageInfo.current,
               }),
@@ -201,7 +196,7 @@ export default memo(() => {
           },
           onPageSizeChange(size) {
             dispatch(
-              getList({
+              getIndexTableBaseList({
                 pageSize: size,
                 current: 1,
               }),

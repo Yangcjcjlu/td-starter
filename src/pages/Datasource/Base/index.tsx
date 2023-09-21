@@ -137,13 +137,13 @@ export default memo(() => {
             colKey: 'ingestionBy',
             title: 'Ingestion By',
           },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'comment',
-            title: 'comment',
-          },
+          // {
+          //   align: 'left',
+          //   width: 200,
+          //   ellipsis: true,
+          //   colKey: 'comment',
+          //   title: 'comment',
+          // },
           // {
           //   align: 'left',
           //   fixed: 'right',

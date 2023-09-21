@@ -54,7 +54,7 @@ const customlineChart = () => {
   return (
     <Row gutter={[16, 16]} className={Style.customlineChartPanel}>
       <Col xs={12} xl={12}>
-        <Card title='Data Count' subtitle='(rows)' actions={LastWeekDatePicker(onTimeChange)} bordered={false}>
+        <Card title='Data Source Daily Volume' subtitle='' actions={LastWeekDatePicker(onTimeChange)} bordered={false}>
           <ReactEcharts option={dynamicLineChartOption} notMerge={true} lazyUpdate={false} />
         </Card>
       </Col>

@@ -109,14 +109,14 @@ export const  EditableCellTable = (props:any) => {
   const columns = useMemo(
     () => [
       {
-        title: 'Table name',
+        title: 'Distribution Info ',
         colKey: 'goldTable',
         align: 'left',
         // 编辑状态相关配置，全部集中在 edit
         
       },
       {
-        title: 'column name',
+        title: 'Current Name',
         colKey: 'goldColumn',
         align: 'left',
         // 编辑状态相关配置，全部集中在 edit

@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { selectDataSourceListSelect } from 'modules/dataSource/listSelect';
+// import { selectDataSourceListSelect } from 'modules/dataSource/listSelect';
 import { useAppSelector,useAppDispatch } from 'modules/store';
 import React, { useEffect, useRef, useState } from 'react';
 import CommonStyle from 'styles/common.module.less';
@@ -11,39 +11,27 @@ import { EditableCellTable } from '../EditTable';
 import { HorizontalStepsWithNumbers } from '../SingleStep';
 import Style from './index.module.less';
 import {  getGoldList } from "../../../services/gold";
-import {  getAllGoldTableList } from "modules/goldTable/base";
-
-
-
-
+import {  getAllGoldTableList,listGoldTable,getAllGoldTableListForDistribution } from "modules/goldTable/base";
 
 
 const TreeList = () => {
   const dispatch = useAppDispatch();
-  const [options, setOptions] = useState([]);
-  const [parentData, setParentData] = useState([]);
+  // const [options, setOptions] = useState([]);
+  // const [parentData, setParentData] = useState([]);
   const [goldTableId, setGoldTableId ] = useState(0);
   const [goldTableName, setGoldTableName ] = useState();
-  const [current,setCurrent] = useState(0);
+  // const [current,setCurrent] = useState(0);
   const treeRef = useRef(null);
-  const pageState = useAppSelector(selectDataSourceListSelect);
+  const pageState = useAppSelector(listGoldTable);
+  const { goldTableList,options } = pageState;
   // const MyContext = React.createContext('');
 
-  const newOptions = [];
+  // const newOptions = [];
   
   useEffect(() => {
-    const resp = getGoldList({name: null})
-    resp.then((value:Array<any>)=>{
-        for (let i = 0; i< value.length; i++){
-          newOptions.push({
-            label: value[i].goldTable,
-            value: value[i].id,
-            key: value[i].id
-          });
-        }
-    
-    setOptions(newOptions);
-    })
+
+    dispatch(getAllGoldTableListForDistribution(null))
+    // setOptions(newOptions);
   }, []);
 
   const handleClick = (context: any) => {
@@ -61,12 +49,12 @@ const TreeList = () => {
         <Input className={Style.search} suffixIcon={<SearchIcon />}
          onEnter={(value: any) => {
           dispatch(
-            getAllGoldTableList({
-              name: value,
+            getAllGoldTableListForDistribution({
+              tableName: value,
             }),
           );
         }}
-         placeholder='please search for source/' />
+         placeholder='Distribution info search /' />
         <Tree
           data={options}
           onClick={handleClick}
