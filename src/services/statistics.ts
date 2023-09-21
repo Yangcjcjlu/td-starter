@@ -83,7 +83,5 @@ export const getLineChartInfo = async (params: any) => {
     const result = await request.get<any>(url);
     console.log("getLineChartInfo==>"+JSON.stringify(result));
     const list = result|| [];
-    return {
-        list,
-    };
+    return list;
 };
