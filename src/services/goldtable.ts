@@ -37,7 +37,7 @@ export const getAllGoldTable = async (params?:any) => {
 
 export const getGoldTablesColumns = async (id: number) => {
     // const id = params.id ? params.id : 0
-    const result = await request.get<any>(`${basePath}/goldTable/${id}/columns`);
+    const result = await request.get<any>(`${basePath}/goldTable/${id}/columnMappings`);
     const data = result ? result : null;
     return { data };
 }
