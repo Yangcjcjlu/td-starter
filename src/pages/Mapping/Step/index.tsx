@@ -4,7 +4,7 @@ import CommonStyle from 'styles/common.module.less';
 import { Steps } from 'tdesign-react';
 import { StepOne, StepTwo, StepThree } from './components';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import {  selectListBase,getGoldTableColumnList,remove,edit,updateMappingItem } from "modules/goldTable/columns";
+import {  selectListBase,getGoldTableColumnList,remove,edit,updateMappingItem,postTableDistributionItem } from "modules/goldTable/columns";
 import { getAllGoldTableList } from "modules/goldTable/base";
 import { updateMapping } from 'services/mapping';
 
@@ -41,9 +41,9 @@ const steps: IStep[] = [
 ];
 
 export const GoldStep = (props: any) =>  {
-  const [current, setCurrent] = React.useState(0);
+  // const [current, setCurrent] = React.useState(0);
+  const {goldTableId, goldTableName, current,setCurrent} = props;
   const Comp = steps[current].component;
-  const {goldTableId, goldTableName} = props;
   const pageState = useAppSelector(selectListBase);
   const dispatch = useAppDispatch();
   const {goldTableColumnList} = pageState;
@@ -54,6 +54,10 @@ export const GoldStep = (props: any) =>  {
     );
     
   }, [goldTableId]);
+
+  const next = () => {
+    setCurrent(current + 1);
+  };
 
   const removeinfo = (id:any) =>{
     const array = [];
@@ -77,9 +81,7 @@ export const GoldStep = (props: any) =>  {
     dispatch(edit(array));
   }
 
-  const next = () => {
-    setCurrent(current + 1);
-  };
+  
 
   const submitInfo = (data:any) =>{
     let obj ={
@@ -92,6 +94,13 @@ export const GoldStep = (props: any) =>  {
 
     //mock
     dispatch(updateMappingItem(obj));
+
+    let tableDistributeInfo ={
+      goldTable:goldTableName,
+      subscrTopic:data.subscr,
+      subscrType:data.distributionType,
+    }
+    dispatch(postTableDistributionItem(tableDistributeInfo));
 
     next();
   }

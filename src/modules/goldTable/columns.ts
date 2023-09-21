@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { IGoldTableColumn, getGoldTablesColumns } from 'services/goldtable'
-import { updateMapping } from 'services/mapping';
+import { IGoldTableColumn, getGoldTablesColumns, } from 'services/goldtable'
+import { updateMapping,postTableDistribution } from 'services/mapping';
 
 
 const namespace = 'goldTable/columns';
@@ -37,6 +37,20 @@ export const updateMappingItem = createAsyncThunk(
       };
     },
   );
+
+export const postTableDistributionItem = createAsyncThunk(
+    `${namespace}/postTableDistributionItem`,
+    async (data: any) => {
+      const result = await postTableDistribution(data);
+      return {
+        // list: result?.data,
+      //   total: result?.total,
+      //   pageSize: params.pageSize,
+      //   current: params.current,
+      };
+    },
+  );
+
 
 
 const listBaseSlice = createSlice({
@@ -79,6 +93,15 @@ const listBaseSlice = createSlice({
                 state.goldTableColumnList = array;
             })
             .addCase(getGoldTableColumnList.rejected, (state) => {
+                state.loading = false;
+            })
+            .addCase(postTableDistributionItem.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(postTableDistributionItem.fulfilled, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(postTableDistributionItem.rejected, (state) => {
                 state.loading = false;
             })
     },

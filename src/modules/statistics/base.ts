@@ -9,9 +9,6 @@ const namespace = 'statistic/base';
 interface IInitialState {
   loading: boolean;
   piploading: boolean;
-  // current: number;
-  // pageSize: number;
-  // total: number;
   list: ILineChartResult[];
   tradPieOptions: any;
   pieOptions:any
@@ -20,9 +17,6 @@ interface IInitialState {
 const initialState: IInitialState = {
   loading: true,
   piploading: true,
-  // current: 1,
-  // pageSize: 10,
-  // total: 0,
   list: [],
   tradPieOptions:[],
   pieOptions:[]
@@ -32,6 +26,24 @@ const getPieInfo = ():any=> ({
   name: 'Access From',
   type: 'pie',
   radius: '50%',
+  // color: ['#ff0000','#00ff00', '#0000ff', '#9FE6B8', '#FFDB5C','#ff9f7f', '#fb7293', '#E062AE', '#E690D1', '#e7bcf3', '#9d96f5', '#8378EA', '#96BFFF'],
+  data: [
+   
+  ],
+  emphasis: {
+    itemStyle: {
+      shadowBlur: 10,
+      shadowOffsetX: 0,
+      shadowColor: 'rgba(0, 0, 0, 0.5)'
+    }
+  }
+})
+
+const getSuccessRatePieInfo = ():any =>({
+  name: 'Access From',
+  type: 'pie',
+  radius: '50%',
+  
   data: [
    
   ],
@@ -48,7 +60,6 @@ const getPieInfo = ():any=> ({
 export const getPieData = createAsyncThunk(
   `${namespace}/getPieData`,
   async (params: any) => {
-    console.log("result1");
     let result = null;
     try{
      result =  await getPieChartInfo(params);
@@ -57,17 +68,13 @@ export const getPieData = createAsyncThunk(
     }
 ;    return {
       list: result?.list,
-      // total: result?.total,
-      // pageSize: params.pageSize,
-      // current: params.current,
     };
   },
 );
 
-export const getVolumePie = createAsyncThunk(
+export const getSuccessRatioPie = createAsyncThunk(
   `${namespace}/getPip`,
   async () => {
-    console.log("result1");
     let result = null;
     try{
      result =  await getPip();
@@ -76,9 +83,6 @@ export const getVolumePie = createAsyncThunk(
     };
    return {
       list: result?.list,
-      // total: result?.total,
-      // pageSize: params.pageSize,
-      // current: params.current,
     };
   },
 );
@@ -107,25 +111,38 @@ const listBaseSlice = createSlice({
       .addCase(getPieData.rejected, (state) => {
         state.tradPieOptions = getPieChartOptions()
         state.loading = false;
-      }).addCase(getVolumePie.pending, (state) => {
+      }).addCase(getSuccessRatioPie.pending, (state) => {
         state.piploading = true;
       })
-      .addCase(getVolumePie.fulfilled, (state, action) => {
+      .addCase(getSuccessRatioPie.fulfilled, (state, action) => {
         state.piploading = false;
         let pieOptions = getPieChartOptions();
         let data = action.payload?.list.map((data)=>{
           let obj = {};
           obj.value = data.volume
           obj.name = data.sourceName
+          // let = itemStyle: {color:'#91cd77'}
+          if(obj.name == 'Succeed'){
+            let a = {
+              color:'#91cd77'
+            }
+            obj.itemStyle = a;
+          }
+          //itemStyle: {color:'#ef6567'}
+          if(obj.name =='Failed'){
+            let a = {
+              color:'#ef6567'
+            }
+            obj.itemStyle = a;
+          }
+
           return obj;
         })
-        // console.log("statis.data==>"+JSON.stringify(data));
+        console.log("statis.data==>"+JSON.stringify(data));
         pieOptions.series[0].data = data;
         state.pieOptions = pieOptions;
-        console.log("statePipOption==>"+JSON.stringify(state.pieOptions));
-        
       })
-      .addCase(getVolumePie.rejected, (state) => {
+      .addCase(getSuccessRatioPie.rejected, (state) => {
         state.pieOptions = getPieChartOptions()
         state.piploading = false;
       });

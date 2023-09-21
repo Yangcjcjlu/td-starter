@@ -43,29 +43,29 @@ export default memo((props: { current: number; callback: Function; steps: any[],
       </FormItem> */}
 
       <FormItem  label='Distribution Name' name='subscr'>
-        <Input style= {{ marginLeft:20 }} placeholder='Please Enter' />
+        <div style={{width:300}}>
+        <Input style= {{ marginLeft:35 }} placeholder='Please Enter' />
+        </div>
       </FormItem>
 
       <FormItem label='Distribution Type' name='distributionType'>
-      <Select style= {{  marginLeft:20 }} value='A' placeholder='please select distribution type'>
-            <Option key='A' label='CSV' value='A' />
-            <Option key='B' label='EXCEL' value='B' />
-            <Option key='C' label='PDF' value='C' />
+      <div style={{width:300}}>
+      <Select style= {{  marginLeft:35 }} value='CSV' placeholder='please select distribution type'>
+            <Option key='CSV' label='CSV' value='CSV' />
+            <Option key='EXCEL' label='EXCEL' value='EXCEL' />
+            <Option key='PDF' label='PDF' value='PDF' />
         </Select>
+        </div>
       </FormItem>
 
       <FormItem>
-        {/* {current < steps.length - 1 && ( */}
           <Button type='submit' onClick={() => next()}>
             Submit
           </Button>
-        {/* )} */}
 
-        {/* {current > 0 && ( */}
           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
             Go back
           </Button>
-        {/* )} */}
       </FormItem>
     </Form>
   );

@@ -144,8 +144,6 @@ const listBaseSlice = createSlice({
   reducers: {
     clearPageState: () => initialState,
     retrigger: (state, action) => {
-      console.log("retrigger state==>" + JSON.stringify(state));
-      console.log("retrigger action==>" + JSON.stringify(action.payload));
 
       // getLineData()
       // getLineData(params);
@@ -159,18 +157,11 @@ const listBaseSlice = createSlice({
       .addCase(getLineData.fulfilled, (state, action) => {
 
         state.loading = false;
-        // const customeLineChartInfo = getCustomLineChartOptions();
         const lineInfo = getLineInfo();
         let xDataList = action.payload?.xDataList || [];
         let sourceList = action.payload?.sourceList || [];
         let dataMap = action.payload?.dataMap;
-        // dataMap = xDataList.map((data: string) => new Date(data))
-        //   .sort((a: Date, b: Date) => a - b)
-        //   .map((date: Date) => formatDate(date));
-
-        // console.log('action.payload==>'+JSON.stringify(action.payload));
         lineInfo.legend.data = sourceList;
-        // customeLineChartInfo.series.push(pieInfo);
         lineInfo.xAxis.data = xDataList;
 
         let serires = [];
@@ -212,68 +203,7 @@ const listBaseSlice = createSlice({
           serires.push(e)
         }
         lineInfo.series = serires
-
-
-
-        // let dataMap:map =action.payload?.list?.dataMap;
-
-        // let sourceList = action.payload?.list?.sourceList || [];
-
-
-        // let sourceMap = new Map();
-        // for (let k of sourceList){
-        //     sourceMap.set(k,[]);
-        // }
-
-
-        // let keys = Object.keys(dataMap);
-
-
-        // for(let a=0; a<sortedxDataList.length; a++ ){
-        //     let array = dataMap[sortedxDataList[a]];
-        //     if(array && array.length>0){
-        //         for(let j of array){
-        //             if(j && j.name){
-        //                 let list = sourceMap.get(j.name);
-        //                 list.push(j.volume);
-        //                 sourceMap.set(j.name,list);
-        //             }
-        //         }
-        //     }
-        // }
-
-        // console.log("sourceMap==>"+JSON.stringify(sourceMap));
-
-
-
-        // for( let i of sourceList ){
-        //     let col = {
-        //         name: i,
-        //        type: 'line',
-        //        stack: 'Total',
-        //        itemStyle: {
-        //         borderColor: '#dcdcdc'
-        //     },
-        //     data:[]
-        //     }
-        // }
-
-        // for(let i of xDataList){
-
-        // }
-
-        console.log('lineInfo==>' + JSON.stringify(lineInfo));
         state.customOptions = lineInfo;
-
-        console.log("state.customOptions ==>" + JSON.stringify(state.customOptions))
-        // state.tradPieOptions
-        // state.list = action.payload?.list;
-        // state.total = action.payload?.total;
-        // state.pageSize = action.payload?.pageSize;
-        // state.current = action.payload?.current;
-
-
-
       })
       .addCase(getLineData.rejected, (state) => {
         state.customOptions = getCustomLineChartOptions()

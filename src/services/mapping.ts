@@ -67,3 +67,13 @@ export const updateMapping = async (data: any) => {
         code
     };
 };
+
+export const postTableDistribution = async (data: any) => {
+    const url = `/api/v1/subscr`;
+    const result: any = await request.post<any>(url, data);
+    // 模拟接口分页
+    const code = result?.code;
+    return {
+        code
+    };
+};

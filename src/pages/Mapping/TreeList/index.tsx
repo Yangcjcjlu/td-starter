@@ -20,6 +20,7 @@ const TreeList = () => {
   // const [parentData, setParentData] = useState([]);
   const [goldTableId, setGoldTableId ] = useState(0);
   const [goldTableName, setGoldTableName ] = useState();
+  const [current, setCurrent] = React.useState(0);
   // const [current,setCurrent] = useState(0);
   const treeRef = useRef(null);
   const pageState = useAppSelector(listGoldTable);
@@ -34,12 +35,18 @@ const TreeList = () => {
     // setOptions(newOptions);
   }, []);
 
+ 
+  const putCurrent = (data:number)=>{
+    setCurrent(data)
+  }
+
   const handleClick = (context: any) => {
    
     const goldTableName = context.node.data.label
     const goldTableKey = context.node.data.value;
     setGoldTableId(goldTableKey);
     setGoldTableName(goldTableName)
+    setCurrent(0);
     
   }
 
@@ -65,7 +72,7 @@ const TreeList = () => {
         />
       </div>
       <div className={Style.tableContent}>
-         { goldTableId && goldTableId!= 0 ? <GoldStep goldTableId={goldTableId} goldTableName={goldTableName}/>  : null }
+         { goldTableId && goldTableId!= 0 ? <GoldStep  setCurrent={putCurrent} current={current} goldTableId={goldTableId} goldTableName={goldTableName}/>  : null }
       </div>
     </div>
   );

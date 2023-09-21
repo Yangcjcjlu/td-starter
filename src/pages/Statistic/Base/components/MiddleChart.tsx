@@ -5,7 +5,7 @@ import { Card, Col, Row } from 'tdesign-react';
 import { getLineChartOptions, getPieChartOptions, getTradPieChartOption } from '../chart';
 import Style from './MiddleChart.module.less';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import { getTradStatisticPieBase, getPieData,getVolumePie } from '../../../../modules/statistics/base';
+import { getTradStatisticPieBase, getPieData,getSuccessRatioPie } from '../../../../modules/statistics/base';
 
 
 const lineOptions = getLineChartOptions();
@@ -29,7 +29,7 @@ const MiddleChart = () => {
 
   useEffect(()=>{
     dispatch(
-      getVolumePie()
+      getSuccessRatioPie()
     )
   },[])
 

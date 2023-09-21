@@ -68,7 +68,6 @@ export const  EditableCellTable = (props:any) => {
   };
 
   const onDelete = (e) => {
-    console.log(e)
     const { id } = e.currentTarget.dataset;
     deleteColumn(id)
   }

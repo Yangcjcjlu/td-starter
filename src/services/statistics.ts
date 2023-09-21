@@ -49,12 +49,9 @@ export const getPieChartInfo = async (params: any) => {
     let result = null;
     let resp = null;
     try{
-        // result = await request.get<any>('api/v1/statistic/dataSource');
-        console.log(proxy[env].API)
         result = await fetch(`${API_HOST}api/v1/statistic/dataSource`);
         resp = await result.json();
     }catch(error){
-        console.log("getPieChartInfo error!",error);
         throw error;
     }
     const list = resp;
@@ -81,7 +78,6 @@ export const getLineChartInfo = async (params: any) => {
         url +=`?startDate=${params.startDate}&endDate=${params.endDate}`
     }
     const result = await request.get<any>(url);
-    console.log("getLineChartInfo==>"+JSON.stringify(result));
     const list = result|| [];
     return list;
 };

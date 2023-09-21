@@ -63,8 +63,7 @@ export default memo((props: { callback: Function , goldTableId: any, goldTableNa
 
 
   const getCurrentColumnList = (array:any) =>{
-    console.log("getCurrentColumnList==>");
-    console.log(JSON.stringify)
+    
 }
 
   const deleteColumn = (id:any) => {
