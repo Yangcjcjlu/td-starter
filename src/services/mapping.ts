@@ -59,24 +59,8 @@ export const getMappingList = async (params: any) => {
 };
 
 export const updateMapping = async (data: any) => {
-
-    let url = `/api/v1/subscr/saveSubGoldMapping`;
-    if(data.goldTableName){
-        url += `?goldTable=${data.goldTableName}`
-    }
-    if(data.subscr){
-        url +=`&subscr=${data.subscr}`
-    }
-    let body = null;
-    if(data.goldTableColumnList){
-        body={
-            listColumn : data.goldTableColumnList
-        }
-    }
-    console.log("body==>"+JSON.stringify(body));
-
-    const result: any = await request.post<any>(url, body);
-    console.log("result==>"+result);
+    const url = `/api/v1/goldTable/${data.goldTableId}/columnMappings`;
+    const result: any = await request.put<any>(url, data.goldTableColumnList);
     // 模拟接口分页
     const code = result?.code;
     return {
