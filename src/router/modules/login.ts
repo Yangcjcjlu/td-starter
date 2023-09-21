@@ -4,21 +4,23 @@ import { IRouter } from '../index';
 
 const result: IRouter[] = [
   {
-    path: '/login',
-    meta: {
-      title: '登录页',
-      Icon: LogoutIcon,
-    },
-    children: [
-      {
-        path: 'index',
-        Component: lazy(() => import('pages/Login')),
-        isFullPage: true,
-        meta: {
-          title: '登录中心',
-        },
-      },
-    ],
+    path: '/login/index',
+    Component: lazy(() => import('pages/Login')),
+    isFullPage: true,
+    // meta: {
+    //   title: '登录页',
+    //   Icon: LogoutIcon,
+    // },
+    // children: [
+    //   {
+    //     path: 'index',
+        
+    //     isFullPage: true,
+    //     meta: {
+    //       title: '登录中心',
+    //     },
+    //   },
+    // ],
   },
 ];
 

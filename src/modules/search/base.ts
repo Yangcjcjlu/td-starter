@@ -1,16 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IDatasource, getDataSourceList } from 'services/datasource';
+import { IDatasource, getSearchList } from 'services/search';
 import { RootState } from '../store';
-import {getIndexTableList } from 'services/indexTable'
 
-const namespace = 'indexTable/base';
+const namespace = 'search/base';
 
 interface IInitialState {
   loading: boolean;
   current: number;
   pageSize: number;
   total: number;
-  list: any[];
+  list: [];
 }
 
 const initialState: IInitialState = {
@@ -21,11 +20,14 @@ const initialState: IInitialState = {
   list: [],
 };
 
-export const getIndexTableBaseList = createAsyncThunk(
+export const getList = createAsyncThunk(
   `${namespace}/getList`,
   async (params: { pageSize: number; current: number, name?: string }) => {
-    console.log("before getIndexTableBaseList")
-    const result = await getIndexTableList(params);
+    const result = await getSearchList(params);
+
+    console.log("getList + result==>"+JSON.stringify(result));
+
+
     return {
       list: result?.list,
       total: result?.total,
@@ -46,23 +48,17 @@ const listBaseSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getIndexTableBaseList.pending, (state) => {
-        console.log("getIndexTableBaseList pending")
+      .addCase(getList.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getIndexTableBaseList.fulfilled, (state, action) => {
-        console.log("action ==>");
-        console.log(JSON.stringify(action.payload))
-
-        console.log("getIndexTableBaseList success")
+      .addCase(getList.fulfilled, (state, action) => {
         state.loading = false;
         state.list = action.payload?.list;
         state.total = action.payload?.total;
         state.pageSize = action.payload?.pageSize;
         state.current = action.payload?.current;
       })
-      .addCase(getIndexTableBaseList.rejected, (state) => {
-        console.log("getIndexTableBaseList rejected")
+      .addCase(getList.rejected, (state) => {
         state.loading = false;
       })
   },
@@ -70,6 +66,6 @@ const listBaseSlice = createSlice({
 
 export const { clearPageState } = listBaseSlice.actions;
 
-export const listIndex = (state: RootState) => state.listIndexTable;
+export const searchListBase = (state: RootState) => state.listSearchData;
 
 export default listBaseSlice.reducer;

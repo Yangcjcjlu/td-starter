@@ -33,7 +33,8 @@ export const getIndexTableList = async (params: { pageSize: number; current: num
     }
 
     const result = await request.get<any>(`${basePath}`);
-
+    console.log("merged index==>");
+    console.log(JSON.stringify(result));
     // 模拟接口分页
     let list = result?.data || [];
     const total = list.length;

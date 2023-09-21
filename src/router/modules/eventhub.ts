@@ -21,9 +21,9 @@ const result: IRouter[] = [
         meta: { title : 'MergeIndex' }
       },
       {
-        path:'trade',
-        Component: lazy(()=> import('pages/Trade/Base')),
-        meta: { title : 'TradInfo'}
+        path: 'search',
+        Component: lazy(() => import('pages/Search/Base')),
+        meta: { title: 'Search Info' },
       }
     ],
   },

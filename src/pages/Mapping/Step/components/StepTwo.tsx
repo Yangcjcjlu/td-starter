@@ -30,27 +30,16 @@ export default memo((props: { current: number; callback: Function; steps: any[],
 
   return (
     <Form ref={formRef} labelWidth={100}>
-      {/* <FormItem label='发票抬头' name='invoice' rules={[{ required: true, message: '请输入发票抬头', type: 'error' }]}>
-        <Input placeholder='请输入发票抬头' />
-      </FormItem>
-
-      <FormItem
-        label='纳税人识别号'
-        name='taxpayerId'
-        rules={[{ required: true, message: '请输入纳税人识别号', type: 'error' }]}
-      >
-        <Input placeholder='请输入纳税人识别号' />
-      </FormItem> */}
-
-      <FormItem  label='Distribution Name' name='subscr'>
+      
+      <FormItem  label='Distribution Name' name='subscr' >
         <div style={{width:300}}>
-        <Input style= {{ marginLeft:35 }} placeholder='Please Enter' />
+        <Input style= {{ marginLeft:25 }} placeholder='Please Enter' />
         </div>
       </FormItem>
 
       <FormItem label='Distribution Type' name='distributionType'>
       <div style={{width:300}}>
-      <Select style= {{  marginLeft:35 }} value='CSV' placeholder='please select distribution type'>
+      <Select style= {{  marginLeft:25 }} value='CSV' placeholder='please select distribution type'>
             <Option key='CSV' label='CSV' value='CSV' />
             <Option key='EXCEL' label='EXCEL' value='EXCEL' />
             <Option key='PDF' label='PDF' value='PDF' />
@@ -59,6 +48,7 @@ export default memo((props: { current: number; callback: Function; steps: any[],
       </FormItem>
 
       <FormItem>
+        <div style={{marginTop: '20px'}}>
           <Button type='submit' onClick={() => next()}>
             Submit
           </Button>
@@ -66,6 +56,7 @@ export default memo((props: { current: number; callback: Function; steps: any[],
           <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
             Go back
           </Button>
+          </div>
       </FormItem>
     </Form>
   );

@@ -10,7 +10,11 @@ interface IInitialState {
     pageSize: number;
     total: number;
     goldTableList: IGoldTable[];
-    options:any[]
+    options:any[],
+    goldTableId:number,
+    goldTableName:string,
+    dynamicOptions:any[]
+
 }
 
 const initialState: IInitialState = {
@@ -19,7 +23,10 @@ const initialState: IInitialState = {
     pageSize: 10,
     total: 0,
     goldTableList: [],
-    options:[]
+    options:[],
+    goldTableName:'',
+    goldTableId:0,
+    dynamicOptions:[]
 };
 
 export const getAllGoldTableList = createAsyncThunk(
@@ -44,6 +51,18 @@ const listBaseSlice = createSlice({
     initialState,
     reducers: {
         clearPageState: () => initialState,
+        setGoldTableId:(state:any,action:any)=>{
+            
+
+            if(action && action.payload && action.payload.goldTableId){
+                state.goldTableId = action.payload.goldTableId
+            }
+        },
+        setGoldTableName:(state:any,action:any)=>{
+            if(action && action.payload && action.payload.goldTableName){
+                state.goldTableName = action.payload.goldTableName
+            }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -63,6 +82,11 @@ const listBaseSlice = createSlice({
                 state.loading = false;
                 state.goldTableList = action.payload;
                 let value = action.payload;
+                if(value && value.length>0){
+                    state.goldTableId = value[0].id,
+                    state.goldTableName = value[0].goldTable
+                }
+
                 const newOptions = [];
                 for (let i = 0; i< value.length; i++){
                     newOptions.push({
@@ -72,6 +96,9 @@ const listBaseSlice = createSlice({
                     });
                   }
                   state.options = newOptions;
+
+
+                  state.dynamicOptions = newOptions;
               
             })
             .addCase(getAllGoldTableListForDistribution.rejected, (state) => {
@@ -80,7 +107,7 @@ const listBaseSlice = createSlice({
     },
 });
 
-export const { clearPageState } = listBaseSlice.actions;
+export const { clearPageState,setGoldTableId,setGoldTableName } = listBaseSlice.actions;
 
 export const listGoldTable = (state: RootState) => state.listAllGoldTable;
 

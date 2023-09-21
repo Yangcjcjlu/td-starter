@@ -22,6 +22,7 @@ import updateMapping from './mapping/update'
 import listIndexTable from './indexTable/base'
 import getLineBase from './statistics/line'
 import listTradeInfo from './trade/base'
+import listSearchData from './search/base'
 
 const reducer = combineReducers({
   global,
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   listIndexTable,
   getLineBase,
   listTradeInfo,
+  listSearchData
 });
 
 export const store = configureStore({

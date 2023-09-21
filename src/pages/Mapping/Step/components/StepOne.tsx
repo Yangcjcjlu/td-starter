@@ -47,9 +47,10 @@ const types = [
   },
 ];
 
-export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[],removeinfo:Function,editInfo:Function}) => {
+export default memo((props: { callback: Function , goldTableId: any, goldTableName:string ,goldTableColumnList:[],
+  removeinfo:Function,editInfo:Function,dynamicOptions:[]}) => {
   const { callback,removeinfo,editInfo } = props;
-  const { goldTableId, goldTableName,goldTableColumnList } = props
+  const { goldTableId, goldTableName,goldTableColumnList,dynamicOptions } = props
 
   const next = () => {
     callback('next');
@@ -87,6 +88,7 @@ export default memo((props: { callback: Function , goldTableId: any, goldTableNa
       {/* <div className={Style.alertBox}>
         <Alert theme='info' message={message} title='发票开具规则：' maxLine={3} close />
       </div> */}
+      
       <EditableCellTable goldTableColumnList={goldTableColumnList} deleteColumn={deleteColumn} getCurrentColumnList={getCurrentColumnList} editColumn={editColumn}/>
       <div style={style}>
           <Button type='submit' onClick={() => next()}>
