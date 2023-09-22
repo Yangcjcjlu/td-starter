@@ -19,6 +19,7 @@ const result: IRouter[] = [
         path:'index',
         Component: lazy(() => import('pages/Index/Base')),
         meta: { title : 'Stock Enrichment' }
+
       },
       {
         path:'trade',
