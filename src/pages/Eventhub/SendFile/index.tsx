@@ -47,31 +47,31 @@ export default memo(() => {
                 label='EventHub Name'
                 name='eventhubName'
                 initialData={INITIAL_DATA.eventhubName}
-                rules={[{ required: true, message: 'EventHub Name is required', type: 'error' }]}
+                rules={[{ required: true, message: 'EventHub name is required', type: 'error' }]}
               >
-                <Input className={Style.inputText} placeholder='please input EventHub Name' />
+                <Input className={Style.inputText} placeholder='Please input EventHub name' />
               </FormItem>
             </Col>
           </Row>
           <Row className={Style.row}>
             <Col>
               <FormItem
-                label='File'
+                label='Upload File'
                 name='file'
                 initialData={INITIAL_DATA.file}
-                rules={[{ required: true, message: 'File is required', type: 'error' }]}
+                rules={[{ required: true, message: 'Please choose upload file', type: 'error' }]}
               >
-                <Upload tips='please upload file to EventHub' autoUpload={false} multiple={false} />
+                <Upload tips='Please upload file to EventHub' autoUpload={false} multiple={false} />
               </FormItem>
             </Col>
           </Row>
 
           <FormItem>
             <Button type='submit' theme='primary'>
-              submit
+              Submit
             </Button>
             <Button type='reset' style={{ marginLeft: 12 }}>
-              reset
+              Reset
             </Button>
           </FormItem>
         </Form>
