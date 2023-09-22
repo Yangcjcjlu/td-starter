@@ -6,7 +6,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CommonStyle from 'styles/common.module.less';
 import { SearchIcon } from 'tdesign-icons-react';
-import { Button, Col, Input, Row, Table, Tag } from 'tdesign-react';
+import { Button, Col, Input, Row, Table, Tag ,Link} from 'tdesign-react';
 import { getDataSourceList } from '../../../services/datasource';
 import { debounce } from '../../../services/debounce';
 import style from './index.module.less';
@@ -35,10 +35,13 @@ export default memo(() => {
 
      let list = [
         {
-            sourceName:'sourceName',
-            attributeName:'AttributeName',
-            goldName:'GoldName',
-            targetName:'TargetName'
+          ingestedSource:'ingestedSource',
+          sourceElementName:'sourceElementName',
+          description:'description',
+          goldTable:'goldTable',
+          goldElementName:'goldElementName',
+          distributionName:'distributionName',
+          disbributionElementName:'disbributionElementName'
         }
     ]
     setList(list);
@@ -87,29 +90,54 @@ export default memo(() => {
             align: 'left',
             width: 150,
             ellipsis: true,
-            colKey: 'sourceName',
-            title: 'Source Name',
+            colKey: 'ingestedSource',
+            title: 'Ingested Source',
+            cell:({row}) => {
+              // console.log("row==>"+JSON.stringify(row['']))
+              return (<Link href='http://20.198.178.168:3000' target="_blank" theme="primary">{row.ingestedSource}</Link>)
+            }
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'attributeName',
-            title: 'Attribute Name',
+            colKey: 'sourceElementName',
+            title: 'Source Element Name',
           },
           {
             align: 'left',
             width: 150,
             ellipsis: true,
-            colKey: 'goldName',
-            title: 'Gold Name',
+            colKey: 'description',
+            title: 'Description',
           },
           {
             align: 'left',
             width: 150,
             ellipsis: true,
-            colKey: 'targetName',
-            title: 'Target Name',
+            colKey: 'goldTable',
+            title: 'Gold Table',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'goldElementName',
+            title: 'Gold Element Name',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'distributionName',
+            title: 'Distribution Name',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'disbributionElementName',
+            title: 'Disbribution Element Name',
           },
           
         

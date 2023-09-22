@@ -18,12 +18,17 @@ const result: IRouter[] = [
       {
         path:'index',
         Component: lazy(() => import('pages/Index/Base')),
-        meta: { title : 'Merge Index' }
+        meta: { title : 'Stock Enrichment' }
       },
       {
         path:'trade',
         Component: lazy(()=> import('pages/Trade/Base')),
         meta: { title : 'Trade Lifecycle'}
+      },
+      {
+        path: 'search',
+        Component: lazy(() => import('pages/Search/Base')),
+        meta: { title: 'Search Info' },
       }
     ],
   },
