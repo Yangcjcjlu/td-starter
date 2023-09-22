@@ -6,7 +6,7 @@ const result: IRouter[] = [
   {
     path: '/eventhub',
     meta: {
-      title: 'Supported Tool ',
+      title: 'Support Tool ',
       Icon: AppIcon  ,
     },
     children: [
@@ -21,9 +21,9 @@ const result: IRouter[] = [
         meta: { title : 'MergeIndex' }
       },
       {
-        path: 'search',
-        Component: lazy(() => import('pages/Search/Base')),
-        meta: { title: 'Search Info' },
+        path:'trade',
+        Component: lazy(()=> import('pages/Trade/Base')),
+        meta: { title : 'Trade Lifecycle'}
       }
     ],
   },
