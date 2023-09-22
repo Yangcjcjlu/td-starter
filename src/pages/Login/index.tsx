@@ -36,7 +36,7 @@ export default memo(() => {
         </div>
         {type === 'login' ? <Login /> : <Register />}
       </div>
-      <footer className={Style.copyright}>Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
+      <footer className={Style.copyright}>Copyright @ 2023-2023 Undertone. All Rights Reserved</footer>
     </div>
   );
 });

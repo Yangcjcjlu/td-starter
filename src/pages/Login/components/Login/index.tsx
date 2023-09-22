@@ -30,7 +30,7 @@ export default function Login() {
 
         MessagePlugin.success('登录成功');
 
-        navigate('/dashboard/base');
+        navigate('/datasource/list');
       } catch (e) {
         console.log(e);
         MessagePlugin.error('登录失败');
