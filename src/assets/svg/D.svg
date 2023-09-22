@@ -1,7 +1,1 @@
-<svg width="28" height="28" xmlns="http://www.w3.org/2000/svg">
- <title/>
- <g>
-  <title/>
-  <text font-weight="normal" transform="matrix(1 0 0 1 0 0)" xml:space="preserve" text-anchor="start" font-family="'Red Rose'" font-size="37" id="svg_1" y="25.5" x="0.10156" stroke-width="0" stroke="#000" fill="#000000">D</text>
- </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="56" viewBox="0 0 64 56" fill="none"><path id="D.png" fill-rule="evenodd" style="fill:url(#pattern0)" d="M0 56L64 56L64 0L0 0L0 56Z"></path><defs><pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1"><use transform="translate(0 0) scale(0.015625 0.017857142857142856) rotate(0)" xlink:href="#image0" /></pattern><image  id="image0" width="64" height="56" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA4CAYAAABNGP5yAAAAAXNSR0IArs4c6QAAAUZJREFUaEPtmEsOgzAMRO2blZO1PRn0ZK4sgYTSkGbjT+vJGhH7eWYSYCq+uHj/BABQQHECsEBxASAEYQFYoDgBWKC4AHAKwAKwQHECLhYQkVuPMzNv0fxNAYjIg4juE00qiBcz6/OuyxrASkTd6Q+6fHqCyAhA2bhByArADUIEgHPwfbPHYh2UEQA+mhqFJTOb1mj6chHphWB3qgMIpnmQBoCa/gLCxsyL1dmYCsAOQZpmywMgyxz4BQUAQBkFXIRgjVNg/2LUY7Nd/w+g2kWo/Qcwug6bTl+lFnEKzN5pzJvPDMD08nOeQEYFuEz+gGANQP3dS/bWBkcuaPOu/wlNAex3++E3v3fDLXlzALOJF/UcAESRz7IvFJBlElF1QAFR5LPsCwVkmURUHVBAFPks+0IBWSYRVQcUEEU+y75QQJZJRNXxBuX3nTke/yo3AAAAAElFTkSuQmCC" /></defs></svg>

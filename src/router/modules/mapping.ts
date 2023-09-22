@@ -19,10 +19,10 @@ const mapping: IRouter[] = [
       },
     ],
   },
-  {
-    path:'/custom-tree',
-    Component: lazy(() => import('pages/Mapping/customTree'))
-  }
+  // {
+  //   path:'/custom-tree',
+  //   Component: lazy(() => import('pages/Mapping/customTree'))
+  // }
 ];
 
 export default mapping;

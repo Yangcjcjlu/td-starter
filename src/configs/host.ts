@@ -18,12 +18,12 @@ export default {
   release: {
     // 正式环境接口地址
     // API: 'https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com',
-    API: 'http://20.168.201.95:8080/',
-    EVENT_API: 'http://20.168.201.95:8080/',
+    API: 'http://20.198.178.168:8080/',
+    EVENT_API: 'http://20.198.178.168:8080/',
   },
   site: {
     // TDesign部署特殊需要 与release功能一致
     API: 'https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com',
-    EVENT_API: 'http://64.176.211.119:8081/',
+    EVENT_API: 'http://20.198.178.168:8081/',
   },
 };
