@@ -93,8 +93,57 @@ export default memo(() => {
             align: 'left',
             width: 150,
             ellipsis: true,
-            colKey: 'adjClose',
-            title: 'AdjClose',
+            colKey: 'index',
+            title: 'Index',
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'region',
+            title: 'Region',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'exchange',
+            title: 'Exchange',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'currency',
+            title: 'Currency',
+          },
+          {
+            align: 'left',
+            width: 150,
+            ellipsis: true,
+            colKey: 'open',
+            title: 'Open',
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'high',
+            title: 'High',
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'low',
+            title: 'Low',
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
+            colKey: 'close',
+            title: 'Close',
           },
           {
             align: 'left',
@@ -103,80 +152,10 @@ export default memo(() => {
             colKey: 'date',
             title: 'Date',
           },
-          {
-            align: 'left',
-            width: 150,
-            ellipsis: true,
-            colKey: 'close',
-            title: 'close',
-          },
-          {
-            align: 'left',
-            width: 150,
-            ellipsis: true,
-            colKey: 'high',
-            title: 'high',
-          },
-          {
-            align: 'left',
-            width: 150,
-            ellipsis: true,
-            colKey: 'index',
-            title: 'index',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'low',
-            title: 'low',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'volume',
-            title: 'volume',
-          },
-         
-          // {
-          //   align: 'left',
-          //   fixed: 'right',
-          //   width: 180,
-          //   colKey: 'op',
-          //   title: 'operation',
-          //   cell(record: any) {
-          //     return (
-          //       <>
-          //         <Button
-          //           theme='primary'
-          //           variant='text'
-          //           onClick={() => {
-          //             return handleManage(record);
-          //           }}
-          //         >
-          //           manage
-          //         </Button>
-          //         <Button theme='primary' variant='text' onClick={() => showDetails(record)}>
-          //           details
-          //         </Button>
-          //         <Button
-          //           theme='primary'
-          //           variant='text'
-          //           onClick={() => {
-          //             // handleClickDelete(record);
-          //           }}
-          //         >
-          //           delete
-          //         </Button>
-          //       </>
-          //     );
-          //   },
-          // },
         ]}
         loading={loading}
         data={list}
-        rowKey='index'
+        rowKey='indexBase'
         selectedRowKeys={selectedRowKeys}
         verticalAlign='top'
         hover

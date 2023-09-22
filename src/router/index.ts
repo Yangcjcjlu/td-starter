@@ -7,6 +7,8 @@ import form from './modules/form';
 import mapping from './modules/mapping';
 import distribution from './modules/distribution'
 import result from './modules/result'
+import trade from './modules/trade';
+import login from './modules/login';
 
 export interface IRouter {
   path: string;
@@ -49,6 +51,6 @@ const routes: IRouter[] = [
   },
 ];
 
-const allRoutes = [...routes, ...datasource, ...mapping, ...eventhub, ...dashboard];
+const allRoutes = [...datasource,...mapping,...trade, ...routes,  ...eventhub,...dashboard,...login ];
 
 export default allRoutes;
