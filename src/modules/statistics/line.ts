@@ -61,7 +61,7 @@ const getLineInfo = (): any => ({
       name: 'Transaction',
       type: 'line',
       stack: 'Total',
-      data: [120, 132, 101],
+      data: [],
       itemStyle: {
         borderColor: '#dcdcdc'
       }
@@ -70,7 +70,7 @@ const getLineInfo = (): any => ({
       name: 'IndexData',
       type: 'line',
       stack: 'Total',
-      data: [220, 182, 191],
+      data: [],
       itemStyle: {
         borderColor: '#dcdcdc'
       }
@@ -79,7 +79,7 @@ const getLineInfo = (): any => ({
       name: 'IndexInfo',
       type: 'line',
       stack: 'Total',
-      data: [150, 232, 201]
+      data: []
     }
   ]
 

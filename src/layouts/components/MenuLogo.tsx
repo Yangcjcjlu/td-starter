@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import Style from './Menu.module.less';
-import FullLogo from 'assets/svg/u-full.svg?component';
-import MiniLogo from 'assets/svg/u.svg?component';
+import FullLogo from 'assets/svg/DPaaS.svg?component';
+import MiniLogo from 'assets/svg/D.svg?component';
 import { useNavigate } from 'react-router-dom';
 
 interface IProps {

@@ -5,7 +5,6 @@ import routers, { IRouter } from 'router';
 import { resolve } from 'utils/path';
 import Page from './Page';
 import Style from './AppRouter.module.less';
-import classNames from 'classnames';
 
 const { Content } = Layout;
 
@@ -50,7 +49,7 @@ const renderRoutes: TRenderRoutes = (routes, parentPath = '', breadcrumb = []) =
   });
 
 const AppRouter = () => (
-  <Content className={classNames(Style.content)}>
+  <Content>
     <Suspense
       fallback={
         <div className={Style.loading}>

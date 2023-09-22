@@ -49,6 +49,6 @@ const routes: IRouter[] = [
   },
 ];
 
-const allRoutes = [...routes, ...dashboard, ...datasource, ...eventhub, ...mapping];
+const allRoutes = [...routes, ...datasource, ...mapping, ...eventhub, ...dashboard];
 
 export default allRoutes;

@@ -1,6 +1,6 @@
 {
-  "name": "td-starter",
-  "version": "0.3.1",
+  "name": "undertone",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "dev:mock": "vite --open --mode mock",

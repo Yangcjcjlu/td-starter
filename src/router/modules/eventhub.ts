@@ -6,7 +6,7 @@ const result: IRouter[] = [
   {
     path: '/eventhub',
     meta: {
-      title: 'Supported Tool ',
+      title: 'Support Tool ',
       Icon: AppIcon  ,
     },
     children: [
@@ -23,7 +23,7 @@ const result: IRouter[] = [
       {
         path:'trade',
         Component: lazy(()=> import('pages/Trade/Base')),
-        meta: { title : 'TradInfo'}
+        meta: { title : 'Trade Lifecycle'}
       }
     ],
   },
