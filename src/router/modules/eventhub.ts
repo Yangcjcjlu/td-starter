@@ -13,12 +13,12 @@ const result: IRouter[] = [
       {
         path: 'sendFile',
         Component: lazy(() => import('pages/Eventhub/SendFile')),
-        meta: { title: 'SendFile' },
+        meta: { title: 'Send File' },
       },
       {
         path:'index',
         Component: lazy(() => import('pages/Index/Base')),
-        meta: { title : 'MergeIndex' }
+        meta: { title : 'Merge Index' }
       },
       {
         path:'trade',
